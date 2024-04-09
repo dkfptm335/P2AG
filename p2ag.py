@@ -7,6 +7,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/univform')
+def univform():
+    return render_template('univform.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
