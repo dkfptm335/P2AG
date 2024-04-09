@@ -1,0 +1,41 @@
+<!-- templates/univResult.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Result</title>
+</head>
+<body>
+<h1>Submission Result</h1>
+<p>(이하 '본교')는 개인정보 보호법에 따라 정보주체의 개인정보 및 권익을 보호하고, 개인정보와 관련한 정보주체의 고충을 원활하게 처리할 수 있도록 다음과 같은 처리방침을 두고 있습니다.</p>
+<p>본교는 개인정보 처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.</p>
+<h3>제1조 (개인정보의 처리 목적)</h3>
+<p> {{ provider }}의 소개 및 공지사항, 교육콘텐츠 제공, 본인인증, 증명서발급(교육 수료증), 입학관련 정보, 도서관 등 학교시설 이용 관련 정보 등의 서비스 제공에 관련한 목적으로 개인정보를
+    처리합니다.</p>
+<h5> 가. 서비스 제공</h5>
+<p> {{ provider }}의 소개 및 공지사항, 교육콘텐츠 제공, 본인인증, 증명서발급(교육 수료증), 입학관련 정보 등의 서비스 제공에 관련한 목적으로 개인정보를 처리합니다.</p>
+<h5> 나. 회원가입 및 관리</h5>
+<p> {{ provider }}에서 제공하는 입시, 학사, 학생, 도서, 온라인교육, 교수·학습, 연구, 보건 등의 회원제 서비스 이용에 따른 본인확인, 개인 식별, 불량회원의 부정이용 방지와 비인가 사용방지,
+    연령확인, 분쟁조정을 위한 기록보존, 불만처리 등 민원처리, 공지사항 전달 등의 목적으로 개인정보를 처리합니다.</p>
+
+<p>수집할 개인정보:</p>
+<ul>
+    {% if 'email' in request.form %}
+    <li>이메일</li>
+    {% endif %}
+    {% if 'name' in request.form %}
+    <li>이름</li>
+    {% endif %}
+    {% if 'birthday' in request.form %}
+    <li>생년월일</li>
+    {% endif %}
+    {% if 'optional_info' in request.form %}
+    <li>선택사항: {{ optional_info }}</li>
+    {% endif %}
+</ul>
+
+<p>본 방침을 시행하는 날: {{ date }}</p>
+<p>본 방침의 제정 정보: {{ policy }}</p>
+</body>
+</html>
