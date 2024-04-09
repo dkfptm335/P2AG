@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!-- templates/index.html -->
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HTML 테스트 페이지</title>
+</head>
+<body>
+<h1>Hello, World!</h1>
+<p>This is a test page created using HTML.</p>
+
+<form action='/submit' method='post'>
+    정보통신서비스 제공자명
+    <input type='text' name='provider'/>
+    <br>
+    본 방침을 시행하는 날
+    <input type='date' name='date'/>
+    <br>
+    본 방침의 제정 정보
+    <select name='policy'>
+        <option value="created">본 방침을 처음으로 만듬</option>
+        <option value="modified">기존의 개인정보처리방침이 있음</option>
+    </select>
+    <br><br>
+    <h3>수집할 개인정보</h3>
+    <h4> 개인정보 종류</h4>
+    <input type="checkbox" id="signupCheckbox"> 회원 가입을 위한 정보 선택
+    <ul class="sub-checklist" id="signupSubChecklist">
+        <li><input type="checkbox" id="signupCheckbox2"> 필수 수집 정보
+            <ul class="sub2-checklist" id="signupSub2Checklist">
+                <li><input type="checkbox" name="email"> 이메일</li>
+                <li><input type="checkbox" name="name"> 이름</li>
+                <li><input type="checkbox" name="birthday"> 생년월일</li>
+            </ul>
+        </li>
+        <li><input type="checkbox" id="signupCheckbox3" name="optional"> 선택 수집 정보
+            <ul class="sub3-checklist" id="signupSub3Checklist">
+                <li><input type="text" name="optional_info"> 선택사항</li>
+            </ul>
+        </li>
+    </ul>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
