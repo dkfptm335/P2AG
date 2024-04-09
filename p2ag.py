@@ -7,8 +7,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/main', methods=['POST'])
+def main():
+    id_ = request.form['id_']
+    pw_ = request.form['pw_']
+    print(id_, pw_)
+    return render_template('main.html')
+
 @app.route('/univform')
 def univform():
+
     return render_template('univform.html')
 
 @app.route('/submit', methods=['POST'])
