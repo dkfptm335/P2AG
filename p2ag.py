@@ -46,9 +46,15 @@ def main():
 
     if userId in df['id'].values:
         if userPw == df[df['id'] == userId]['pw'].values[0]:
-            return render_template('main.html', userId=userId, userPw=userPw, userName=df[df['id'] == userId]['name'].values[0], userGender=df[df['id'] == userId])
+            return render_template('main.html', userId=userId, userPw=userPw,
+                                   userName=df[df['id'] == userId]['name'].values[0], userGender=df[df['id'] == userId])
         else:
             return "비밀번호가 일치하지 않습니다."
+
+
+@app.route('/signUp', methods=['POST'])
+def signup():
+    return render_template('signUp.html')
 
 
 @app.route('/univForm')
