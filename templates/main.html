@@ -1,8 +1,25 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>main</title>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 </head>
 <body>
-로그인 성공
+    <div class="main-container">
+        <h2>환영합니다, {{ userName }}님!</h2>
+        <form action="/submitSelection" method="post">
+            <div class="selection-group">
+                <input type="radio" id="university" name="selection" value="university">
+                <label for="university">대학</label>
+            </div>
+            <div class="selection-group">
+                <input type="radio" id="mall" name="selection" value="mall">
+                <label for="mall">쇼핑몰</label>
+            </div>
+            <button type="submit">제출</button>
+        </form>
+    </div>
 </body>
 </html>

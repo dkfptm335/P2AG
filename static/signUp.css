@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-info p {
+    font-size: 16px;
+    color: #333;
+}
+
+h2 {
+    color: #30D5C8;
+    text-align: center;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #30D5C8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* 기존 스타일에 추가 */
+.confirm-btn {
+    background-color: #4CAF50; /* 회원가입 확인 버튼은 녹색으로 표시 */
+    margin-bottom: 10px; /* 버튼 간격 조정 */
+}
+
+.back-btn {
+    background-color: #f44336; /* 뒤로 가기 버튼은 빨간색으로 표시 */
+}
