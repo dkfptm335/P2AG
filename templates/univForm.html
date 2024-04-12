@@ -6,120 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML 테스트 페이지</title>
     <link rel="stylesheet" href="../static/form.css">
-
 </head>
 <body>
-    <h1>개인정보 처리방침 폼</h1>
+<div id="container" class="container">
+    <h1 id="form_name">개인정보 처리방침</h1>
 
-    <form action='/submit' method='post'>
-        <h2>정보통신서비스 제공자명
-            <input type='text' name='provider' placeholder="학교명을 입력해주세요"  />
-        </h2>
-        <h2>본 방침을 시행하는 날
-            <input type='date' name='date' />
-        </h2>
+<form action='/univResult' method='post' id="form_" class="form_" enctype="multipart/form-data">
+        <fieldset style="width:150">
+            <legend>제공 기본 정보</legend>
+            <h3>정보통신서비스 제공자명
+                <input type='text' name='provider' placeholder="학교명을 입력해주세요" required/>
+            </h3>
+            <h3>본 방침을 시행하는 날
+                <input type='date' name='date' required/>
+            </h3>
 
-        <h2>본 방침의 제정 정보
-            <select name='policy'>
-                <option value="created">본 방침을 처음으로 만듬</option>
-                <option value="modified">기존의 개인정보처리방침이 있음</option>
-            </select>
-        </h2>
-
-        <h2>수집할 개인정보</h2>
-        <h3> 개인정보 종류</h3>
-        <input type="checkbox" id="signupCheckbox"> 입학관리를 위한 정보 선택
-        <ul class="sub-checklist" id="signupSubChecklist">
-            <li><input type="checkbox" id= "signupCheckbox2"> 필수 수집 정보
-                <ul class="sub2-checklist" id="signupSub2Checklist">
-                    <li><input type="checkbox" class="email"> 이메일</li>
-                    <li><input type="checkbox" class="name"> 이름</li>
-                    <li><input type="checkbox" class="birthday"> 생년월일</li>
-                </ul>
-            </li>
-            <li><input type="checkbox" id="signupCheckbox3" class="optional"> 선택 수집 정보
-                <ul class="sub3-checklist" id="signupSub3Checklist">
-                    <li><input type="text" class="option"> 선택사항</li>
-                </ul>
-            </li>
-        </ul>
+            <h3>본 방침의 제정 정보
+                <select name='policy'>
+                    <option value="created">본 방침을 처음으로 만듬</option>
+                    <option value="modified">기존의 개인정보처리방침이 있음</option>
+                </select>
+            </h3>
+        </fieldset>
         <br>
-        <input type="checkbox" id="signupCheckbox"> 학적 관리를 위한 정보 선택
-        <ul class="sub-checklist" id="signupSubChecklist">
-            <li><input type="checkbox" id= "signupCheckbox2"> 필수 수집 정보
-                <ul class="sub2-checklist" id="signupSub2Checklist">
-                    <li><input type="checkbox" class="email"> 이메일</li>
-                    <li><input type="checkbox" class="name"> 이름</li>
-                    <li><input type="checkbox" class="birthday"> 생년월일</li>
-                </ul>
-            </li>
-            <li><input type="checkbox" id="signupCheckbox3" class="optional"> 선택 수집 정보
-                <ul class="sub3-checklist" id="signupSub3Checklist">
-                    <li><input type="text" class="option"> 선택사항</li>
-                </ul>
-            </li>
-        </ul>
-        <br>
-<!--        <input type="checkbox" id="signupCheckbox"> 대학 학적관리를 위한 정보 선택-->
-<!--        <ul class="sub-checklist" id="signupSubChecklist">-->
-<!--            <li><input type="checkbox" id= "signupCheckbox2"> 필수 수집 정보-->
-<!--                <ul class="sub2-checklist" id="signupSub2Checklist">-->
-<!--                    <li><input type="checkbox" class="email"> 이메일</li>-->
-<!--                    <li><input type="checkbox" class="name"> 이름</li>-->
-<!--                    <li><input type="checkbox" class="birthday"> 생년월일</li>-->
-<!--                </ul>-->
-<!--            </li>-->
-<!--            <li><input type="checkbox" id="signupCheckbox3" class="optional"> 선택 수집 정보-->
-<!--                <ul class="sub3-checklist" id="signupSub3Checklist">-->
-<!--                    <li><input type="text" class="option"> 선택사항</li>-->
-<!--                </ul>-->
-<!--            </li>-->
-<!--        </ul>-->
+        <fieldset>
+            <legend>수집할 개인정보</legend>
+            <h3> 개인정보 종류</h3>
+            <input type="checkbox" id="signupCheckbox"> 입학관리를 위한 정보 선택
+            <ul class="sub-checklist" id="signupSubChecklist">
+                <li><input type="checkbox" id="signupCheckbox2"> 필수 수집 정보
+                    <ul class="sub2-checklist" id="signupSub2Checklist">
+                        <li><input type="checkbox" class="email"> 이메일</li>
+                        <li><input type="checkbox" class="name"> 이름</li>
+                        <li><input type="checkbox" class="birthday"> 생년월일</li>
+                    </ul>
+                </li>
+                <li><input type="checkbox" id="signupCheckbox3" class="optional"> 선택 수집 정보
+                    <ul class="sub3-checklist" id="signupSub3Checklist">
+                        <li><input type="text" class="option"placeholder="주소, 전화번호 등"></li>
+                    </ul>
+                </li>
+            </ul>
+            <br>
+            <!-- 파일 업로드 -->
+            <h1>Upload Excel File</h1>
+            <input type="file" name="file"/>
+            <br>
+        </fieldset>
 
-        <script>
-            const signupCheckbox = document.getElementById('signupCheckbox');
-            const signupSubChecklist = document.getElementById('signupSubChecklist');
-            const signupCheckbox2 = document.getElementById('signupCheckbox2');
-            const signupSub2Checklist = document.getElementById('signupSub2Checklist');
-            const signupCheckbox3 = document.getElementById('signupCheckbox3');
-            const signupSub3Checklist = document.getElementById('signupSub3Checklist');
-            const verificationCheckbox = document.getElementById('verificationCheckbox');
-            const verificationSubChecklist = document.getElementById('verificationSubChecklist');
-
-            signupCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    signupSubChecklist.style.display = 'block';
-                } else {
-                    signupSubChecklist.style.display = 'none';
-                }
-            });
-            signupCheckbox2.addEventListener('change', function() {
-                if (this.checked) {
-                    signupSub2Checklist.style.display = 'block';
-                } else {
-                    signupSub2Checklist.style.display = 'none';
-                }
-            });
-            signupCheckbox3.addEventListener('change', function() {
-                if (this.checked) {
-                    signupSub3Checklist.style.display = 'block';
-                } else {
-                    signupSub3Checklist.style.display = 'none';
-                }
-            });
-
-            verificationCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    verificationSubChecklist.style.display = 'block';
-                } else {
-                    verificationSubChecklist.style.display = 'none';
-                }
-            });
-
-        </script>
         <br><br><br>
-        <button type="submit">Submit</button>
+        <!-- form 제출 버튼 or 초기화 -->
+        <div style="text-align: center;">
+            <button type="reset" style="margin-right: 10px; color: #30d5c8; background-color: white">초기화</button>
+            <input type="submit" class="submit"></input>
+        </div>
     </form>
+    <script src="../static/form_script.js"></script>
+</div>
 
 </body>
 </html>

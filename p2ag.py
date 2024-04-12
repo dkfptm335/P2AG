@@ -1,8 +1,10 @@
-import pandas as pd
 import requests
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request, redirect
+from flask import url_for, render_template
+import pandas as pd
 
 app = Flask(__name__)
+app.secret_key = 'random string'
 
 token = r'secret_DMk5aGpHhepTCDPLnpslUaxNFIL5Az2sAGi23PI7rdR'
 database_id = r'031db1df89214a38bbf9302803d5c5b6'
@@ -92,10 +94,20 @@ def univResult():
     name = request.form.get('name')
     birthday = request.form.get('birthday')
     optional_info = request.form.get('optional_info')
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
 
+    # file = request.files['file']
+    data = pd.read_excel(file)
+    print(data)
     return render_template('univResult.html', provider=provider, date=date, policy=policy,
-                           email=email, name=name, birthday=birthday, optional_info=optional_info)
-
+                           email=email, name=name, birthday=birthday, optional_info=optional_info,
+                           tables=[data.to_html(classes='data')], titles=data.columns.values)
 
 if __name__ == '__main__':
     app.run(debug=True)
