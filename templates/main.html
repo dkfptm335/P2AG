@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>P2AG</title>
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 </head>
 <body>
-    <h2>환영합니다, {{ userName }}님!</h2>
-    <form action="/welcome" method="post">
-        <p>선택해주세요:</p>
-        <input type="radio" id="university" name="place" value="대학">
-        <label for="university">대학</label><br>
-        <input type="radio" id="mall" name="place" value="쇼핑몰">
-        <label for="mall">쇼핑몰</label><br>
-        <input type="submit" value="제출">
-    </form>
+    <div class="main-container">
+        <h2>환영합니다, {{ userName }}님!</h2>
+        <form action="/submitSelection" method="post">
+            <div class="selection-group">
+                <input type="radio" id="university" name="selection" value="university">
+                <label for="university">대학</label>
+            </div>
+            <div class="selection-group">
+                <input type="radio" id="mall" name="selection" value="mall">
+                <label for="mall">쇼핑몰</label>
+            </div>
+            <button type="submit">제출</button>
+        </form>
+    </div>
 </body>
 </html>

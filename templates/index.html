@@ -9,19 +9,23 @@
                     <form method="post" action="/signUp">
                         <div class="input-group">
                             <i class='bx bxs-user'></i>
-                            <input type="text" placeholder="아이디">
+                            <input type="text" name="userNewId" placeholder="아이디" required>
                         </div>
                         <div class="input-group">
                             <i class='bx bx-mail-send'></i>
-                            <input type="email" placeholder="이메일">
+                            <input type="text" name="userNewName" placeholder="이름" required>
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bx-mail-send'></i>
+                            <input type="email" name="userNewEmail" placeholder="이메일" required>
                         </div>
                         <div class="input-group">
                             <i class='bx bxs-lock-alt'></i>
-                            <input type="password" placeholder="비밀번호">
+                            <input type="password" name="userNewPw" placeholder="비밀번호" required>
                         </div>
                         <div class="input-group">
                             <i class='bx bxs-lock-alt'></i>
-                            <input type="password" placeholder="비밀번호 확인">
+                            <input type="password" name="userNewPw2" placeholder="비밀번호 확인" required>
                         </div>
                         <button>
                             회원가입
