@@ -1,8 +1,18 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>main</title>
+    <title>P2AG</title>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
 </head>
 <body>
-로그인 성공
+    <h2>환영합니다, {{ userName }}님!</h2>
+    <form action="/welcome" method="post">
+        <p>선택해주세요:</p>
+        <input type="radio" id="university" name="place" value="대학">
+        <label for="university">대학</label><br>
+        <input type="radio" id="mall" name="place" value="쇼핑몰">
+        <label for="mall">쇼핑몰</label><br>
+        <input type="submit" value="제출">
+    </form>
 </body>
 </html>
