@@ -80,13 +80,13 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #F0F8FF;
 }
-button, .submit{
+.reset, .submit{
     background-color: #30d5c8;
     color: white;
     border: None;
     width: 9%;
     border-radius: 10px; /* 경계의 모서리를 둥글게 설정 */
-    padding: 10px 20px;
+    padding: 10px 0px;
     font-size: 20px;
     font-weight: bold;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */

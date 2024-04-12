@@ -31,34 +31,18 @@
         <br>
         <fieldset>
             <legend>수집할 개인정보</legend>
-            <h3> 개인정보 종류</h3>
-            <input type="checkbox" id="signupCheckbox"> 입학관리를 위한 정보 선택
-            <ul class="sub-checklist" id="signupSubChecklist">
-                <li><input type="checkbox" id="signupCheckbox2"> 필수 수집 정보
-                    <ul class="sub2-checklist" id="signupSub2Checklist">
-                        <li><input type="checkbox" class="email"> 이메일</li>
-                        <li><input type="checkbox" class="name"> 이름</li>
-                        <li><input type="checkbox" class="birthday"> 생년월일</li>
-                    </ul>
-                </li>
-                <li><input type="checkbox" id="signupCheckbox3" class="optional"> 선택 수집 정보
-                    <ul class="sub3-checklist" id="signupSub3Checklist">
-                        <li><input type="text" class="option"placeholder="주소, 전화번호 등"></li>
-                    </ul>
-                </li>
-            </ul>
-            <br>
+
             <!-- 파일 업로드 -->
-            <h1>Upload Excel File</h1>
-            <input type="file" name="file"/>
+            <h1>개인정보 처리방침 업로드</h1>
+            <input type="file" name="file" required/>
             <br>
         </fieldset>
 
         <br><br><br>
         <!-- form 제출 버튼 or 초기화 -->
         <div style="text-align: center;">
-            <button type="reset" style="margin-right: 10px; color: #30d5c8; background-color: white">초기화</button>
-            <input type="submit" class="submit"></input>
+            <input type="reset" class="reset" style="margin-right: 10px; color: #30d5c8; background-color: white"/>
+            <input type="submit" class="submit"/>
         </div>
     </form>
     <script src="../static/form_script.js"></script>
