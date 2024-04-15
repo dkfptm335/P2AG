@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보처리방침 생성 폼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/generateMain.css">
+</head>
+<body>
+<div class="header">
+    개인정보처리방침 생성 폼
+</div>
+<div class="form-container">
+    <form id="privacyForm" action="/generateConfirm" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">대학/쇼핑몰 이름:</label>
+            <input type="text" id="name" name="name" class="form-input" required>
+        </div>
+        <div class="form-group radio-group">
+            <label>유형:</label>
+            <div class="radio-option">
+                <input type="radio" id="university" name="type" value="university" class="radio-input" required>
+                <label for="university" class="radio-label">대학</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" id="mall" name="type" value="mall" class="radio-input" required>
+                <label for="mall" class="radio-label">쇼핑몰</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="file">처리 목적 및 항목 파일:</label>
+                <!-- 사용자 정의 파일 선택 버튼 -->
+                <button type="button" id="customFileBtn" class="btn">파일 선택</button>
+                <!-- 실제 파일 입력 필드는 숨김 처리 -->
+                <input type="file" id="customFile" name="file" hidden required>
+                <!-- 선택된 파일 이름을 표시할 공간 -->
+                <span id="customFileName">선택된 파일 없음</span>
+            </div>
+
+        </div>
+        <button type="submit" class="submit-button">제출</button>
+    </form>
+</div>
+<script>
+    document.getElementById('customFileBtn').addEventListener('click', function () {
+        document.getElementById('customFile').click();
+    });
+
+    document.getElementById('customFile').addEventListener('change', function () {
+        var fileName = this.files[0].name;
+        document.getElementById('customFileName').textContent = fileName;
+    });
+
+</script>
+</body>
+</html>
