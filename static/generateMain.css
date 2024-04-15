@@ -151,3 +151,39 @@ body, html {
     margin-top: 10px;
 }
 
+/* 기본 체크박스 숨기기 */
+.checkbox-input {
+    display: none;
+}
+
+/* 사용자 정의 체크박스 */
+.checkbox-custom-label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    display: inline-block;
+    color: #000;
+    line-height: 20px;
+}
+
+/* 사용자 정의 체크박스: 체크박스 모양 */
+.checkbox-custom-label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #b4b4b4;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* 체크박스 체크 시 스타일 */
+.checkbox-input:checked + .checkbox-custom-label:before {
+    content: '✓';
+    color: #fff;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 18px;
+}
