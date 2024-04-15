@@ -20,12 +20,17 @@ def generateConfirm():
     name = request.form['name']
     type = request.form['type']
     file = request.files['file']
-    # 파일 확장자 확인 후, 엑셀 파일이 아니라면 경고창 띄우기
-    if not file.filename.endswith('.xlsx'):
-        return render_template('generateMain.html', message='엑셀 파일만 업로드 가능합니다.')
-    else:
-        df = pd.read_excel(file)
+    if file.filename.endswith('.xlsx'):
+        df = pd.read_excel(file, header=None)
+        columns = df.iloc[2][0:]
+        # 0, 1, 2행 제거
+        df = df.drop([0, 1, 2], axis=0)
+        df.columns = columns
+        df.reset_index(drop=True, inplace=True)
+        df.fillna("", inplace=True)
         return render_template('generateConfirm.html', name=name, type=type, df=df)
+    else:
+        return render_template('generateMain.html', error='.xlsx 파일만 업로드 가능합니다.')
 
 
 if __name__ == '__main__':

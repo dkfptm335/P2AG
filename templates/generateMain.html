@@ -21,7 +21,7 @@
             <label>유형:</label>
             <div class="radio-option">
                 <input type="radio" id="university" name="type" value="university" class="radio-input" required>
-                <label for="university" class="radio-label">대학</label>
+                <label for="university" class="radio-label">대학교</label>
             </div>
             <div class="radio-option">
                 <input type="radio" id="mall" name="type" value="mall" class="radio-input" required>
@@ -30,6 +30,7 @@
         </div>
         <div class="form-group">
             <div class="form-group">
+                ※ 본교가 법령에 근거하여 수집·보유하고 있는 주요 개인정보파일의 상세내용은 개인정보보호 포털(www.privacy.go.kr)에 접속 후 개인정보파일 목록 검색란에서 기관명으로 조회하시면 확인 하실 수 있습니다. ☞ Click<br><br>
                 <label for="file">처리 목적 및 항목 파일:</label>
                 <!-- 사용자 정의 파일 선택 버튼 -->
                 <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
@@ -56,7 +57,7 @@
 </script>
 <script>
     window.onload = function () {
-        var message = "{{ message }}";
+        var message = "{{ error }}";
         if (message) {
             alert(message);
         }

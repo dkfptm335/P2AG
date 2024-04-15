@@ -1,0 +1,77 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.header {
+    font-size: 32px;
+    text-align: center;
+    color: #30d5c8;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px; /* 테이블 너비 조정을 위해 증가 */
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table, .table th, .table td {
+    border: 1px solid #ccc;
+}
+
+.table th, .table td {
+    text-align: left;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #30d5c8;
+    color: white;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.submit-button {
+    background-color: #30d5c8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: #279a93;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .header {
+        font-size: 24px;
+    }
+}
