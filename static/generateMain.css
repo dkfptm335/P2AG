@@ -96,7 +96,7 @@ body, html {
 
 /* 라벨과 인풋 요소의 스타일을 더 세련되게 조정 */
 .form-input, .submit-button, .radio-label {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.5;
 }
 
@@ -141,7 +141,7 @@ body, html {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 10px;
 }
 

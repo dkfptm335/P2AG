@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="file">처리 목적 및 항목 파일:</label>
                 <!-- 사용자 정의 파일 선택 버튼 -->
-                <button type="button" id="customFileBtn" class="btn">파일 선택</button>
+                <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
                 <!-- 실제 파일 입력 필드는 숨김 처리 -->
                 <input type="file" id="customFile" name="file" hidden required>
                 <!-- 선택된 파일 이름을 표시할 공간 -->
@@ -53,6 +53,14 @@
         document.getElementById('customFileName').textContent = fileName;
     });
 
+</script>
+<script>
+    window.onload = function () {
+        var message = "{{ message }}";
+        if (message) {
+            alert(message);
+        }
+    }
 </script>
 </body>
 </html>
