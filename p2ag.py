@@ -104,7 +104,6 @@ def univResult():
 
     # file = request.files['file']
     data = pd.read_excel(file)
-    print(data)
     return render_template('univResult.html', provider=provider, date=date, policy=policy,
                            email=email, name=name, birthday=birthday, optional_info=optional_info,
                            tables=[data.to_html(classes='data')], titles=data.columns.values)
