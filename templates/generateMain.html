@@ -6,6 +6,16 @@
     <title>개인정보처리방침 생성 폼</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/generateMain.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var num = 1; // 시작 번호
+            var elements = document.querySelectorAll('h2');
+
+            elements.forEach(function(element) {
+                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="header">
@@ -13,25 +23,34 @@
 </div>
 <div class="form-container">
     <form id="privacyForm" action="/generateConfirm" method="post" enctype="multipart/form-data">
+        <!-- 대학교 이름 입력 -->
         <div class="form-group">
-            <label for="name">1. 대학/쇼핑몰 이름:</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="1. 대학/쇼핑몰 이름" required>
+            <h2> {{num}}. 대학교 이름</h2>
+            <input type="text" id="name" name="name" class="form-input" placeholder="ex) OO대학교" required>
         </div>
 
-        <div class="form-group radio-group">
-            <label>2. 유형:</label>
-            <div class="radio-option">
-                <input type="radio" id="university" name="type" value="university" class="radio-input" required>
-                <label for="university" class="radio-label">대학교</label>
-            </div>
-            <div class="radio-option">
-                <input type="radio" id="mall" name="type" value="mall" class="radio-input" required>
-                <label for="mall" class="radio-label">쇼핑몰</label>
-            </div>
+        <!-- 처리목적 및 항목 파일 선택 -->
+        <div class="form-group">
+            <!--                ※ 본교가 법령에 근거하여 수집·보유하고 있는 주요 개인정보파일의 상세내용은 개인정보보호 포털(www.privacy.go.kr)에 접속 후 개인정보파일 목록 검색란에서 기관명으로-->
+            <!--                조회하시면 확인 하실 수 있습니다. ☞ Click<br><br>-->
+            <h2>{{num}}. 처리 목적 및 항목 파일:</h2>
+            <!-- 사용자 정의 파일 선택 버튼 -->
+            <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
+            <!-- 실제 파일 입력 필드는 숨김 처리 -->
+            <input type="file" id="customFile" name="file" accept=".xlsx" hidden required>
+            <!-- 선택된 파일 이름을 표시할 공간 -->
+            <span id="customFileName">선택된 파일 없음</span>
+            <p>
+                ※ 개인정보보호 포털>개인서비스>정보주체 권리행사>개인정보 열람등요구>개인정보파일 검색(
+                https://www.privacy.go.kr/front/wcp/dcl/per/personalInfoFileSrhList.do)에 접속 > 검색란에서 대학교명으로 조회 > 엑셀
+                파일 다운로드 ☞ 클릭
+            </p>
+<!--            테이블 내용보기-->
         </div>
 
+        <!-- 개인정보의 파기 절차 및 방법 -->
         <div class="form-group checkbox-group">
-            <label for="destructionProcedure" class="checkbox-label">3. 개인정보의 파기 절차 및 방법</label>
+            <h2 class="checkbox-label">{{num}}. 개인정보의 파기 절차 및 방법</h2>
             해당 항목은 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 이에 동의하십니까?
             <div class="checkbox-option">
                 <input type="checkbox" id="destructionProcedureAgree" name="destructionProcedure" value="yes"
@@ -40,8 +59,9 @@
             </div>
         </div>
 
+        <!-- 정보주체와 법정대리인의 권리/의무 및 행사방법 -->
         <div class="form-group checkbox-group">
-            <label for="rightsAndDuties" class="checkbox-label">4. 정보주체와 법정대리인의 권리/의무 및 행사방법</label>
+            <h2 class="checkbox-label">{{num}}. 정보주체와 법정대리인의 권리/의무 및 행사방법</h2>
             해당 항목은 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 이에 동의하십니까?
             <div class="checkbox-option">
                 <input type="checkbox" id="rightsAndDutiesAgree" name="rightsAndDuties" value="yes"
@@ -50,8 +70,9 @@
             </div>
         </div>
 
+        <!-- 개인정보의 안정성 확보조치에 관한 사항 -->
         <div class="form-group checkbox-group">
-            <label for="securityMeasures" class="checkbox-label">5. 개인정보의 안정성 확보조치에 관한 사항</label>
+            <h2 class="checkbox-label">{{num}}. 개인정보의 안정성 확보조치에 관한 사항</h2>
             <div class="checkbox-option">
                 <input type="checkbox" id="minimalStaffTraining" name="securityMeasures" value="yes"
                        class="checkbox-input" required>
@@ -99,26 +120,33 @@
             </div>
         </div>
 
+        <!-- 개인정보 보호책임자(담당부서) -->
         <div class="form-group">
-            <label>6. 개인정보 보호책임자(담당부서):</label>
+            <h2>{{num}}. 개인정보 보호책임자(담당부서):</h2>
             <input type="text" id="chargeName" name="chargeName" class="form-input" placeholder="이름/부서명" required>
-            <input type="text" id="chargeAffiliation" name="chargeAffiliation" class="form-input" placeholder="소속/담당자" required>
+            <input type="text" id="chargeAffiliation" name="chargeAffiliation" class="form-input" placeholder="소속/담당자"
+                   required>
             <input type="text" id="chargePhone" name="chargePhone" class="form-input" placeholder="전화번호" required>
             <input type="email" id="chargeEmail" name="chargeEmail" class="form-input" placeholder="이메일" required>
             <input type="text" id="chargeEtc" name="chargeEtc" class="form-input" placeholder="기타(FAX 등)" required>
         </div>
 
+        <!-- 개인정보의 열람청구를 접수/처리하는 부서 -->
         <div class="form-group">
-            <label>7. 개인정보의 열람청구를 접수/처리하는 부서:</label>
+            <h2>{{num}}. 개인정보의 열람청구를 접수/처리하는 부서:</h2>
             <input type="text" id="department" name="department" class="form-input" placeholder="부서명" required>
             <input type="text" id="departmentName" name="departmentName" class="form-input" placeholder="담당자" required>
-            <input type="text" id="departmentPhone" name="departmentPhone" class="form-input" placeholder="전화번호" required>
-            <input type="email" id="departmentEmail" name="departmentEmail" class="form-input" placeholder="이메일" required>
-            <input type="text" id="departmentEtc" name="departmentEtc" class="form-input" placeholder="기타(FAX 등)" required>
+            <input type="text" id="departmentPhone" name="departmentPhone" class="form-input" placeholder="전화번호"
+                   required>
+            <input type="email" id="departmentEmail" name="departmentEmail" class="form-input" placeholder="이메일"
+                   required>
+            <input type="text" id="departmentEtc" name="departmentEtc" class="form-input" placeholder="기타(FAX 등)"
+                   required>
         </div>
 
+        <!-- 정보주체의 권익침해에 대한 구제방법 -->
         <div class="form-group checkbox-group">
-            <label for="remedy" class="checkbox-label">8. 정보주체의 권익침해에 대한 구제방법</label>
+            <h2 class="checkbox-label">{{num}}. 정보주체의 권익침해에 대한 구제방법</h2>
             해당 항목은 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 이에 동의하십니까?
             <div class="checkbox-option">
                 <input type="checkbox" id="remedy" name="remedy" value="yes"
@@ -127,19 +155,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="form-group">
-                ※ 본교가 법령에 근거하여 수집·보유하고 있는 주요 개인정보파일의 상세내용은 개인정보보호 포털(www.privacy.go.kr)에 접속 후 개인정보파일 목록 검색란에서 기관명으로
-                조회하시면 확인 하실 수 있습니다. ☞ Click<br><br>
-                <label for="file">9. 처리 목적 및 항목 파일:</label>
-                <!-- 사용자 정의 파일 선택 버튼 -->
-                <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
-                <!-- 실제 파일 입력 필드는 숨김 처리 -->
-                <input type="file" id="customFile" name="file" hidden required>
-                <!-- 선택된 파일 이름을 표시할 공간 -->
-                <span id="customFileName">선택된 파일 없음</span>
-            </div>
-        </div>
+        <!-- 제출 버튼 -->
         <button type="submit" class="submit-button">제출</button>
     </form>
 </div>
