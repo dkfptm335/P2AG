@@ -1,132 +1,19 @@
-<link rel="stylesheet" href="../static/index.css" xmlns="http://www.w3.org/1999/html">
-<div id="container" class="container">
-    <!-- FORM SECTION -->
-    <div class="row">
-        <!-- SIGN UP -->
-        <div class="col align-items-center flex-col sign-up">
-            <div class="form-wrapper align-items-center">
-                <div class="form sign-up">
-                    <form method="post" action="/signUp">
-                        <div class="input-group">
-                            <i class='bx bxs-user'></i>
-                            <input type="text" name="userNewId" placeholder="아이디" required>
-                        </div>
-                        <div class="input-group">
-                            <i class='bx bx-mail-send'></i>
-                            <input type="text" name="userNewName" placeholder="이름" required>
-                        </div>
-                        <div class="input-group">
-                            <i class='bx bx-mail-send'></i>
-                            <input type="email" name="userNewEmail" placeholder="이메일" required>
-                        </div>
-                        <div class="input-group">
-                            <i class='bx bxs-lock-alt'></i>
-                            <input type="password" name="userNewPw" placeholder="비밀번호" required>
-                        </div>
-                        <div class="input-group">
-                            <i class='bx bxs-lock-alt'></i>
-                            <input type="password" name="userNewPw2" placeholder="비밀번호 확인" required>
-                        </div>
-                        <button>
-                            회원가입
-                        </button>
-                    </form>
-                    <p style="font-size: 16px">
-              <span>
-                계정이 있나요?
-              </span>
-                        <b onclick="toggle()" class="pointer">
-                            로그인
-                        </b>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-        <!-- END SIGN UP -->
-        <!-- SIGN IN -->
-        <div class="col align-items-center flex-col sign-in">
-            <div class="form-wrapper align-items-center">
-
-                <div class="form sign-in">
-                    <form method="post" action="/main">
-                        <div class="input-group">
-                            <i class='bx bxs-user'></i>
-                            <input type="text" name='userId' placeholder="아이디">
-                        </div>
-                        <div class="input-group">
-                            <i class='bx bxs-lock-alt'></i>
-                            <input type="password" name='userPw' placeholder="비밀번호">
-                        </div>
-                        <button type="submit">
-                            로그인
-                        </button>
-                    </form>
-                    <p style="font-size: 16px">
-                        <b>
-                            비밀번호 찾기
-                        </b>
-                    </p>
-                    <p style="font-size: 14px">
-              <span>
-                계정이 없나요?
-              </span>
-                        <b onclick="toggle()" class="pointer">
-                            회원가입
-                        </b>
-                    </p>
-                </div>
-
-            </div>
-            <div class="form-wrapper">
-
-            </div>
-        </div>
-        <!-- END SIGN IN -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2AG Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <div class="header">
+        P2AG
     </div>
-    <!-- END FORM SECTION -->
-    <!-- CONTENT SECTION -->
-    <div class="row content-row">
-        <!-- SIGN IN CONTENT -->
-        <div class="col align-items-center flex-col">
-            <div class="text sign-in">
-                <h2>
-                    P2AG<br>
-                    <p style="font-size:22px;">Privacy Policy Auto Generator</p>
-                </h2>
-
-            </div>
-            <div class="img sign-in">
-
-            </div>
-        </div>
-        <!-- END SIGN IN CONTENT -->
-        <!-- SIGN UP CONTENT -->
-        <div class="col align-items-center flex-col">
-            <div class="img sign-up">
-
-            </div>
-            <div class="text sign-up">
-                <h2>
-                    회원가입
-                </h2>
-
-            </div>
-        </div>
-        <!-- END SIGN UP CONTENT -->
+    <div class="container">
+        <a href="/generateMain" class="button" id="generate">생성</a>
+        <a href="/inspectionMain" class="button" id="verify">검증</a>
     </div>
-    <!-- END CONTENT SECTION -->
-</div>
-
-<script>
-    let container = document.getElementById('container')
-
-    toggle = () => {
-        container.classList.toggle('sign-in')
-        container.classList.toggle('sign-up')
-    }
-
-    setTimeout(() => {
-        container.classList.add('sign-in')
-    }, 200)
-</script>
+</body>
+</html>

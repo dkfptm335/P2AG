@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>개인정보처리방침 생성 폼 입력 확인</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='generateConfirm.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="header">개인정보처리방침 생성 폼 입력 확인</div>
+    <p><strong>기관명:</strong> {{ name }}</p>
+    <p><strong>기관 유형:</strong>
+        {% if type == 'university' %}
+            대학교
+        {% elif type == 'mall' %}
+            쇼핑몰
+        {% else %}
+            {{ type }}
+        {% endif %}
+    </p>
+</div>
+</body>
+</html>
