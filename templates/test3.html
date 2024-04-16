@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+document.getElementById('addDateButton').addEventListener('click', function() {
+    // 새로운 input 요소 생성
+    var newInput = document.createElement('input');
+    newInput.type = 'date';
+    newInput.name = 'past_date[]'; // 배열 형태로 이름을 설정하여 서버에서 여러 값을 쉽게 받을 수 있음
+    newInput.className = 'form-input';
+
+    // 날짜 입력 필드를 담고 있는 컨테이너에 새로운 input 요소 추가
+    document.getElementById('dateInputsContainer').appendChild(newInput);
+});
+</script>
+</head>
+<body>
+<label>이전 처리방침</label>
+<div id="dateInputsContainer">
+    <input type="date" id="past_date" name="past_date[]" class="form-input"><br>
+</div>
+<button type="button" id="addDateButton">날짜 추가하기</button>
+
+
+
+
+</body>
+</html>

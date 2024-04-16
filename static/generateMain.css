@@ -187,3 +187,11 @@ body, html {
     text-align: center;
     line-height: 18px;
 }
+
+#dateInputsContainer>div{
+    display: flex;
+    justify-content: space-between;
+}
+#dateInputsContainer>div>input{
+    width: 40%;
+}
