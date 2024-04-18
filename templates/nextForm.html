@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>개인정보처리방침 생성 폼 입력 확인</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nextForm.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var num = 1; // 시작 번호
+            var security_num = 1;
+            var elements = document.querySelectorAll('h2');
+
+            elements.forEach(function(element) {
+                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="header">
+    {{name}} 개인정보처리방침 생성 두번째 폼
+</div>
+<div class="form-container">
+    <form id="privacyForm" action="/nextFormConfirm" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <!-- 첫번째 checkbox -->
+            <div class="checkbox-option">
+                <input type="checkbox" id="checkBox1" name="checkBox1" value="checkBox1" class="checkbox-input">
+                <label for="checkBox1" class="checkbox-custom-label"><strong>개인정보 제3자 제공에 관한 사항</strong></label>
+                <ul class="sub_checkbox" id="SubCheckList">
+                    <fieldset>
+                        <legend>개인정보 제3자 제공에 관한 사항</legend>
+
+                        <table id="data-table">
+                            <thead>
+                            <tr class="columns">
+                                <th class="check">선택</th>
+                                <th class="recipient">제공받는 자</th>
+                                <th class="purpose">제공 목적</th>
+                                <th class="items">제공 항목</th>
+                                <th class="period">보유 및 이용 기간</th>
+                                <th class="reason">제공 근거</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- 대학 학적관리-->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">대학 학적관리</td>
+                                <td class="purpose">
+                            <textarea name="content">장학재단 장학 행정 협조
+ - 장학금 지급 및 학자금 대출 관련 자료 요청
+                            </textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">주민등록번호, 성명, 학과,학번, 전화번호, 이메일,주소, 성별, 수험번호 , 학년, 학적, 신입생 여부, 등록납부대상구분, 학적상태, 입학년도, 총평균평점, 수납계좌번호</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 2회, 10년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 한국장학재단 설립 등에 관한 법률 제 50조 및 제 50조의 2
+ - 한국장학재단 설립 등에 관한 법률 시행령 제35조의2, 제35조의3, 제36조의2
+ - 고등교육법 시행령 제73조 제2항
+ - 취업 후 학자금 상환 특별법 제45조의2
+                        </textarea></td>
+                            </tr>
+                            <!-- 근로복지공단-->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">근로복지공단</td>
+                                <td class="purpose">
+                            <textarea style="height: 100%;" name="content">4대보험 업무 처리
+ - 고용보험 보험료 징수 및 관리
+ - 산재보험 보험료 징수 및 관리</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 주민등록번호, 연간보수총액, 월 소득액, 자격취득일, 직종부호, 1주소정근로시간</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 고용산재보험료징수법 제5조, 제11조, 제 12조, 제16조의1~16조 9, 제 40조
+ - 고용보험법 제8조 및 제15조
+ - 산업재해보상보험법 제6조</textarea></td>
+                            </tr>
+                            <!-- 국민연금관리공단-->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">국민연금관리공단</td>
+                                <td class="purpose">
+                            <textarea name="content">4대보험 업무 처리
+ - 국민연금가입 및 공제 </textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 주민번호, 월 소득액, 입사일, 퇴사일, 직종, 휴직기록</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">입사익월 15일 부터 퇴사익월 15일까지, 영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">국민연금법 제21조,제123조</textarea></td>
+                            </tr>
+                            <!-- 국민건강보험공단 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">국민건강보험공단</td>
+                                <td class="purpose">
+                            <textarea name="content">4대보험 업무 처리
+- 건강보험가입 및 공제</textarea>
+                                </td>
+                                <td class="items">
+                            <textarea
+                                    name="content">성명,주민등록번호, 입사일, 퇴사일, 휴직기록, 월 소득액,  직종, 재직당시 근로소득,  해외출국기록</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">입사익월 15일부터 퇴사익월 15일까지, 영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 국민건강보험법 제7조, 제9조, 제96조
+ - 국민건강보험법 시행령 제38조
+ - 국민건강보험법 시행규칙 제4조</textarea></td>
+                            </tr>
+                            <!-- 병무청 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">병무청</td>
+                                <td class="purpose">
+                            <textarea name="content">병무행정에 대한 협조
+ - 신/재학생 입영 연기 처리
+ - 학생 예비군 자원관리</textarea>
+                                </td>
+                                <td class="items">
+                            <textarea
+                                    name="content">성명, 생년월일, 주소, 학적반영일, 제적사유, 학번, 전공, 학년, 이메일, 전화번호, 입학년도, 졸업년도</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 2회(3월, 9월), 10년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 병역법 제80조 및 제60조
+ - 병역법 시행령 제124조 및 제127조
+ - 입영연기 관리 규정 제5조, 제6조, 제12조, 제14조</textarea></td>
+                            </tr>
+                            <!-- 국가평생교육진흥원 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">국가평생교육진흥원</td>
+                                <td class="purpose">
+                                    <textarea name="content">학점인정 및 교육원 학사관리</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 생년월일, 학력, 주소, 전화번호, 이메일, 계좌번호</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 4회, 준영구</textarea>
+                                </td>
+                                <td class="reason"><textarea
+                                        name="content">학점인정등에관한법률 시행령 제19조의2, 개인정보 수집, 이용, 제3자 제공 동의서</textarea></td>
+                            </tr>
+                            <!-- 한국대학교육협의회 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">한국대학교육협의회</td>
+                                <td class="purpose">
+                                    <textarea name="content">입학 지원자 현황 및 위반자 처리</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 주민등록번호, 출신고교, 졸업년도</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 1회, 5년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">고등교육법시행령제35조</textarea></td>
+                            </tr>
+                            <!-- 교육부 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">교육부</td>
+                                <td class="purpose">
+                            <textarea name="content">교원의 자격검정에 관한 사무
+ - 교원자격증 수여</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 주민등록번호, 발급기관, 교원자격증번호, 발급일자, 보고년도, 취득일, 학위번호</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 2회, 준영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 교원자격검정령 제3조, 제31조
+ - 교원자격검정령 시행규칙 제3조의 2 </textarea></td>
+                            </tr>
+                            <!-- 법무부(출입국관리사무소) -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">법무부(출입국관리사무소)</td>
+                                <td class="purpose">
+                                    <textarea name="content">외국인 유학생(출입국) 관리</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">여권번호, 생년월일, 출신학교 이름, 출생국가, 성별, 국적, 이메일, 입학유형, 등록과정, 계열구분, 교육기간, 학과/전공, 한국어구사능력,출석현황</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 8회, 준영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">출입국관리법 제19조의4, 시행령 제101조</textarea></td>
+                            </tr>
+                            <!-- 한국대학교육협의회 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">한국대학교육협의회</td>
+                                <td class="purpose">
+                                    <textarea name="content">대입전형지원자 현황, 중복등록자 확인</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명, 주민등록번호, 출신고교, 졸업년도</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">5년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">고등교육법시행령제35조, 제42조,제42조의2</textarea></td>
+                            </tr>
+                            <!-- 국회도서관 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">국회도서관</td>
+                                <td class="purpose">
+                                    <textarea name="content">학위논문 납본</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">학위등록번호, 성명, 학과, 졸업일자, 학위논문명</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">준영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">국회도서관법 제7조</textarea></td>
+                            </tr>
+                            <!-- 한국교육학술정보원 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">한국교육학술정보원</td>
+                                <td class="purpose">
+                                    <textarea name="content">학위논문 등록관리</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">학위논문정보</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">준영구</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content">정보주체 동의</textarea></td>
+                            </tr>
+                            <!-- 한국교육개발원 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">한국교육개발원</td>
+                                <td class="purpose">
+                                    <textarea name="content">고등교육기관 교육기본통계조사 수행(학생, 교원, 직원)</textarea>
+                                </td>
+                                <td class="items">
+                                    <textarea name="content">성명,주민등록번호, 외국인등록번호, 입학년월일, 졸업년월일, 학적상태, 등록금납부현황, 학위취득일, 학위정보, 외국인학생졸업후상황, 교직원번호, 임용정보, 국적</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연2회, 5년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> -  고등교육법 제11조의 3
+ - 교육통계조사에 대한 훈령
+ - 통계법에 따른 통계청 지정통계 승인번호 제334001호</textarea></td>
+                            </tr>
+                            <!-- 보훈처 -->
+                            <tr class="Row">
+                                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                                <td class="recipient">보훈처</td>
+                                <td class="purpose">
+                                    <textarea name="content">장학금(국가보조금) 지급</textarea>
+                                </td>
+                                <td class="items">
+                            <textarea
+                                    name="content">보훈번호,성명,주민등록번호,학과,학년,평균성적,신청학점,입학금,수업료,이수학기, 등록여부, 학적변동일자</textarea>
+                                </td>
+                                <td class="period">
+                                    <textarea name="content">연 2회, 5년</textarea>
+                                </td>
+                                <td class="reason"><textarea name="content"> - 국가유공자등예우및지원에관한법률제25조
+ - 국가유공자등예우및지원에관한 법률시행령제102조의2</textarea></td>
+                            </tr>
+                            <!--                    &lt;!&ndash; 추가버튼 &ndash;&gt;-->
+                            <!--                    <tr>-->
+                            <!--                        <td class="check"><input type="checkbox" value="check1" name="checklist"></td>-->
+                            <!--                        <td class="recipient"></td>-->
+                            <!--                        <td class="purpose">-->
+                            <!--                            <textarea name="content"> </textarea>-->
+                            <!--                        </td>-->
+                            <!--                        <td class="items">-->
+                            <!--                            <textarea name="content"></textarea>-->
+                            <!--                        </td>-->
+                            <!--                        <td class="period">-->
+                            <!--                            <textarea name="content"></textarea>-->
+                            <!--                        </td>-->
+                            <!--                        <td class="reason"><textarea name="content"></textarea></td>-->
+                            <!--                    </tr>-->
+                            </tbody>
+                        </table>
+                        <button type="button" id="addRow">추가하기</button>
+                    </fieldset>
+                </ul>
+            </div>
+            <!-- 두번째 checkbox -->
+            <div class="checkbox-option">
+                <input type="checkbox" id="checkBox2" name="checkBox2" value="checkBox2" class="checkbox-input">
+                <label for="checkBox2" class="checkbox-custom-label"><strong>개인정보처리 위탁에 관한 사항</strong></label>
+                <ul class="sub_checkbox" id="SubCheckList2">
+                    <fieldset>
+                        <legend>대학교 개인정보 위탁 추천 항목</legend>
+                        <p>※ 대학교에서 많이 기재되는 '개인정보처리 위탁에 관한 사항'의 추천 문구 입니다. 아래의 항목을 선택하시면 업무 내용이 자동 생성되고 수탁사는 직접 작성해야
+                            합니다.</p>
+
+                        <table id="data-table2">
+                            <thead>
+                            <tr class="columns">
+                                <th class="check">선택</th>
+                                <th class="items2">선택 항목</th>
+                                <th class="information">업무내용(일반)</th>
+                                <th class="trustee">수탁사(안내문구) <span class="faded-text">사용자 입력</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- 원서접수 -->
+                            <tr class="Row2">
+                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
+                                <td class="items2">원서접수</td>
+                                <td class="information">입학전형 온라인 접수 및 전형료 수납</td>
+                                <td class="trustee">
+                                    <input class="trustee-input" placeholder="진학어플라이, 유웨이어플라이, 한국대학교육협의회">
+                                </td>
+
+                            </tr>
+                            <!-- 증명서 발급 -->
+                            <tr class="Row2">
+                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
+                                <td class="items2">증명서 발급</td>
+                                <td class="information">입학전형 온라인 접수 및 전형료 수납</td>
+                                <td class="trustee">
+                                    <input class="trustee-input" placeholder="디지털존, 씨아이테크 등">
+                                </td>
+
+                            </tr>
+                            <!-- 등록금 납부 -->
+                            <tr class="Row2">
+                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
+                                <td class="items2">등록금 납부</td>
+                                <td class="information">등록금 납부</td>
+                                <td class="trustee">
+                                    <input class="trustee-input" placeholder="OO은행, OO카드">
+                                </td>
+
+                            </tr>
+                            <!-- 학생증 발급 -->
+                            <tr class="Row2">
+                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
+                                <td class="items2">학생증 발급</td>
+                                <td class="information">입학전형 온라인 접수 및 전형료 수납</td>
+                                <td class="trustee">
+                                    <input class="trustee-input" placeholder="OO은행, OO카드">
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </ul>
+            </div>
+
+
+        </div>
+        <!-- 제출 버튼 -->
+        <div class="submit-div">
+            <button type="submit" class="submit-button" name="action" value="confirm">미리보기</button>
+            <button type="submit" class="submit-button" name="action" value="result">다음 폼</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#addRow").click(function(){
+            var newRow = `<tr class="Row">
+                <td class="check"><input type="checkbox" value="check1" name="checklist"></td>
+                <td class="recipient"><input type="text" name="recipient" /></td>
+                <td class="purpose"><textarea name="purpose"></textarea></td>
+                <td class="items"><textarea name="items"></textarea></td>
+                <td class="period"><textarea name="period"></textarea></td>
+                <td class="reason"><textarea name="reason"></textarea></td>
+            </tr>`;
+            $("#data-table tbody").append(newRow);
+        });
+    });
+
+</script>
+
+<script>
+    const Checkbox = document.getElementById('checkBox1');
+    const SubChecklist = document.getElementById('SubCheckList');
+
+    Checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            SubChecklist.style.display = 'block';
+        } else {
+            SubChecklist.style.display = 'none';
+        }
+    });
+
+    const Checkbox2 = document.getElementById('checkBox2');
+    const SubChecklist2 = document.getElementById('SubCheckList2');
+
+    Checkbox2.addEventListener('change', function() {
+        if (this.checked) {
+            SubChecklist2.style.display = 'block';
+        } else {
+            SubChecklist2.style.display = 'none';
+        }
+    });
+
+        document.getElementById('addDateButton').addEventListener('click', function() {
+        // 새로운 div 요소 생성
+        var newDiv = document.createElement('div');
+
+        // 첫 번째 날짜 입력 필드 생성 및 설정
+        var newInput1 = document.createElement('input');
+        newInput1.type = 'date';
+        newInput1.name = 'start_date';
+        newInput1.className = 'form-input';
+
+        // <p> 요소 생성 및 '~' 텍스트 설정
+        var pElement = document.createElement('p');
+        pElement.innerText = ' ~ '; // 혹은 pElement.textContent = ' ~ ';
+        pElement.style.display = 'inline'; // <p>를 인라인 요소처럼 보이도록 설정
+
+        // 두 번째 날짜 입력 필드 생성 및 설정
+        var newInput2 = document.createElement('input');
+        newInput2.type = 'date';
+        newInput2.name = 'end_date';
+        newInput2.className = 'form-input';
+
+        // 새로운 div에 첫 번째 입력 필드, <p> 요소, 두 번째 입력 필드 추가
+        newDiv.appendChild(newInput1);
+        newDiv.appendChild(pElement);
+        newDiv.appendChild(newInput2);
+
+        // 날짜 입력 필드를 담고 있는 컨테이너에 새로운 div 요소 추가
+        document.getElementById('dateInputsContainer').appendChild(newDiv);
+    });
+
+</script>
+
+<script>
+    window.onload = function () {
+        var message = "{{ error }}";
+        if (message) {
+            alert(message);
+        }
+    }
+</script>
+</body>
+
+</html>

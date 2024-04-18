@@ -37,7 +37,7 @@
             <!-- 사용자 정의 파일 선택 버튼 -->
             <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
             <!-- 실제 파일 입력 필드는 숨김 처리 -->
-            <input type="file" id="customFile" name="file" hidden required>
+            <input type="file" id="customFile" name="file" accept=".xlsx" hidden required>
             <!-- 선택된 파일 이름을 표시할 공간 -->
             <span id="customFileName">선택된 파일 없음</span>
             <p>
@@ -163,7 +163,7 @@
 
         <!-- 8. 개인정보의 열람청구를 접수/처리하는 부서 -->
         <div class="form-group">
-            <h2>{{num}}. 개인정보의 열람청구를 접수/처리하는 부서:</h2>
+            <h2>{{num}}. 개인정보의 열람청구를 접수/처리하는 부서</h2>
             <input type="text" id="receipt_department" name="receipt_department" class="form-input" placeholder="부서명"
                    required>
             <input type="text" id="receipt_departmentName" name="receipt_departmentName" class="form-input"
@@ -194,7 +194,7 @@
                 <label>현재 처리방침 적용 날짜</label>
                 <input type="date" id="current_date" name="current_date" class="form-input" required>
             </div>
-            <div>
+            <div class="date-box">
                 <label>이전 처리방침 적용 날짜</label>
                 <div id="dateInputsContainer">
                     <div>
@@ -209,7 +209,10 @@
 
 
         <!-- 제출 버튼 -->
-        <button type="submit" class="submit-button">제출</button>
+        <div class="submit-div">
+            <button type="submit" class="submit-button" name="action" value="confirm">미리보기</button>
+            <button type="submit" class="submit-button" name="action" value="nextform">다음 폼으로 이동</button>
+        </div>
     </form>
 </div>
 <script>

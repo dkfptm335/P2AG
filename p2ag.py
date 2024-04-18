@@ -1,8 +1,9 @@
 import pandas as pd
-from flask import Flask, request
-from flask import render_template
+from flask import Flask, request, session, flash
+from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # 세션을 위한 시크릿 키 설정
 
 
 @app.route('/')
@@ -14,9 +15,7 @@ def index():
 def generate():
     return render_template('generateMain.html')
 
-
-@app.route('/generateConfirm', methods=['POST'])
-def generateConfirm():
+def process_form_data1(request):
     name = request.form['name']
     file = request.files['file']
 
@@ -88,60 +87,218 @@ def generateConfirm():
     print(start_dates, end_dates)
     date_ranges = [{'start_date': start, 'end_date': end} for start, end in zip(start_dates, end_dates)]
     print(start_dates)
-    if file.filename.endswith('.xlsx'):
-        # df = pd.read_excel(file, header=None)
-        # columns = df.iloc[2][0:]
-        # # 0, 1, 2행 제거
-        # df = df.drop([0, 1, 2], axis=0)
-        # df.columns = columns
-        # df.reset_index(drop=True, inplace=True)
-        # df.fillna("", inplace=True)
-        # return render_template('generateConfirm.html', name=name, df=df, chargeName=chargeName,
-        #                        chargeAffiliation=chargeAffiliation, chargePhone=chargePhone, chargeEmail=chargeEmail,
-        #                        chargeEtc=chargeEtc, department=department, departmentName=departmentName,
-        #                        departmentPhone=departmentPhone, departmentEmail=departmentEmail,
-        #                        departmentEtc=departmentEtc)
-        # header=0 옵션으로 첫 번째 행을 칼럼명으로 사용
-        df = pd.read_excel(file, header=None)
-        columns = df.iloc[2][0:]
-        # 0, 1, 2행 제거
-        df = df.drop([0, 1, 2], axis=0)
-        df.columns = columns
-        df.reset_index(drop=True, inplace=True)
 
-        # '개인정보파일의 운영 목적' 열에서 '학사' 또는 '행정'이 포함된 행을 필터링
-        # 결측치 제거
-        df.dropna(subset=['개인정보파일의 운영 목적'], inplace=True)
-        df = df[['개인정보파일의 명칭', '개인정보파일의 운영 목적', '개인정보파일에 기록되는 개인정보의 항목', '개인정보의 보유기간']]
-        academic_df = df[(df['개인정보파일의 운영 목적'].str.contains('학사관리')) | (df['개인정보파일의 운영 목적'].str.contains('학교행정업무')) | (
+    # header=0 옵션으로 첫 번째 행을 칼럼명으로 사용
+    df = pd.read_excel(file, header=None)
+    columns = df.iloc[2][0:]
+    # 0, 1, 2행 제거
+    df = df.drop([0, 1, 2], axis=0)
+    df.columns = columns
+    df.reset_index(drop=True, inplace=True)
+
+    # '개인정보파일의 운영 목적' 열에서 '학사' 또는 '행정'이 포함된 행을 필터링
+    # 결측치 제거
+    df.dropna(subset=['개인정보파일의 운영 목적'], inplace=True)
+    df = df[['개인정보파일의 명칭', '개인정보파일의 운영 목적', '개인정보파일에 기록되는 개인정보의 항목', '개인정보의 보유기간']]
+    academic_df = df[
+        (df['개인정보파일의 운영 목적'].str.contains('학사관리')) | (df['개인정보파일의 운영 목적'].str.contains('학교행정업무')) | (
             df['개인정보파일의 운영 목적'].str.contains('학사')) | (df['개인정보파일의 운영 목적'].str.contains('행정')) | (
-                             df['개인정보파일의 운영 목적'].str.contains('학교 행정')) | (df['개인정보파일의 운영 목적'].str.contains('학교행정'))]
-        scholarship_df = df[(df['개인정보파일의 운영 목적'].str.contains('장학생')) | (df['개인정보파일의 운영 목적'].str.contains('장학'))]
-        grade_df = df[(df['개인정보파일의 운영 목적'].str.contains('성적')) | (df['개인정보파일의 운영 목적'].str.contains('수강')) | (
-            df['개인정보파일의 운영 목적'].str.contains('수업'))]
-        graduate_df = df[(df['개인정보파일의 운영 목적'].str.contains('졸업')) | (df['개인정보파일의 운영 목적'].str.contains('졸업생'))]
-        # 필터링된 결과에서 최대 2개의 행만 선택
-        if len(academic_df) > 2:
-            academic_df = academic_df.iloc[:2]
-        if len(scholarship_df) > 2:
-            scholarship_df = scholarship_df.iloc[:2]
-        if len(grade_df) > 2:
-            grade_df = grade_df.iloc[:2]
-        if len(graduate_df) > 2:
-            graduate_df = graduate_df.iloc[:2]
-        return render_template('generateConfirm.html', name=name, df=df, chargeName=chargeName,
-                               chargeAffiliation=chargeAffiliation, chargePhone=chargePhone, chargeEmail=chargeEmail,
-                               chargeEtc=chargeEtc, department=department, departmentName=departmentName,
-                               departmentPhone=departmentPhone, departmentEmail=departmentEmail,
-                               departmentEtc=departmentEtc, combined_data=combined_data,
-                               receipt_department=receipt_department, receipt_departmentName=receipt_departmentName,
-                               receipt_departmentPhone=receipt_departmentPhone,
-                               receipt_departmentEmail=receipt_departmentEmail,
-                               receipt_departmentEtc=receipt_departmentEtc, current_date=current_date,
-                               academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
-                               graduate_df=graduate_df, date_ranges=date_ranges)
+            df['개인정보파일의 운영 목적'].str.contains('학교 행정')) | (df['개인정보파일의 운영 목적'].str.contains('학교행정'))]
+    scholarship_df = df[(df['개인정보파일의 운영 목적'].str.contains('장학생')) | (df['개인정보파일의 운영 목적'].str.contains('장학'))]
+    grade_df = df[(df['개인정보파일의 운영 목적'].str.contains('성적')) | (df['개인정보파일의 운영 목적'].str.contains('수강')) | (
+        df['개인정보파일의 운영 목적'].str.contains('수업'))]
+    graduate_df = df[(df['개인정보파일의 운영 목적'].str.contains('졸업')) | (df['개인정보파일의 운영 목적'].str.contains('졸업생'))]
+    # 필터링된 결과에서 최대 2개의 행만 선택
+    if len(academic_df) > 2:
+        academic_df = academic_df.iloc[:2]
+    if len(scholarship_df) > 2:
+        scholarship_df = scholarship_df.iloc[:2]
+    if len(grade_df) > 2:
+        grade_df = grade_df.iloc[:2]
+    if len(graduate_df) > 2:
+        graduate_df = graduate_df.iloc[:2]
+    return {
+        'name': name,
+        'df': df,
+        'chargeName': chargeName,
+        'chargeAffiliation': chargeAffiliation,
+        'chargePhone': chargePhone,
+        'chargeEmail': chargeEmail,
+        'chargeEtc': chargeEtc,
+        'department': department,
+        'departmentName': departmentName,
+        'departmentPhone': departmentPhone,
+        'departmentEmail': departmentEmail,
+        'departmentEtc': departmentEtc,
+        'combined_data': combined_data,
+        'receipt_department': receipt_department,
+        'receipt_departmentName': receipt_departmentName,
+        'receipt_departmentPhone': receipt_departmentPhone,
+        'receipt_departmentEmail': receipt_departmentEmail,
+        'receipt_departmentEtc': receipt_departmentEtc,
+        'current_date': current_date,
+        'academic_df': academic_df,
+        'scholarship_df': scholarship_df,
+        'grade_df': grade_df,
+        'graduate_df': graduate_df,
+        'date_ranges': date_ranges
+    }
+
+@app.route('/generateConfirm', methods=['POST'])
+def generateConfirm():
+    session['form_data_1'] = request.form.to_dict()
+    process_data = process_form_data1(request)
+
+    if request.form['action'] == 'confirm':
+        return render_template('generateConfirm.html', **process_data)
     else:
-        return render_template('generateMain.html', error='.xlsx 파일만 업로드 가능합니다.')
+        return redirect(url_for('nextForm'))
+
+
+@app.route('/nextForm', methods=['GET', 'POST'])
+def nextForm():
+    return render_template('nextForm.html')
+
+
+@app.route('/nextFormConfirm', methods=['POST'])
+def nextFormConfirm():
+    form_data_1 = session.get('form_data_1', {})
+    name = form_data_1['name']
+
+    if request.form['action'] == 'confirm':
+        return render_template('nextFormConfirm.html', name=name)
+    else:
+        return redirect(url_for('nextForm2'))
+
+@app.route('/nextForm2', methods=['GET', 'POST'])
+def nextForm2():
+    return render_template('nextForm2.html')
+
+def process_form_data3(request):
+    form_data_1 = session.get('form_data_1', {})
+    name = form_data_1['name']
+    checkBoxList = request.form.getlist('checkBoxList')
+    # 체크박스 확인
+    checkBox1 = ''
+    if 'checkBox1' in request.form.getlist('checkBox1'):
+        checkBox1 = 1
+
+    # 1. 영상정보처리기기 설치근거·목적
+    purpose = request.form['purpose']  # 근거 목적
+    # 2. 설치 대수, 설치 위치, 촬영 범위
+    installation_number = request.form['installation_number']  # 설치 대수
+    installation_location = request.form['installation_location']  # 설치 위치 및 범위
+
+    # 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자
+    manager = request.form['manager']  # 관리책임자
+    # '/'가 정확히 2개 포함되어 있는지 확인
+
+    manager_position = ''
+    manager_affiliation = ''
+    manager_phone = ''
+    if manager:  # manager에서 / 단위로 잘라서 책임자 직위 소속 연락처로 넣기
+        manager_position = manager.split('/')[0]
+        manager_affiliation = manager.split('/')[1]
+        manager_phone = manager.split('/')[2]
+
+    access_authority = request.form['access_authority']  # 접근 권한자
+    access_position = ''
+    access_affiliation = ''
+    access_phone = ''
+    if access_authority:
+        access_position = access_authority.split('/')[0]
+        access_affiliation = access_authority.split('/')[1]
+        access_phone = access_authority.split('/')[2]
+
+
+    # 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법
+    shooting_time = request.form['shooting_time']  # 촬영 시간
+    storage_period = request.form['storage_period']  # 보관 기간
+    storage_location = request.form['storage_location']  # 보관 장소
+
+    ###############보류################
+    # 체크박스 확인
+    checkBox4 = ''
+    if 'Processing_method' in request.form.getlist('Processing_method'):
+        checkBox4 = '‣ 처리방법 : 개인영상정보의 목적 외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록ㆍ관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다.'
+
+    # 이거 예시가 없음
+    trustee = request.form['trustee']
+    trustee_tel = request.form['trustee_tel']
+
+    # 5. 영상정보 확인 방법 및 장소
+    checking_method = request.form['checking_method']
+    checking_location = request.form['checking_location']
+
+    # 6~7
+    checkListYes = request.form.getlist('checkListYes')
+    checkList7 = []
+    checkList8 = []
+    print(checkList7)
+    if 'sub7' in checkListYes:
+        checkList7.append('‣  귀하는 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다. ')
+        checkList7.append('‣  단, 귀하가 촬영된 개인영상정보 및 명백히 정보주체의 급박한 생명, 신체, 재산의 이익을 위하여 필요한 개인영상정보에 한정됩니다.')
+        checkList7.append('‣  본 기관은 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 요구한 경우 지체없이 필요한 조치를 하겠습니다.')
+    if 'sub8' in checkListYes:
+        checkList8.append('‣  본 기관에서 처리하는 영상정보는 암호화 조치 등을 통하여 안전하게 관리되고 있습니다. ')
+        checkList8.append(
+            '‣  또한 본 기관은 개인영상정보보호를 위한 관리적 대책으로서 개인정보에 대한 접근 권한을 차등부여하고 있고, 개인영상정보의 위ㆍ변조 방지를 위하여 개인영상정보의 생성 일시, 열람시 열람 목적ㆍ열람자ㆍ열람 일시 등을 기록하여 관리하고 있습니다. ')
+        checkList8.append('‣  이 외에도 개인영상정보의 안전한 물리적 보관을 위하여 잠금장치를 설치하고 있습니다')
+
+    # 8. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항
+    # 현재 날짜 받아오기
+    current_date = request.form['current_date']
+
+    # 제출된 데이터를 가져온다
+    start_dates = request.form.getlist('start_date')
+    end_dates = request.form.getlist('end_date')
+    date_ranges = [{'start_date': start, 'end_date': end} for start, end in zip(start_dates, end_dates)]
+
+    # 처리된 데이터를 딕셔너리로 반환
+    return {
+        'name': name,
+        'checkBox1': checkBox1,
+        'checkBoxList': checkBoxList,
+        'purpose': purpose,
+        'installation_number': installation_number,
+        'installation_location': installation_location,
+        'manager_position': manager_position,
+        'manager_affiliation': manager_affiliation,
+        'manager_phone': manager_phone,
+        'access_position': access_position,
+        'access_affiliation': access_affiliation,
+        'access_phone': access_phone,
+        'shooting_time': shooting_time,
+        'storage_period': storage_period,
+        'storage_location': storage_location,
+        'trustee': trustee,
+        'trustee_tel': trustee_tel,
+        'checkList7': checkList7,
+        'checkList8': checkList8,
+        'checkBox4': checkBox4,
+        'checking_method': checking_method,
+        'checking_location': checking_location,
+        'current_date': current_date,
+        'date_ranges': date_ranges
+    }
+
+@app.route('/nextForm2Confirm', methods=['GET','POST'])
+def nextForm2Confirm():
+    processed_data = process_form_data3(request)
+    if processed_data:
+        if 'action' in request.form and request.form['action'] == 'confirm':
+            return render_template('nextForm2Confirm.html', **processed_data)
+        else:
+            return redirect(url_for('result'))
+    else:
+        return redirect(url_for('result'))
+
+
+
+
+@app.route('/result', methods=['GET','POST'])
+def result():
+    return render_template('result.html')
 
 
 if __name__ == '__main__':

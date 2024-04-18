@@ -15,7 +15,7 @@ body, html {
 
 .form-container {
     width: 80%;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 20px auto;
     padding: 20px; /* 기존 설정 유지 */
     background-color: white;
@@ -31,7 +31,7 @@ body, html {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .form-input, .submit-button, .radio-label {
@@ -226,4 +226,118 @@ body, html {
     cursor: pointer;
     font-size: 18px;
     margin-top: 10px;
+}
+
+/* 모든 ul 요소에 대해 스타일 적용 */
+ul {
+
+    margin-left: 20px; /* 좌측 여백 추가 */
+    padding: 0; /* 기본 패딩 제거 */
+}
+
+/* 모든 li 요소에 대해 스타일 적용 */
+li {
+    margin-top: 20px; /* li 요소 위쪽 여백 추가 */
+    margin-bottom: 10px; /* li 요소 사이의 간격 조정 */
+}
+
+/* 체크박스 스타일 적용 */
+.checkbox-input {
+    margin-right: 10px; /* 체크박스와 라벨 사이의 간격 조정 */
+}
+
+/* 텍스트 입력 필드 스타일 적용 */
+.form-input {
+    display: block; /* 블록 레벨 요소로 표시 */
+    width: 100%; /* 부모 요소의 전체 너비 사용 */
+    padding: 5px; /* 내부 여백 추가 */
+    margin-top: 5px; /* 위쪽 여백 추가 */
+    box-sizing: border-box; /* border와 padding을 너비에 포함 */
+}
+
+/* 라벨 스타일 적용 */
+.checkbox-custom-label {
+    font-weight: normal; /* 라벨의 글꼴 굵기 조정 */
+}
+
+/* 하위 체크리스트 스타일 */
+.sub2-checklist {
+    margin-top: 5px;
+    margin-left: 20px; /* 하위 리스트의 좌측 여백 추가 */
+}
+
+.sub_checkbox{
+    display: none;
+}
+.sub2-checklist{
+    display: none;
+}
+
+table{
+    table-layout: fixed
+    border: 1px solid;
+    border-collapse:
+    width: 100%
+    collapse;
+}
+
+.Row{
+    height: 100px;
+}
+
+.columns{
+    height: 50px;
+}
+th, td{
+    border: 1px solid;
+    padding: 8px;
+    text-align: center;
+}
+
+td{
+    height: 30px;
+}
+
+
+textarea{
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.trustee-input{
+    width: 99%;
+    height: 100%;
+}
+
+.purpose{
+    width: 25%;
+}
+
+.items{
+    width: 20%;
+}
+
+.period{
+    width: 15%;
+}
+
+.reason{
+    width: 25%
+}
+
+.faded-text{
+    opacity: 0.5;
+}
+
+.item2{
+    width: 20%;
+}
+
+.information{
+    width: 30%;
+}
+
+.trustee{
+    width: 50%;
 }
