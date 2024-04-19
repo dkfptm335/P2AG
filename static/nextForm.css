@@ -272,13 +272,34 @@ li {
 .sub2-checklist{
     display: none;
 }
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+table caption {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
 
-table{
-    table-layout: fixed
-    border: 1px solid;
-    border-collapse:
-    width: 100%
-    collapse;
+}
+
+table, .table th, .table td {
+    border: 1px solid #ccc;
+}
+
+table th, .table td {
+    text-align: left;
+    padding: 8px;
+}
+
+table th {
+    background-color: #30d5c8;
+    color: white;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
 
 .Row{
@@ -303,6 +324,10 @@ textarea{
     height: 100%;
     width: 100%;
     border: none;
+}
+
+tr:nth-child(odd) textarea{
+    background-color: #f2f2f2;
 }
 
 .trustee-input{
@@ -340,4 +365,17 @@ textarea{
 
 .trustee{
     width: 50%;
+}
+
+
+
+.radio-container, .checkbox-container {
+  grid-column: span 2; /* 또는 필요에 따라 span 값을 조정 */
+  font-weight: normal;
+}
+
+.retrusteeList-classification, .trusteeList-classification{
+    padding: 0px 10px;
+    font-weight: bold;
+
 }

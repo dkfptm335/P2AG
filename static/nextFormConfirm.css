@@ -15,7 +15,7 @@ body, html {
 
 .container {
     width: 80%;
-    max-width: 800px; /* 테이블 너비 조정을 위해 증가 */
+    max-width: 1200px; /* 테이블 너비 조정을 위해 증가 */
     margin: 20px auto;
     background-color: white;
     border-radius: 10px;
@@ -49,39 +49,63 @@ table th {
     color: white;
 }
 
-.preformatted {
-    white-space: pre-wrap;
-}
-
 table tbody tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-.submit-button {
-    background-color: #30d5c8;
-    color: white;
+.Row{
+    height: 100px;
+}
+
+.columns{
+    height: 50px;
+}
+
+
+td{
+    height: 30px;
+}
+
+
+textarea{
+    height: 100%;
+    width: 100%;
     border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    text-align: center;
 }
 
-.submit-button:hover {
-    background-color: #279a93;
+.trustee-input{
+    width: 99%;
+    height: 100%;
 }
 
-/* 반응형 디자인을 위한 미디어 쿼리 */
-@media (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
+.purpose{
+    width: 25%;
+}
 
-    .header {
-        font-size: 24px;
-    }
+.items{
+    width: 20%;
+}
+
+.period{
+    width: 15%;
+}
+
+.reason{
+    width: 25%
+}
+
+.faded-text{
+    opacity: 0.5;
+}
+
+.item2{
+    width: 20%;
+}
+
+.information{
+    width: 30%;
+}
+
+.trustee{
+    width: 50%;
 }
