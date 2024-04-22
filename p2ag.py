@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, session
+from flask import Flask, request, session, flash
 from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
@@ -14,7 +14,6 @@ def index():
 @app.route('/generateMain')
 def generate():
     return render_template('generateMain.html')
-
 
 def process_form_data1(request):
     name = request.form['name']
@@ -145,7 +144,6 @@ def process_form_data1(request):
         'date_ranges': date_ranges
     }
 
-
 @app.route('/generateConfirm', methods=['POST'])
 def generateConfirm():
     session['form_data_1'] = request.form.to_dict()
@@ -161,52 +159,6 @@ def generateConfirm():
 def nextForm():
     return render_template('nextForm.html')
 
-
-rows_data = {
-    'check1': {'recipient': '대학 학적관리', 'purpose': '장학재단 장학 행정 협조',
-               'data_items': '주민등록번호, 성명, 학과,학번, 전화번호, 이메일,주소, 성별, 수험번호 , 학년, 학적, 신입생 여부, 등록납부대상구분, 학적상태, 입학년도, 총평균평점, 수납계좌번호',
-               'period': '연 2회, 10년',
-               'reason': ' - 한국장학재단 설립 등에 관한 법률 제 50조 및 제 50조의 2\n - 한국장학재단 설립 등에 관한 법률 시행령 제35조의2, 제35조의3, 제36조의2\n - 고등교육법 시행령 제73조 제2항\n - 취업 후 학자금 상환 특별법 제45조의2'},
-    'check2': {'recipient': '근로복지공단', 'purpose': '4대보험 업무 처리\n - 고용보험 보험료 징수 및 관리\n - 산재보험 보험료 징수 및 관리',
-               'data_items': '성명, 주민등록번호, 연간보수총액, 월 소득액, 자격취득일, 직종부호, 1주소정근로시간', 'period': '영구',
-               'reason': ' - 고용산재보험료징수법 제5조, 제11조, 제 12조, 제16조의1~16조 9, 제 40조\n - 고용보험법 제8조 및 제15조\n - 산업재해보상보험법 제6조'},
-    'check3': {'recipient': '국민연금관리공단', 'purpose': '4대보험 업무 처리\n - 국민연금가입 및 공제',
-               'data_items': '성명, 주민번호, 월 소득액, 입사일, 퇴사일, 직종, 휴직기록', 'period': '입사익월 15일 부터 퇴사익월 15일까지, 영구',
-               'reason': '국민연금법 제21조,제123조'},
-    'check4': {'recipient': '국민건강보험공단', 'purpose': '4대보험 업무 처리\n- 건강보험가입 및 공제',
-               'data_items': '성명,주민등록번호, 입사일, 퇴사일, 휴직기록, 월 소득액, 직종, 재직당시 근로소득, 해외출국기록',
-               'period': '입사익월 15일부터 퇴사익월 15일까지, 영구',
-               'reason': ' - 국민건강보험법 제7조, 제9조, 제96조\n - 국민건강보험법 시행령 제38조\n - 국민건강보험법 시행규칙 제4조'},
-    'check5': {'recipient': '병무청', 'purpose': '병무행정에 대한 협조\n - 신/재학생 입영 연기 처리\n - 학생 예비군 자원관리',
-               'data_items': '성명, 생년월일, 주소, 학적반영일, 제적사유, 학번, 전공, 학년, 이메일, 전화번호, 입학년도, 졸업년도',
-               'period': '연 2회(3월, 9월), 10년',
-               'reason': ' - 병역법 제80조 및 제60조\n - 병역법 시행령 제124조 및 제127조\n - 입영연기 관리 규정 제5조, 제6조, 제12조, 제14조'},
-    'check6': {'recipient': '국가평생교육진흥원', 'purpose': '학점인정 및 교육원 학사관리',
-               'data_items': '성명, 생년월일, 학력, 주소, 전화번호, 이메일, 계좌번호', 'period': '연 4회, 준영구', 'reason': '연 4회, 준영구'},
-    'check7': {'recipient': '한국대학교육협의회', 'purpose': '입학 지원자 현황 및 위반자 처리', 'data_items': '성명, 주민등록번호, 출신고교, 졸업년도',
-               'period': '연 1회, 5년', 'reason': '고등교육법시행령제35조'},
-    'check8': {'recipient': '교육부', 'purpose': '교원의 자격검정에 관한 사무\n - 교원자격증 수여',
-               'data_items': '성명, 주민등록번호, 발급기관, 교원자격증번호, 발급일자, 보고년도, 취득일, 학위번호', 'period': '연 2회, 준영구',
-               'reason': ' - 교원자격검정령 제3조, 제31조\n - 교원자격검정령 시행규칙 제3조의 2'},
-    'check9': {'recipient': '법무부(출입국관리사무소)', 'purpose': '외국인 유학생(출입국) 관리',
-               'data_items': '여권번호, 생년월일, 출신학교 이름, 출생국가, 성별, 국적, 이메일, 입학유형, 등록과정, 계열구분, 교육기간, 학과/전공, 한국어구사능력,출석현황',
-               'period': '연 8회, 준영구', 'reason': '출입국관리법 제19조의4, 시행령 제101조'},
-    'check10': {'recipient': '한국대학교육협의회', 'purpose': '대입전형지원자 현황, 중복등록자 확인', 'data_items': '성명, 주민등록번호, 출신고교, 졸업년도',
-                'period': '5년', 'reason': '고등교육법시행령제35조, 제42조,제42조의2'},
-    'check11': {'recipient': '국회도서관', 'purpose': '학위논문 납본', 'data_items': '학위등록번호, 성명, 학과, 졸업일자, 학위논문명',
-                'period': '준영구', 'reason': '국회도서관법 제7조'},
-    'check12': {'recipient': '한국교육학술정보원', 'purpose': '학위논문 등록관리', 'data_items': '학위논문정보', 'period': '준영구',
-                'reason': '정보주체 동의'},
-    'check13': {'recipient': '한국교육개발원', 'purpose': '고등교육기관 교육기본통계조사 수행(학생, 교원, 직원)',
-                'data_items': '성명,주민등록번호, 외국인등록번호, 입학년월일, 졸업년월일, 학적상태, 등록금납부현황, 학위취득일, 학위정보, 외국인학생졸업후상황, 교직원번호, 임용정보, 국적',
-                'period': '연2회, 5년',
-                'reason': ' -  고등교육법 제11조의 3\n - 교육통계조사에 대한 훈령\n - 통계법에 따른 통계청 지정통계 승인번호 제334001호'},
-    'check14': {'recipient': '보훈처', 'purpose': '장학금(국가보조금) 지급',
-                'data_items': '보훈번호,성명,주민등록번호,학과,학년,평균성적,신청학점,입학금,수업료,이수학기, 등록여부, 학적변동일자', 'period': '연2회, 5년',
-                'reason': ' - 국가유공자등예우및지원에관한법률제25조\n - 국가유공자등예우및지원에관한 법률시행령제102조의2'}
-}
-
-
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
     form_data_1 = session.get('form_data_1', {})
@@ -218,19 +170,29 @@ def nextFormConfirm():
     if 'checkBox1' in checkBoxList:
         checkbox1 = 1
 
-    selected_ids = request.form.getlist('checklist')
-    selected_rows = [rows_data[id] for id in selected_ids if id in rows_data]
-    print(selected_rows)
+    # 체크박스 선택 항목 가져오기
+    selected_checks = request.form.getlist('checklist')
+    selected_rows = []
+
+    # 선택된 체크박스에 대응하는 textarea 데이터 처리
+    for check in selected_checks:
+        # 각 항목의 recipient, purpose, items, period, reason 데이터 추출
+        selected_rows.append({
+            'recipient': request.form[f'recipient_{check}'],
+            'purpose': request.form[f'purpose_{check}'],
+            'data_items': request.form[f'items_{check}'],
+            'period': request.form[f'period_{check}'],
+            'reason': request.form[f'reason_{check}']
+        })
+
     if request.form['action'] == 'confirm':
         return render_template('nextFormConfirm.html', name=name, checkbox1=checkbox1, selected_rows=selected_rows)
     else:
         return redirect(url_for('nextForm1_2'))
 
-
 @app.route('/nextForm1_2', methods=['GET', 'POST'])
 def nextForm1_2():
     return render_template('nextForm1_2.html')
-
 
 @app.route('/nextForm1_2Confirm', methods=['POST'])
 def nextForm1_2Confirm():
@@ -243,7 +205,8 @@ def nextForm1_2Confirm():
     if 'checkBox2' in checkBoxList:
         checkbox2 = 1
 
-    selected_ids = request.form.getlist('checklist')
+    selected_ids = request.form.getlist('checklist2')
+    print(selected_ids)
     selected_rows = [rows_data[id] for id in selected_ids if id in rows_data]
     print(selected_rows)
     if request.form['action'] == 'confirm':
@@ -251,11 +214,9 @@ def nextForm1_2Confirm():
     else:
         return redirect(url_for('nextForm1_2'))
 
-
 @app.route('/nextForm2', methods=['GET', 'POST'])
 def nextForm2():
     return render_template('nextForm2.html')
-
 
 def process_form_data3(request):
     form_data_1 = session.get('form_data_1', {})
@@ -292,6 +253,7 @@ def process_form_data3(request):
         access_position = access_authority.split('/')[0]
         access_affiliation = access_authority.split('/')[1]
         access_phone = access_authority.split('/')[2]
+
 
     # 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법
     shooting_time = request.form['shooting_time']  # 촬영 시간
@@ -364,8 +326,7 @@ def process_form_data3(request):
         'date_ranges': date_ranges
     }
 
-
-@app.route('/nextForm2Confirm', methods=['GET', 'POST'])
+@app.route('/nextForm2Confirm', methods=['GET','POST'])
 def nextForm2Confirm():
     processed_data = process_form_data3(request)
     if processed_data:
@@ -377,7 +338,9 @@ def nextForm2Confirm():
         return redirect(url_for('result'))
 
 
-@app.route('/result', methods=['GET', 'POST'])
+
+
+@app.route('/result', methods=['GET','POST'])
 def result():
     return render_template('result.html')
 
