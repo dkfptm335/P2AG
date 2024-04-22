@@ -188,15 +188,16 @@ body, html {
     line-height: 18px;
 }
 
-#dateInputsContainer>div{
+#dateInputsContainer > div {
     display: flex;
     justify-content: space-between;
 }
-#dateInputsContainer>input{
+
+#dateInputsContainer > input {
     width: 40%;
 }
 
-#addDateButton{
+#addDateButton {
     width: 50%;
     background-color: #007bff;
     color: white;
@@ -210,7 +211,7 @@ body, html {
     margin-top: 10px;
 }
 
-.submit-div{
+.submit-div {
     justify-content: space-between;
     text-align: center;
     display: block; /* 블록 레벨 요소로 변경 */
@@ -219,7 +220,7 @@ body, html {
 
 .submit-button {
     width: 45%;
-	display :inline-block;
+    display: inline-block;
     color: white;
     padding: 10px 20px;
     border: none;

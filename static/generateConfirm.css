@@ -28,6 +28,7 @@ table {
     margin-top: 10px;
     border-collapse: collapse;
 }
+
 table caption {
     font-size: 18px;
     margin-bottom: 10px;
@@ -58,21 +59,20 @@ table tbody tr:nth-child(odd) {
 }
 
 .submit-button {
-    background-color: #30d5c8;
+    width: 45%;
+    display: inline-block;
     color: white;
-    border: none;
-    cursor: pointer;
     padding: 10px 20px;
-    font-size: 18px;
+    border: none;
     border-radius: 5px;
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    background-color: #30d5c8;
 }
 
 .submit-button:hover {
-    background-color: #279a93;
+    background-color: #279a93
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
@@ -87,7 +87,8 @@ table tbody tr:nth-child(odd) {
 }
 
 .submit-div {
-    /* 자식 요소들을 수평으로 배치 */
-    display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    text-align: center;
+    display: block; /* 블록 레벨 요소로 변경 */
+    margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
 }
