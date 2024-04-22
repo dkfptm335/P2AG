@@ -16,8 +16,9 @@ body, html {
 .form-container {
     width: 80%;
     max-width: 600px;
-    margin: 20px auto;
+    margin: auto;
     padding: 20px; /* 기존 설정 유지 */
+    padding-right: 40px; /* 오른쪽 패딩 추가 */
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -187,15 +188,16 @@ body, html {
     line-height: 18px;
 }
 
-#dateInputsContainer>div{
+#dateInputsContainer > div {
     display: flex;
     justify-content: space-between;
 }
-#dateInputsContainer>input{
+
+#dateInputsContainer > input {
     width: 40%;
 }
 
-#addDateButton{
+#addDateButton {
     width: 50%;
     background-color: #007bff;
     color: white;
@@ -209,7 +211,7 @@ body, html {
     margin-top: 10px;
 }
 
-.submit-div{
+.submit-div {
     justify-content: space-between;
     text-align: center;
     display: block; /* 블록 레벨 요소로 변경 */
@@ -218,7 +220,7 @@ body, html {
 
 .submit-button {
     width: 45%;
-	display :inline-block;
+    display: inline-block;
     color: white;
     padding: 10px 20px;
     border: none;
