@@ -37,46 +37,50 @@
                         <table id="data-table2">
                             <thead>
                             <tr class="columns">
-                                <th class="check">선택</th>
-                                <th class="information">업무내용(일반)</th>
+                                <th class="check">업무내용(일반)</th>
                                 <th class="trustee">수탁사(안내문구) <span class="faded-text">사용자 입력</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- 원서접수 -->
                             <tr class="Row2">
-                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
-                                <td class="information">입학전형 온라인 접수 및 전형료 수납</td>
+                                <td class="check"><input type="checkbox" value="check1" name="checklist2"> 입학전형 온라인 접수 및
+                                    전형료 수납
+                                    <input type="hidden" value="입학전형 온라인 접수 및 전형료 수납" name="text_check2">
+                                </td>
                                 <td class="trustee">
-                                    <input class="trustee-input" placeholder="진학어플라이, 유웨이어플라이, 한국대학교육협의회">
+                                    <input class="trustee-input" name="trustee_check1"
+                                           placeholder="진학어플라이, 유웨이어플라이, 한국대학교육협의회">
                                 </td>
 
                             </tr>
                             <!-- 증명서 발급 -->
                             <tr class="Row2">
-                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
-                                <td class="information">증명서 발급</td>
+                                <td class="check"><input type="checkbox" value="check2" name="checklist2"> 증명서 발급
+                                    <input type="hidden" value="증명서 발급" name="text_check2">
+                                </td>
                                 <td class="trustee">
-                                    <input class="trustee-input" placeholder="디지털존, 씨아이테크 등">
+                                    <input class="trustee-input" name="trustee_check2" placeholder="디지털존, 씨아이테크 등">
                                 </td>
 
                             </tr>
                             <!-- 등록금 납부 -->
                             <tr class="Row2">
-                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
-                                <td class="information">등록금 납부</td>
+                                <td class="check"><input type="checkbox" value="check3" name="checklist2">등록금 납부
+                                    <input type="hidden" value="등록금 납부" name="text_check3">
+                                </td>
                                 <td class="trustee">
-                                    <input class="trustee-input" placeholder="OO은행, OO카드">
+                                    <input class="trustee-input" name="trustee_check3" placeholder="OO은행, OO카드">
                                 </td>
                             </tr>
                             <!-- 학생증 발급 -->
                             <tr class="Row2">
-                                <td class="check"><input type="checkbox" value="check2" name="checklist2"></td>
-                                <td class="information">학생증 발급</td>
-                                <td class="trustee">
-                                    <input class="trustee-input" placeholder="OO은행, OO카드">
+                                <td class="check"><input type="checkbox" value="check4" name="checklist2"> 학생증 발급
+                                    <input type="hidden" value="학생증 발급" name="text_check4">
                                 </td>
-
+                                <td class="trustee">
+                                    <input class="trustee-input" name="trustee_check4" placeholder="OO은행, OO카드">
+                                </td>
                             </tr>
 
                             </tbody>
@@ -91,159 +95,138 @@
                 <label for="checkBox3" class="checkbox-custom-label"><strong>위탁 사항 추가 - 유형별 위탁 업무 내용 선택 및 위탁사, 재위탁사
                     작성</strong></label>
                 <ul class="sub_checkbox" id="SubCheckList3">
-                    <div class="trusteeList-classification">
-                        <li>수탁사 명<input type="text" name="add_trustee" class="form-input"
-                                        placeholder="수탁사 명"></li>
-                    </div>
-                    <div class="trusteeList-classification">
-                        <li>분류 1
-                            <div class="radio-container">
-                                <input type="radio" name="classification1" value="classification1"> 시스템
-                                <input type="radio" name="classification1" value="classification2"> 홈페이지
-                                <input type="radio" name="classification1" value="classification3"> 기기 장비
+                    <div id="fieldsetContainer1">
+                        <fieldset>
+                            <legend>위탁 사항 추가</legend>
+                            <p>※ 대학교에서 많이 기재되는 업무내용을 대분류, 중분류, 소분류로 구분하였습니다. 시스템-유지보수/운영-전자도서관 선택 시 업무 내용에 '전자도서관 시스템
+                                유지보수,
+                                운영'으로 기재됩니다.
+                                <br>해당하는 업무 내용이 없는 경우, 기타()를 선택하고 직접 작성할 수 있습니다.</p>
+                            <div class="trusteeList-classification">
+                                <li>수탁사 명<input type="text" name="add_trustee[]" class="form-input"
+                                                placeholder="수탁사 명"></li>
                             </div>
-                        </li>
-                    </div>
-                    <div class="trusteeList-classification">
-                        <li>분류 2
-                            <div class="checkbox-container">
-                                <input type="checkbox" name="classification2" value="classification1"> 유지보수
-                                <input type="checkbox" name="classification2" value="classification2"> 운영
-                                <input type="checkbox" name="classification2" value="classification3"> 구축
-                                <input type="checkbox" name="classification2" value="classification4"> 개발
+                            <div class="trusteeList-classification">
+                                <!-- 분류 1  -->
+                                <li>분류 1
+                                    <div class="radio-container" id="classification1">
+                                        <input type="radio" name="radio_classification1" value="classification1"> 시스템 운영 및
+                                        유지보수<input type="hidden" value="시스템 운영 및 유지보수" name="classification1">
+                                        <input type="radio" name="radio_classification1" value="classification2"> 시스템 구축<input type="hidden" value="시스템 구축" name="classification2">
+                                        <input type="radio" name="radio_classification1" value="classification3"> 홈페이지 운영 및
+                                        유지보수<input type="hidden" value="홈페이지 운영 및 유지보수" name="classification3">
+                                        <input type="radio" name="radio_classification1" value="classification4"> 홈페이지 구축 <input type="hidden" value="홈페이지 구축" name="classification4">
+                                        <input type="radio" name="radio_classification1" value="classification5"> 장비 운영 및 유지보수 <input type="hidden" value="장비 운영 및 유지보수" name="classification5">
+                                        <input type="radio" name="radio_classification1" value="classification6"> 장비 구축 <input type="hidden" value="장비 구축" name="classification6">
+                                        <input type="radio" name="radio_classification1" value="classification7"> 교육 컨텐츠 제공 <input type="hidden" value="교육 컨텐츠 제공" name="classification7">
+                                        <input type="radio" name="radio_classification1" value="classification8"> 교육 수강관리 <input type="hidden" value="교육 수강관리" name="classification8">
+                                        <input type="radio" name="radio_classification1" value="classification9"> 교육 테스트 진행 <input type="hidden" value="교육 테스트 진행" name="classification9">
+                                        <input type="radio" name="radio_classification1" value="classification10"> 취업정보 <input type="hidden" value="취업정보" name="classification10">
+                                        <input type="radio" name="radio_classification1" value="classification11"> 현장실습 <input type="hidden" value="현장실습" name="classification11">
+                                        <input type="radio" name="radio_classification1" value="classification12"> 건강 검진 <input type="hidden" value="건강 검진" name="classification12">
+                                        <input type="radio" name="radio_classification1" value="classification13"> 복지카드 및 복지몰 <input type="hidden" value="복지카드 및 복지몰" name="classification13">
+                                        <input type="radio" name="radio_classification1" value="classification14"> 시설물 관리 <input type="hidden" value="시설물 관리" name="classification14">
+                                        <input type="radio" name="radio_classification1" value="classification15"> 사용자 자료관리 <input type="hidden" value="사용자 자료관리" name="classification15">
+                                        <input type="radio" name="radio_classification1" value="other"> 기타()
+                                        <input type="text" placeholder="기타사항" id="otherText" name="other" disabled>
+                                    </div>
+                                </li>
                             </div>
-                        </li>
-                    </div>
-                    <div class="trusteeList-classification">
-                        <li>분류 3
-                            <div class="radio-container" id="radioContainer">
-                                <input type="radio" name="classification3" value="classification1"> DB
-                                <input type="radio" name="classification3" value="classification2"> 전자문서
-                                <input type="radio" name="classification3" value="classification3"> 전산
-                                <input type="radio" name="classification3" value="classification4"> 전자출결관리
-                                <input type="radio" name="classification3" value="classification5"> 인터넷증명발급
-                                <input type="radio" name="classification3" value="classification6"> 입학관리
-                                <input type="radio" name="classification3" value="classification7"> 연말정산
-                                <input type="radio" name="classification3" value="classification8"> 출입관리
-                                <input type="radio" name="classification3" value="classification9"> 학사행정
-                                <input type="radio" name="classification3" value="classification10"> 그룹웨어
-                                <input type="radio" name="classification3" value="classification11"> LMS
-                                <input type="radio" name="classification3" value="classification12"> 통합정보
-                                <input type="radio" name="classification3" value="classification13"> 논문 온라인 제출
-                                <input type="radio" name="classification3" value="classification14"> 도서관리
-                                <input type="radio" name="classification3" value="other" id="otherOption"> 기타
-                                <input type="text" placeholder="기타사항" id="otherText" disabled>
+                            <div class="trusteeList-classification" id="additional-classification1"
+                                 style="display:none;">
+                                <li>분류 2
+                                    <div class="radio-container" id="radioContainer1">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_1"> 전자도서관 <input type="hidden" value="전자도서관" name="radio_classification3_1">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_2"> DB <input type="hidden" value="DB" name="radio_classification3_2">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_3"> 전자문서 <input type="hidden" value="전자문서" name="radio_classification3_3">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_4"> 전산 <input type="hidden" value="전산" name="radio_classification3_4">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_5"> 전자출결관리 <input type="hidden" value="전자출결관리" name="radio_classification3_5">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_6"> 인터넷증명발급 <input type="hidden" value="인터넷증명발급" name="radio_classification3_6">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_7"> 입학관리 <input type="hidden" value="입학관리" name="radio_classification3_7">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_8"> 연말정산 <input type="hidden" value="연말정산" name="radio_classification3_8">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_9"> 출입관리 <input type="hidden" value="출입관리" name="radio_classification3_9">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_10"> 학사행정 <input type="hidden" value="학사행정" name="radio_classification3_10">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_11"> 그룹웨어 <input type="hidden" value="그룹웨어" name="radio_classification3_11">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_12"> 통합정보 <input type="hidden" value="통합정보" name="radio_classification3_12">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_13"> 논문 온라인 제출 <input type="hidden" value="논문 온라인 제출" name="radio_classification3_13">
+                                        <input type="radio" name="radio_classification3" value="other" id="otherOption1"> 기타
+                                        <input type="text" placeholder="기타사항" id="otherText1" name="other" disabled>
+                                    </div>
+                                </li>
                             </div>
-                        </li>
-                    </div>
-                    <!-- 재위탁 여부 -->
-                    <div class="trusteeList-classification">
-                        <li>재수탁 여부
-                            <input type="checkbox" name="re_trustee" value="re_trustee1" id="re_trustee"> 재수탁 하시겠습니까?
-                            <ul class="sub_checkbox" id="re_trusteeList">
-                                <div id="fieldsetContainer">
-                                    <fieldset>
-                                        <legend>재수탁사</legend>
-                                        <div class="re_trusteeList_div">
-                                            <div class="retrusteeList-classification">
-                                                <li>재수탁사 명<input type="text" name="add_trustee" class="form-input"
-                                                                 placeholder="재수탁사 명"></li>
-                                            </div>
-                                            <div class="retrusteeList-classification">
-                                                <li>분류 1
-                                                    <div class="radio-container">
-                                                        <input type="radio" name="classification1"
-                                                               value="classification1">
-                                                        시스템
-                                                        <input type="radio" name="classification1"
-                                                               value="classification2">
-                                                        홈페이지
-                                                        <input type="radio" name="classification1"
-                                                               value="classification3">
-                                                        기기 장비
+                            <div class="trusteeList-classification" id="additional-classification2"
+                                 style="display:none;">
+                                <li>분류 2
+                                    <div class="radio-container" id="radioContainer2">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_14"> 대학 <input type="hidden" value="대학" name="radio_classification3_14">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_15"> 학과 <input type="hidden" value="학과" name="radio_classification3_15">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_16"> 기관 <input type="hidden" value="기관" name="radio_classification3_16">
+                                        <input type="radio" name="radio_classification3" value="other" id="otherOption2"> 기타
+                                        <input type="text" placeholder="기타사항" id="otherText2" disabled>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="trusteeList-classification" id="additional-classification3"
+                                 style="display:none;">
+                                <li>분류 2
+                                    <div class="radio-container" id="radioContainer3">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_17"> 영상정보처리기기 <input type="hidden" value="영상정보처리기기" name="radio_classification3_17">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_18"> 증명서자동발급기 <input type="hidden" value="증명서자동발급기" name="radio_classification3_18">
+                                        <input type="radio" name="radio_classification3" value="other" id="otherOption3"> 기타
+                                        <input type="text" placeholder="기타사항" id="otherText3" disabled>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="trusteeList-classification" id="additional-classification4"
+                                 style="display:none;">
+                                <li>분류 2
+                                    <div class="radio-container" id="radioContainer4">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_19"> 토익 <input type="hidden" value="토익" name="radio_classification3_19">
+                                        <input type="radio" name="radio_classification3" value="radio_classification3_20"> 외국어 <input type="hidden" value="외국어" name="radio_classification3_20">
+                                        <input type="radio" name="radio_classification3" value="other" id="otherOption4"> 기타
+                                        <input type="text" placeholder="기타사항" id="otherText4" disabled>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="trusteeList-classification" id="additional-classification5"
+                                 style="display:none;">
+                                <li>분류 2
+                                    <div class="radio-container" id="radioContainer5">
+                                        <input type="radio" name="radio_classification3" value="other" id="otherOption5"> 시설물
+                                        명
+                                        <input type="text" placeholder="시설물 명" id="otherText5" disabled>
+                                    </div>
+                                </li>
+                            </div>
+                            <!-- 재위탁 여부 -->
+                            <div class="trusteeList-classification">
+                                <li>재수탁 여부
+                                    <input type="checkbox" name="re_trustee" value="re_trustee1" id="re_trustee"> 재수탁
+                                    하시겠습니까?
+                                    <ul class="sub_checkbox" id="re_trusteeList">
+                                        <div id="fieldsetContainer">
+                                            <fieldset>
+                                                <legend>재수탁사</legend>
+                                                <div class="re_trusteeList_div">
+                                                    <div class="retrusteeList-classification">
+                                                        <li>재수탁사 명<input type="text" name="add_retrustee"
+                                                                         class="form-input"
+                                                                         placeholder="재수탁사 명"></li>
+                                                        <li>위탁업무<input type="text" name="add_retrustee_2"
+                                                                         class="form-input"
+                                                                         placeholder="위탁업무"></li>
                                                     </div>
-                                                </li>
-                                            </div>
-                                            <div class="retrusteeList-classification">
-                                                <li>분류 2
-                                                    <div class="checkbox-container">
-                                                        <input type="checkbox" name="classification2"
-                                                               value="classification1">
-                                                        유지보수
-                                                        <input type="checkbox" name="classification2"
-                                                               value="classification2">
-                                                        운영
-                                                        <input type="checkbox" name="classification2"
-                                                               value="classification3">
-                                                        구축
-                                                        <input type="checkbox" name="classification2"
-                                                               value="classification4">
-                                                        개발
-                                                    </div>
-                                                </li>
-                                            </div>
-                                            <div class="retrusteeList-classification">
-                                                <li>분류 3
-                                                    <div class="radio-container" id="radioContainer2">
-                                                        <input type="radio" name="classification3"
-                                                               value="classification1">
-                                                        DB
-                                                        <input type="radio" name="classification3"
-                                                               value="classification2">
-                                                        전자문서
-                                                        <input type="radio" name="classification3"
-                                                               value="classification3">
-                                                        전산
-                                                        <input type="radio" name="classification3"
-                                                               value="classification4">
-                                                        전자출결관리
-                                                        <input type="radio" name="classification3"
-                                                               value="classification5">
-                                                        인터넷증명발급
-                                                        <input type="radio" name="classification3"
-                                                               value="classification6">
-                                                        입학관리
-                                                        <input type="radio" name="classification3"
-                                                               value="classification7">
-                                                        연말정산
-                                                        <input type="radio" name="classification3"
-                                                               value="classification8">
-                                                        출입관리
-                                                        <input type="radio" name="classification3"
-                                                               value="classification9">
-                                                        학사행정
-                                                        <input type="radio" name="classification3"
-                                                               value="classification10">
-                                                        그룹웨어
-                                                        <input type="radio" name="classification3"
-                                                               value="classification11">
-                                                        LMS
-                                                        <input type="radio" name="classification3"
-                                                               value="classification12">
-                                                        통합정보
-                                                        <input type="radio" name="classification3"
-                                                               value="classification13">
-                                                        논문
-                                                        온라인
-                                                        제출
-                                                        <input type="radio" name="classification3"
-                                                               value="classification14">
-                                                        도서관리
-                                                        <input type="radio" name="classification3" value="other"
-                                                               id="otherOption2">
-                                                        기타
-                                                        <input type="text" placeholder="기타사항" id="otherText2" disabled>
-                                                    </div>
-                                                </li>
-                                            </div>
+                                                </div>
+                                            </fieldset>
                                         </div>
-                                    </fieldset>
-                                </div>
-                                <button type="button" id="addRow_retrustee">재수탁사 추가하기</button>
-
-                            </ul>
-                        </li>
+                                        <button type="button" id="addRow_retrustee">재수탁사 추가하기</button>
+                                    </ul>
+                                </li>
+                            </div>
+                        </fieldset>
                     </div>
+                    <button type="button" id="addRow_trustee">수탁사 추가하기</button>
+
                 </ul>
 
             </div>
@@ -257,77 +240,208 @@
 </div>
 
 <script>
-    document.getElementById('confirm').addEventListener('click', function() {
-        const selectedRows = document.querySelectorAll('#data-table .Row input[type="checkbox"]:checked');
 
-        Array.from(selectedRows).forEach(row => {
-            const recipient = row.closest('.Row').querySelector('.recipient').textContent;
-            const purpose = row.closest('.Row').querySelector('.purpose textarea').value;
-            const items = row.closest('.Row').querySelector('.items textarea').value;
+    // 'classification1' 이름을 가진 모든 라디오 버튼을 가져옵니다.
+    const classificationRadioButtons = document.querySelectorAll('input[name="radio_classification1"]');
 
-            console.log(`제공받는 자: ${recipient}, 제공 목적: ${purpose}, 제공 항목: ${items}`); // 콘솔에 출력
-            // 여기에서 선택된 정보를 서버에 전송하거나 로컬 스토리지에 저장할 수 있습니다.
+
+    // 라디오 버튼에 change 이벤트 리스너를 추가합니다.
+    classificationRadioButtons.forEach(button => {
+        button.addEventListener('change', function() {
+            // 'classification1' 또는 'classification2'가 선택되었는지 확인합니다.
+            document.getElementById('additional-classification1').style.display = 'none';
+            document.getElementById('additional-classification2').style.display = 'none';
+            document.getElementById('additional-classification3').style.display = 'none';
+            document.getElementById('additional-classification4').style.display = 'none';
+            document.getElementById('additional-classification5').style.display = 'none';
+
+
+            if (this.value === 'classification1' || this.value === 'classification2') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById('additional-classification1').style.display = 'block';
+            }
+            else if (this.value === 'classification3' || this.value === 'classification4') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById('additional-classification2').style.display = 'block';
+            }
+            else if (this.value === 'classification5' || this.value === 'classification6') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById('additional-classification3').style.display = 'block';
+            }
+            else if (this.value === 'classification7' || this.value === 'classification8' || this.value === 'classification9') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById('additional-classification4').style.display = 'block';
+            }
+            else if (this.value === 'classification14' || this.value === 'classification15') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById('additional-classification5').style.display = 'block';
+            }
+             else {
+                // 그 외 경우에는 새로운 위탁분류를 숨깁니다.
+                document.getElementById('additional-classification1').style.display = 'none';
+                document.getElementById('additional-classification2').style.display = 'none';
+            }
         });
     });
 </script>
-
 <script>
+    var num =2;
+    document.getElementById('addRow_trustee').addEventListener('click', function() {
+        // 새 fieldset 요소 생성
+        var fieldset = document.createElement('fieldset');
 
-
+        // fieldset에 추가할 내용. 예를 들어, 여기에 더 많은 요소를 추가할 수 있습니다.
+        fieldset.innerHTML = `
+        <legend>위탁 사항 추가</legend>
+        <p>※ 대학교에서 많이 기재되는 업무내용을 대분류, 중분류, 소분류로 구분하였습니다. 시스템-유지보수/운영-전자도서관 선택 시 업무 내용에 '전자도서관 시스템
+            유지보수,
+            운영'으로 기재됩니다.
+            <br>해당하는 업무 내용이 없는 경우, 기타()를 선택하고 직접 작성할 수 있습니다.</p>
+        <div class="trusteeList-classification">
+            <li>수탁사 명<input type="text" name="add_trustee[]" class="form-input"
+                            placeholder="수탁사 명"></li>
+        </div>
+        <div class="trusteeList-classification">
+            <!-- 분류 1  -->
+            <li>분류 1
+                <div class="radio-container" id="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification1"> 시스템 운영 및 <input type="hidden" value="시스템 운영 및 유지보수" name="classification${num}">
+                    유지보수
+                    <input type="radio" name="classification${num}" value="classification2"> 시스템 구축 <input type="hidden" value="시스템 구축" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification3"> 홈페이지 운영 및
+                    유지보수 <input type="hidden" value="홈페이지 운영 및 유지보수" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification4"> 홈페이지 구축 <input type="hidden" value="홈페이지 구축" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification5"> 장비 운영 및 유지보수 <input type="hidden" value="장비 운영 및 유지보수" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification6"> 장비 구축 <input type="hidden" value="장비 구축" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification7"> 교육 컨텐츠 제공 <input type="hidden" value="교육 컨텐츠 제공" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification8"> 교육 수강관리 <input type="hidden" value="교육 수강관리" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification9"> 교육 테스트 진행 <input type="hidden" value="교육 테스트 진행" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification10"> 취업정보 <input type="hidden" value="취업정보" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification11"> 현장실습 <input type="hidden" value="현장실습" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification12"> 건강 검진 <input type="hidden" value="건강 검진" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification13"> 복지카드 및 복지몰 <input type="hidden" value="복지카드 및 복지몰" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification14"> 시설물 관리 <input type="hidden" value="시설물 관리" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="classification15"> 사용자 자료관리 <input type="hidden" value="사용자 자료관리" name="classification${num}">
+                    <input type="radio" name="classification${num}" value="other"> 기타()
+                    <input type="text" placeholder="기타사항" id="otherText" disabled>
+                </div>
+            </li>
+        </div>
+        <div class="trusteeList-classification" id="additional-classification1"
+             style="display:none;">
+            <li>분류 2
+                <div class="radio-container" id="radioContainer1">
+                    <input type="radio" name="classification3" value="classification1"> 전자도서관
+                    <input type="radio" name="classification3" value="classification2"> DB
+                    <input type="radio" name="classification3" value="classification3"> 전자문서
+                    <input type="radio" name="classification3" value="classification4"> 전산
+                    <input type="radio" name="classification3" value="classification5"> 전자출결관리
+                    <input type="radio" name="classification3" value="classification6"> 인터넷증명발급
+                    <input type="radio" name="classification3" value="classification7"> 입학관리
+                    <input type="radio" name="classification3" value="classification8"> 연말정산
+                    <input type="radio" name="classification3" value="classification9"> 출입관리
+                    <input type="radio" name="classification3" value="classification10"> 학사행정
+                    <input type="radio" name="classification3" value="classification11"> 그룹웨어
+                    <input type="radio" name="classification3" value="classification12"> 통합정보
+                    <input type="radio" name="classification3" value="classification13"> 논문 온라인 제출
+                    <input type="radio" name="classification3" value="other" id="otherOption1"> 기타
+                    <input type="text" placeholder="기타사항" id="otherText1" disabled>
+                </div>
+            </li>
+        </div>
+        <div class="trusteeList-classification" id="additional-classification2"
+             style="display:none;">
+            <li>분류 2
+                <div class="radio-container" id="radioContainer2">
+                    <input type="radio" name="classification3" value="classification1"> 대학
+                    <input type="radio" name="classification3" value="classification2"> 학과
+                    <input type="radio" name="classification3" value="classification3"> 기관
+                    <input type="radio" name="classification3" value="other" id="otherOption2"> 기타
+                    <input type="text" placeholder="기타사항" id="otherText2" disabled>
+                </div>
+            </li>
+        </div>
+        <div class="trusteeList-classification" id="additional-classification3"
+             style="display:none;">
+            <li>분류 2
+                <div class="radio-container" id="radioContainer3">
+                    <input type="radio" name="classification3" value="classification1"> 영상정보처리기기
+                    <input type="radio" name="classification3" value="classification2"> 증명서자동발급기
+                    <input type="radio" name="classification3" value="other" id="otherOption3"> 기타
+                    <input type="text" placeholder="기타사항" id="otherText3" disabled>
+                </div>
+            </li>
+        </div>
+        <div class="trusteeList-classification" id="additional-classification4"
+             style="display:none;">
+            <li>분류 2
+                <div class="radio-container" id="radioContainer4">
+                    <input type="radio" name="classification3" value="classification1"> 토익
+                    <input type="radio" name="classification3" value="classification2"> 외국어
+                    <input type="radio" name="classification3" value="other" id="otherOption4"> 기타
+                    <input type="text" placeholder="기타사항" id="otherText4" disabled>
+                </div>
+            </li>
+        </div>
+        <div class="trusteeList-classification" id="additional-classification5"
+             style="display:none;">
+            <li>분류 2
+                <div class="radio-container" id="radioContainer5">
+                    <input type="radio" name="classification3" value="other" id="otherOption5"> 시설물
+                    명
+                    <input type="text" placeholder="시설물 명" id="otherText5" disabled>
+                </div>
+            </li>
+        </div>
+        <!-- 재위탁 여부 -->
+        <div class="trusteeList-classification">
+            <li>재수탁 여부
+                <input type="checkbox" name="re_trustee" value="re_trustee1" id="re_trustee"> 재수탁
+                하시겠습니까?
+                <ul class="sub_checkbox" id="re_trusteeList">
+                    <div id="fieldsetContainer">
+                        <fieldset>
+                            <legend>재수탁사</legend>
+                            <div class="re_trusteeList_div">
+                                <div class="retrusteeList-classification">
+                                    <li>재수탁사 명<input type="text" name="add_retrustee"
+                                                     class="form-input"
+                                                     placeholder="재수탁사 명"></li>
+                                    <li>위탁업무<input type="text" name="add_retrustee_2"
+                                                     class="form-input"
+                                                     placeholder="위탁업무"></li>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <button type="button" id="addRow_retrustee">재수탁사 추가하기</button>
+                </ul>
+            </li>
+        </div>`;
+        // fieldset을 div에 추가
+        document.getElementById('fieldsetContainer1').appendChild(fieldset);
+        num++;
+    });
+</script>
+<script>
     document.getElementById('addRow_retrustee').addEventListener('click', function() {
         // 새 fieldset 요소 생성
         var fieldset = document.createElement('fieldset');
 
         // fieldset에 추가할 내용. 예를 들어, 여기에 더 많은 요소를 추가할 수 있습니다.
         fieldset.innerHTML = `
-            <legend>재수탁사</legend>
-            <div class="re_trusteeList_div">
-                <div class="retrusteeList-classification">
-                    <li>재수탁사 명<input type="text" name="add_trustee" class="form-input"
-                                     placeholder="재수탁사 명"></li>
-                </div>
-                <div class="retrusteeList-classification">
-                    <li>분류 1
-                        <div class="radio-container">
-                            <input type="radio" name="classification1" value="classification1"> 시스템
-                            <input type="radio" name="classification1" value="classification2"> 홈페이지
-                            <input type="radio" name="classification1" value="classification3"> 기기 장비
-                        </div>
-                    </li>
-                </div>
-                <div class="retrusteeList-classification">
-                    <li>분류 2
-                        <div class="checkbox-container">
-                            <input type="checkbox" name="classification2" value="classification1"> 유지보수
-                            <input type="checkbox" name="classification2" value="classification2"> 운영
-                            <input type="checkbox" name="classification2" value="classification3"> 구축
-                            <input type="checkbox" name="classification2" value="classification4"> 개발
-                        </div>
-                    </li>
-                </div>
-                <div class="retrusteeList-classification">
-                    <li>분류 3
-                        <div class="radio-container" id="radioContainer2">
-                            <input type="radio" name="classification3" value="classification1"> DB
-                            <input type="radio" name="classification3" value="classification2"> 전자문서
-                            <input type="radio" name="classification3" value="classification3"> 전산
-                            <input type="radio" name="classification3" value="classification4"> 전자출결관리
-                            <input type="radio" name="classification3" value="classification5"> 인터넷증명발급
-                            <input type="radio" name="classification3" value="classification6"> 입학관리
-                            <input type="radio" name="classification3" value="classification7"> 연말정산
-                            <input type="radio" name="classification3" value="classification8"> 출입관리
-                            <input type="radio" name="classification3" value="classification9"> 학사행정
-                            <input type="radio" name="classification3" value="classification10"> 그룹웨어
-                            <input type="radio" name="classification3" value="classification11"> LMS
-                            <input type="radio" name="classification3" value="classification12"> 통합정보
-                            <input type="radio" name="classification3" value="classification13"> 논문 온라인 제출
-                            <input type="radio" name="classification3" value="classification14"> 도서관리
-                            <input type="radio" name="classification3" value="other" id="otherOption2"> 기타
-                            <input type="text" placeholder="기타사항" id="otherText2" disabled>
-                        </div>
-                    </li>
-                </div>
-            </div>`;
+        <legend>재수탁사</legend>
+        <div class="re_trusteeList_div">
+            <div class="retrusteeList-classification">
+                <li>재수탁사 명<input type="text" name="add_retrustee"
+                                 class="form-input"
+                                 placeholder="재수탁사 명"></li>
+                <li>위탁업무<input type="text" name="add_retrustee_2"
+                                 class="form-input"
+                                 placeholder="위탁업무"></li>
+            </div>
+        </div>
+        `;
         // fieldset을 div에 추가
         document.getElementById('fieldsetContainer').appendChild(fieldset);
     });
@@ -369,44 +483,49 @@
         }
     });
 
-    document.getElementById("radioContainer").addEventListener("click", function(event) {
+    document.getElementById("classification1").addEventListener("click", function(event) {
         if (event.target.type === "radio" && event.target.value === "other") {
             document.getElementById("otherText").disabled = false;
         } else if (event.target.type === "radio") {
             document.getElementById("otherText").disabled = true;
         }
     });
-
-
-    document.getElementById('addDateButton').addEventListener('click', function() {
-        // 새로운 div 요소 생성
-        var newDiv = document.createElement('div');
-
-        // 첫 번째 날짜 입력 필드 생성 및 설정
-        var newInput1 = document.createElement('input');
-        newInput1.type = 'date';
-        newInput1.name = 'start_date';
-        newInput1.className = 'form-input';
-
-        // <p> 요소 생성 및 '~' 텍스트 설정
-        var pElement = document.createElement('p');
-        pElement.innerText = ' ~ '; // 혹은 pElement.textContent = ' ~ ';
-        pElement.style.display = 'inline'; // <p>를 인라인 요소처럼 보이도록 설정
-
-        // 두 번째 날짜 입력 필드 생성 및 설정
-        var newInput2 = document.createElement('input');
-        newInput2.type = 'date';
-        newInput2.name = 'end_date';
-        newInput2.className = 'form-input';
-
-        // 새로운 div에 첫 번째 입력 필드, <p> 요소, 두 번째 입력 필드 추가
-        newDiv.appendChild(newInput1);
-        newDiv.appendChild(pElement);
-        newDiv.appendChild(newInput2);
-
-        // 날짜 입력 필드를 담고 있는 컨테이너에 새로운 div 요소 추가
-        document.getElementById('dateInputsContainer').appendChild(newDiv);
+    document.getElementById("radioContainer1").addEventListener("click", function(event) {
+        if (event.target.type === "radio" && event.target.value === "other") {
+            document.getElementById("otherText1").disabled = false;
+        } else if (event.target.type === "radio") {
+            document.getElementById("otherText1").disabled = true;
+        }
     });
+    document.getElementById("radioContainer2").addEventListener("click", function(event) {
+        if (event.target.type === "radio" && event.target.value === "other") {
+            document.getElementById("otherText2").disabled = false;
+        } else if (event.target.type === "radio") {
+            document.getElementById("otherText2").disabled = true;
+        }
+    });
+    document.getElementById("radioContainer3").addEventListener("click", function(event) {
+        if (event.target.type === "radio" && event.target.value === "other") {
+            document.getElementById("otherText3").disabled = false;
+        } else if (event.target.type === "radio") {
+            document.getElementById("otherText3").disabled = true;
+        }
+    });
+    document.getElementById("radioContainer4").addEventListener("click", function(event) {
+        if (event.target.type === "radio" && event.target.value === "other") {
+            document.getElementById("otherText4").disabled = false;
+        } else if (event.target.type === "radio") {
+            document.getElementById("otherText4").disabled = true;
+        }
+    });
+    document.getElementById("radioContainer5").addEventListener("click", function(event) {
+        if (event.target.type === "radio" && event.target.value === "other") {
+            document.getElementById("otherText5").disabled = false;
+        } else if (event.target.type === "radio") {
+            document.getElementById("otherText5").disabled = true;
+        }
+    });
+
 
 </script>
 

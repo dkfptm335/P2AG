@@ -108,15 +108,7 @@ def process_form_data1(request):
     grade_df = df[(df['개인정보파일의 운영 목적'].str.contains('성적')) | (df['개인정보파일의 운영 목적'].str.contains('수강')) | (
         df['개인정보파일의 운영 목적'].str.contains('수업'))]
     graduate_df = df[(df['개인정보파일의 운영 목적'].str.contains('졸업')) | (df['개인정보파일의 운영 목적'].str.contains('졸업생'))]
-    # 필터링된 결과에서 최대 2개의 행만 선택
-    if len(academic_df) > 2:
-        academic_df = academic_df.iloc[:2]
-    if len(scholarship_df) > 2:
-        scholarship_df = scholarship_df.iloc[:2]
-    if len(grade_df) > 2:
-        grade_df = grade_df.iloc[:2]
-    if len(graduate_df) > 2:
-        graduate_df = graduate_df.iloc[:2]
+
     return {
         'name': name,
         'df': df,
@@ -204,13 +196,35 @@ def nextForm1_2Confirm():
 
     if 'checkBox2' in checkBoxList:
         checkbox2 = 1
+    # 체크박스 선택 항목 가져오기
+    selected_checks = request.form.getlist('checklist2')
+    selected_rows = []
+    # 선택된 체크박스에 대응하는 textarea 데이터 처리
+    for check in selected_checks:
+        # 각 항목의 recipient, purpose, items, period, reason 데이터 추출
+        selected_rows.append({
+            'trustee': request.form[f'trustee_{check}'],
+            'text': request.form[f'text_{check}'],  # 숨겨진 텍스트 필드의 값을 가져옴
+        })
 
-    selected_ids = request.form.getlist('checklist2')
-    print(selected_ids)
-    selected_rows = [rows_data[id] for id in selected_ids if id in rows_data]
-    print(selected_rows)
+    #수탁사 이름 받아오기
+    add_trustee = request.form.getlist('add_trustee[]')
+    print(add_trustee)
+
+    text_check3 = request.form.getlist('text_check3')
+    classification1 = request.form['radio_classification1']
+    classification1 = request.form[classification1]
+    print(classification1)
+    try:
+        classification3 = request.form['radio_classification3']
+        classification3 = request.form[classification3]
+        print(classification3)
+    except:
+        classification3 = ''
+
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows)
+        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows,
+                               add_trustee=add_trustee, classification1=classification1, classification3=classification3)
     else:
         return redirect(url_for('nextForm1_2'))
 
