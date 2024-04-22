@@ -165,7 +165,7 @@
             <p>소속: <strong>{{chargeAffiliation}}</strong></p>
             <p>연락처: <strong>{{chargePhone}} / {{chargeEmail}}</strong></p>
             {% if chargeEtc%}
-            <p>Etc.: <strong>{{chargeEtc}}</strong></p>
+            <p>etc.: <strong>{{chargeEtc}}</strong></p>
             {% endif %}
         </div>
         <br>
@@ -213,7 +213,7 @@
     <div>
         <h2>{{num}}. 정보주체의 권익침해에 대한 구제방법[필수]</h2>
         <p>정보주체는 아래의 기관을 통해 개인정보침해에 대한 피해구제나 상담 등을 신청할 수 있습니다.</p>
-        <p> - 아래의 기관은 <strong>{{name}}</strong>와(과)는 별개의 기관으로서, <strong>{{name}}</strong> 의 자체적인 개인정보 불만처리, 피해구제 결과에
+        <p> - 아래의 기관은 <strong>{{name}}</strong>와(과)는 별개의 기관으로서, <strong>{{name}}</strong>의 자체적인 개인정보 불만처리, 피해구제 결과에
             만족하지 못하시거나 보다 자세한 도움이 필요하시면 문의하여 주시기 바랍니다</p>
         <div>
             <p>1. 개인정보분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr) </p>
@@ -229,20 +229,15 @@
         <h2>{{num}}. 개인정보 처리방침의 변경 사항[필수]</h2>
         <p>이 개인정보 처리방침은 <strong>{{current_date}}</strong>부터 적용됩니다.</p>
         <p><strong>{{name}}</strong>은(는) 「개인정보 보호법」 제30조(개인정보처리방침의 수립 및 공개)에 따라 이 전의 개인정보 처리방침을 공개합니다. </p>
-        <div>
-            {% for range in date_ranges %}
-            <p><strong>- {{ range.start_date }} ~ {{ range.end_date }} 적용</strong> </p>
-            {% endfor %}
-        </div>
     </div>
     <br>
 
     <!-- end -->
-    <div>
-        <button onclick="goBack()">뒤로 가기</button>
-        <a href="/result"><button>다음으로</button></a>
-
+    <div class="submit-div">
+        <p onclick="goBack()" class="submit-button">뒤로 가기</p>
+        <a href="/nextForm" style="text-decoration: none" class="submit-button">다음으로</a>
     </div>
+
 </div>
 <script>
     function goBack(){

@@ -85,3 +85,9 @@ table tbody tr:nth-child(odd) {
         font-size: 24px;
     }
 }
+
+.submit-div {
+    /* 자식 요소들을 수평으로 배치 */
+    display: flex;
+    justify-content: space-evenly;
+}
