@@ -57,22 +57,25 @@ table tbody tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-.submit-button {
-    background-color: #30d5c8;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    display: block;
-    width: 200px;
-    margin: 20px auto;
+
+.submit-div{
+    justify-content: space-between;
     text-align: center;
+    display: block; /* 블록 레벨 요소로 변경 */
+    margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
 }
 
-.submit-button:hover {
-    background-color: #279a93;
+.submit-button {
+    background-color: #30d5c8;
+    width: 45%;
+	display :inline-block;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */
