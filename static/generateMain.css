@@ -16,8 +16,9 @@ body, html {
 .form-container {
     width: 80%;
     max-width: 600px;
-    margin: 20px auto;
+    margin: auto;
     padding: 20px; /* 기존 설정 유지 */
+    padding-right: 40px; /* 오른쪽 패딩 추가 */
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
