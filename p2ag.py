@@ -212,7 +212,7 @@ def nextForm1_2Confirm():
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows)
     else:
-        return redirect(url_for('nextForm1_2'))
+        return redirect(url_for('nextForm2'))
 
 @app.route('/nextForm2', methods=['GET', 'POST'])
 def nextForm2():
