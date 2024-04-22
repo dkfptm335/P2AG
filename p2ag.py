@@ -11,9 +11,19 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/preGenerate')
+def preGenerate():
+    return render_template('preGenerate.html')
+
+
 @app.route('/generateMain')
 def generate():
     return render_template('generateMain.html')
+
+
+@app.route('/generateMainMall')
+def generateMainMall():
+    return render_template('generateMainMall.html')
 
 
 def process_form_data1(request):
@@ -118,7 +128,9 @@ def process_form_data1(request):
     disorder_df = df[(df['개인정보파일의 운영 목적'].str.contains('장애'))]
     homepage_df = df[(df['개인정보파일의 운영 목적'].str.contains('홈페이지')) | (df['개인정보파일의 운영 목적'].str.contains('웹사이트'))]
     # 나머지 데이터 etc_df로 저장
-    etc_df = df[~df.index.isin(academic_df.index) & ~df.index.isin(scholarship_df.index) & ~df.index.isin(grade_df.index) & ~df.index.isin(graduate_df.index) & ~df.index.isin(newStudent_df.index) & ~df.index.isin(disorder_df.index) & ~df.index.isin(homepage_df.index)]
+    etc_df = df[~df.index.isin(academic_df.index) & ~df.index.isin(scholarship_df.index) & ~df.index.isin(
+        grade_df.index) & ~df.index.isin(graduate_df.index) & ~df.index.isin(newStudent_df.index) & ~df.index.isin(
+        disorder_df.index) & ~df.index.isin(homepage_df.index)]
     return {
         'name': name,
         'df': df,

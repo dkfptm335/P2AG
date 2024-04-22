@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #E8F0F2; /* 배경색을 밝은 터키색 계열로 설정 */
+    color: #303030; /* 기본 텍스트 색상 */
+}
+
+h1 {
+    color: #17A2B8; /* 헤더에 터키색 적용 */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 80%;
+    margin: auto; /* 테이블을 페이지 중앙에 배치 */
+    border-collapse: collapse; /* 테이블 경계선을 합침 */
+    background-color: #FFFFFF; /* 테이블 배경색 */
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #17A2B8; /* 셀 경계선에 터키색 적용 */
+}
+
+th {
+    background-color: #17A2B8; /* 테이블 헤더 배경색 */
+    color: white; /* 테이블 헤더 텍스트 색상 */
+    text-align: center;
+    width: 10%;
+}
+
+ol {
+    width: 80%;
+    margin: 20px auto; /* 목록을 페이지 중앙에 배치하고 상하 마진 추가 */
+}
+
+.submit-div {
+    justify-content: space-between;
+    text-align: center;
+    display: block; /* 블록 레벨 요소로 변경 */
+    margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
+}
+
+.submit-button {
+    background-color: #17A2B8; /* 버튼 배경색에 터키색 적용 */
+    width: 45%;
+    display: inline-block;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* "다음으로 넘어가는" 버튼 추가 */
+.next-button {
+    background-color: #1597A5; /* 버튼에 약간 더 어두운 터키색 적용 */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block; /* 인라인 블록 요소로 설정 */
+}
+
+.submit-button {
+    width: 20%;
+    display: inline-block;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    background-color: #30d5c8;
+}
+
+.submit-button:hover {
+    background-color: #279a93
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .header {
+        font-size: 24px;
+    }
+}
+
+.submit-div {
+    justify-content: space-between;
+    text-align: center;
+    display: block; /* 블록 레벨 요소로 변경 */
+    margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
+}
