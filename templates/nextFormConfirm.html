@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>개인정보처리방침 생성 폼 입력 확인</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nextFormConfirm.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var num = 1; // 시작 번호
+            var security_num = 1;
+            var elements = document.querySelectorAll('h2');
+
+            elements.forEach(function(element) {
+                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    {% if checkbox1 %}
+    <div class="header">1. 개인정보 제3자 제공에 관한 사항</div>
+    <p><strong>{{ name }}</strong>에서 개인정보의 이용 또는 제공은 소관업무를 수행하기 위한 최소한의 범위로 제한하며, 다른 법률에 따라 연세대학교 내부에서 이용하거나 제3자에게
+        제공하는
+        경우를 제외하고는 개인정보파일의 보유목적 외의 목적으로 타 기관 및 타인에게 제공하지 않습니다.</p>
+    <p><strong>{{ name }}</strong>는 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조에 해당하는 경우 다음과 같이 개인정보를 제3자에게 제공하고 있습니다.
+    </p>
+
+    <table>
+        <thead>
+        <tr class="columns">
+            <th class="recipient">제공받는 자</th>
+            <th class="purpose">제공 목적</th>
+            <th class="items">제공 항목</th>
+            <th class="period">보유 및 이용 기간</th>
+            <th class="reason">제공 근거</th>
+        </tr>
+        </thead>
+        {% for row in selected_rows %}
+        <tr>
+            <td><div class="preformatted"> {{row.recipient }}</div></td>
+            <td><div class="preformatted"> {{row.purpose }}</div></td>
+            <td><div class="preformatted"> {{row.data_items }}</div></td>
+            <td><div class="preformatted"> {{row.period }}</div></td>
+            <td><div class="preformatted"> {{row.reason }}</div></td>
+            </tr>
+            {% endfor %}
+        </table>
+    <br>
+    <hr>
+    {% endif %}
+    <!-- end -->
+    <div>
+        <button onclick="goBack()">뒤로 가기</button>
+        <a href="/result">
+            <button>최종결과</button>
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+    function goBack(){
+    window.history.back();
+    }
+</script>
+</body>
+</html>
