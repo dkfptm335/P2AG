@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>개인정보 처리방침 검증 서비스</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/inspectionMain.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>개인정보처리방침 검증</h1>
+            <p>P2AG의 개인정보 처리방침 검증 서비스는 개인정보보호법과 개인정보처리방침을 기반으로 AI가 학습한 결과로 검증한 내용입니다. 단, 이 서비스의 결과는 법적 효력이 없음을 유의하시길 바랍니다.</p>
+        </header>
+        <section class="verification-application">
+            <h2>검증 적용</h2>
+            <form>
+                <label for="verification-type">검증 유형</label>
+                <select id="verification-type">
+                    <option value="shopping">쇼핑몰</option>
+                    <option value="university">대학교</option>
+                </select>
+                <label for="target-input">처리방침 검증 적용할 대상</label>
+                <input type="text" id="target-input" placeholder="URL 사용자입력">
+                <input type="file">
+                <button type="submit">업로드</button>
+            </form>
+        </section>
+        <section class="verification-criteria">
+            <h2>검증 기준 소개</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>설명</th>
+                        <th>검증 대상</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>항목 존재</td>
+                        <td>기재 필수사항과 해당의무 사항이 포함되어 있는지 제목 존재 유무를 파악합니다.</td>
+                        <td>문서 전체</td>
+                    </tr>
+                    <tr>
+                        <td>컬럼명 존재</td>
+                        <td>기재 사항에 반드시 표기해야할 정보가 표, 줄글 등으로 표현되어 있는 경우 그 항목에 대한 명시가 정확한지 확인합니다.</td>
+                        <td>개인정보의 처리 목적, 처리 항목, 보유기간 등</td>
+                    </tr>
+                    <tr>
+                        <td>정보값 존재</td>
+                        <td>개인정보보호책임자의 연락처와 개인정보 관련 요구사항 처리부서에 대한 정보가 정확한지 확인합니다.</td>
+                        <td>개인정보 보호책임자에 관한 사항 등</td>
+                    </tr>
+                    <tr>
+                        <td>표현 방식</td>
+                        <td>처리방침 작성 내용 중 모호한 표현을 검출합니다.</td>
+                        <td>항목 중 목적, 항목, 기간을 알려야 하는 경우</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>
