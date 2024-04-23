@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ form_data1['name'] }} 개인정보처리방침 생성 결과</title>
+    <link rel="stylesheet" href="../static/result.css">
 </head>
 <body>
-최종 화면
+<div class="datetime-container" id="datetime"></div>
+<div class="header">{{ form_data1['name'] }} 개인정보처리방침</div>
+<div class="container">
+    <div>
+        <strong>{{ form_data1['name'] }}</strong>는 정보주체의 자유와 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여, 적법하게 개인정보를 처리하고
+        안전하게 관리하고 있습니다. 이에 「개인정보 보호법」 제 30조에
+        따라 정보주체에게 개인정보 처리에 관한 절차 및 기준을 안내하고, 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립/공개합니다.
+    </div>
+    <br>
+    <div class="image-container">
+        <div class="image-box">
+            <img src="../static/images/개인정보.png" alt="개인정보">
+            <div class="info">개인정보</div>
+        </div>
+        <div class="image-box">
+            <img src="../static/images/처리목적.png" alt="처리목적">
+            <div class="info">처리목적</div>
+        </div>
+        <div class="image-box">
+            <img src="../static/images/고충처리부서.png" alt="고충처리부서">
+            <div class="info">고충처리부서</div>
+        </div>
+        <div class="image-box">
+            <img src="../static/images/제3자 제공.png" alt="제3자 제공">
+            <div class="info">제3자 제공</div>
+        </div>
+        <div class="image-box">
+            <img src="../static/images/처리위탁.png" alt="처리위탁">
+            <div class="info">처리위탁</div>
+        </div>
+        <div class="image-box">
+            <img src="../static/images/가명정보 처리.png" alt="가명정보 처리">
+            <div class="info">가명정보 처리</div>
+        </div>
+    </div>
+    <br>
+</div>
+<script>
+    function updateDateTime() {
+        var now = new Date();
+        var datetimeString = now.toLocaleString();
+        document.getElementById("datetime").innerHTML = datetimeString;
+    }
+
+    // 페이지 로드 시 1초마다 현재 날짜와 시간을 업데이트하기
+    window.onload = function () {
+        updateDateTime(); // 초기 로드 시 한 번 실행
+    };
+</script>
 </body>
 </html>
