@@ -237,14 +237,17 @@ def nextForm1_2Confirm():
             'text': request.form[f'text_{check}'],
         })
 
-    #수탁사 이름 받아오기
+    # 수탁사 이름 받아오기
     add_trustee = request.form.getlist('add_trustee[]')
     print(add_trustee)
 
     text_check3 = request.form.getlist('text_check3')
-    classification1 = request.form['radio_classification1']
-    classification1 = request.form[classification1]
-    print(classification1)
+    try:
+        classification1 = request.form['radio_classification1']
+        classification1 = request.form[classification1]
+        print(classification1)
+    except:
+        classification1 = ''
     try:
         classification3 = request.form['radio_classification3']
         classification3 = request.form[classification3]
@@ -258,7 +261,10 @@ def nextForm1_2Confirm():
     print(retrustee_name, retrustee_business)
 
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows, add_trustee=add_trustee, text_check3=text_check3, classification1=classification1, classification3=classification3, retrustee_name=retrustee_name, retrustee_business=retrustee_business)
+        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows,
+                               add_trustee=add_trustee, text_check3=text_check3, classification1=classification1,
+                               classification3=classification3, retrustee_name=retrustee_name,
+                               retrustee_business=retrustee_business)
     else:
         return redirect(url_for('nextForm2'))
 
@@ -391,6 +397,11 @@ def nextForm2Confirm():
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     return render_template('result.html')
+
+
+@app.route('/inspectionMain')
+def inspectionMain():
+    return render_template('inspectionMain.html')
 
 
 if __name__ == '__main__':
