@@ -35,18 +35,20 @@
             <td><div class="text"> {{row.text }}</div></td>
         </tr>
         {% endfor %}
-        {% for trustee in add_trustee %}
-        <tr>
-            <td><div> {{trustee}}</div></td>
-            <td><div> {{classification3}} {{classification1}}</div></td>
-        </tr>
-        {% endfor %}
-        {% for retrustee in add_retrustee_name %}
-        <tr>
-            <td><div> {{retrustee}}</div></td>
-            <td><div> {{add_retrustee_business}} </div></td>
-        </tr>
-        {% endfor %}
+        {% if checkbox3 %}
+            {% for trustee in add_trustee %}
+            <tr>
+                <td><div> {{trustee}}</div></td>
+                <td><div> {{classification3}} {{classification1}}</div></td>
+            </tr>
+            {% endfor %}
+            {% for retrustee_name, retrustee_business in retrustee %}
+            <tr>
+                <td><div> ㄴ {{retrustee_name}}</div></td>
+                <td><div> {{retrustee_business}}</div></td>
+            </tr>
+            {% endfor %}
+        {% endif %}
 
         </table>
     <br>

@@ -182,6 +182,8 @@ def nextForm():
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
     form_data_1 = session.get('form_data_1', {})
+    session['form_data_2'] = request.form.to_dict()
+
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
@@ -223,9 +225,13 @@ def nextForm1_2Confirm():
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
     checkbox2 = ''
+    checkbox3 = ''
 
     if 'checkBox2' in checkBoxList:
         checkbox2 = 1
+    if 'checkBox3' in checkBoxList:
+        checkbox3 = 1
+
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist2')
     selected_rows = []
@@ -242,23 +248,26 @@ def nextForm1_2Confirm():
     print(add_trustee)
 
     text_check3 = request.form.getlist('text_check3')
-    classification1 = request.form['radio_classification1']
-    classification1 = request.form[classification1]
-    print(classification1)
     try:
-        classification3 = request.form['radio_classification3']
+        classification1 = request.form['trustee1_option1']
+        classification1 = request.form[classification1]
+        print(classification1)
+    except:
+        classification1 = ''
+    try:
+        classification3 = request.form['trustee1_option2']
         classification3 = request.form[classification3]
         print(classification3)
     except:
         classification3 = ''
 
-    retrustee_name = request.form.getlist('retrustee_name[]')
-    retrustee_business = request.form.getlist('retrustee_business[]')
+    trustee1_retrustee_name = request.form.getlist('trustee1_retrustee_name[]')
+    trustee1_retrustee_business = request.form.getlist('trustee1_retrustee_business[]')
+    retrustee = zip(trustee1_retrustee_name, trustee1_retrustee_business)
 
-    print(retrustee_name, retrustee_business)
 
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows, add_trustee=add_trustee, text_check3=text_check3, classification1=classification1, classification3=classification3, retrustee_name=retrustee_name, retrustee_business=retrustee_business)
+        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3, selected_rows=selected_rows, add_trustee=add_trustee, text_check3=text_check3, classification1=classification1, classification3=classification3, retrustee=retrustee)
     else:
         return redirect(url_for('nextForm2'))
 
