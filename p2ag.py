@@ -252,9 +252,13 @@ def nextForm1_2Confirm():
     except:
         classification3 = ''
 
+    add_retrustee_name = request.form.getlist('add_retrustee_name[]')
+    add_retrustee_business = request.form.getlist('add_retrustee_business[]')
+    print(add_retrustee_name, add_retrustee_business)
+
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows,
-                               add_trustee=add_trustee, classification1=classification1, classification3=classification3)
+                               add_trustee=add_trustee, classification1=classification1, classification3=classification3, text_check3=text_check3, add_retrustee_name=add_retrustee_name, add_retrustee_business=add_retrustee_business)
     else:
         return redirect(url_for('nextForm2'))
 
