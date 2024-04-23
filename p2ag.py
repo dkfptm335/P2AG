@@ -182,6 +182,7 @@ def nextForm():
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
     form_data_1 = session.get('form_data_1', {})
+    session['form_data_2'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
@@ -384,6 +385,7 @@ def process_form_data3(request):
 
 @app.route('/nextForm2Confirm', methods=['GET', 'POST'])
 def nextForm2Confirm():
+    session['form_data_4'] = request.form.to_dict()
     processed_data = process_form_data3(request)
     if processed_data:
         if 'action' in request.form and request.form['action'] == 'confirm':
@@ -396,6 +398,13 @@ def nextForm2Confirm():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
+    form_data1 = session.get('form_data_1', {})
+    form_data2 = session.get('form_data_2', {})
+    form_data4 = session.get('form_data_4', {})
+    print(form_data1)
+    print(form_data2)
+    print(form_data4)
+
     return render_template('result.html')
 
 
