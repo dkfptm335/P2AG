@@ -15,7 +15,7 @@ body, html {
 
 .form-container {
     width: 80%;
-    max-width: 600px;
+    max-width: 1200px;
     margin: auto;
     padding: 20px; /* 기존 설정 유지 */
     padding-right: 40px; /* 오른쪽 패딩 추가 */
@@ -228,4 +228,113 @@ body, html {
     cursor: pointer;
     font-size: 18px;
     margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+table caption {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+}
+
+table, .table th, .table td {
+    border: 1px solid #ccc;
+}
+
+table th, .table td {
+    text-align: left;
+    padding: 8px;
+}
+
+table th {
+    background-color: #30d5c8;
+    color: white;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.Row {
+    height: 100px;
+}
+
+.columns {
+    height: 50px;
+}
+
+th, td {
+    border: 1px solid;
+    padding: 8px;
+    text-align: center;
+}
+
+td {
+    height: 30px;
+}
+
+
+textarea {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+tr:nth-child(odd) textarea {
+    background-color: #f2f2f2;
+}
+
+.trustee-input {
+    width: 99%;
+    height: 100%;
+}
+
+.purpose {
+    width: 25%;
+}
+
+.items {
+    width: 20%;
+}
+
+.period {
+    width: 15%;
+}
+
+.reason {
+    width: 25%
+}
+
+.faded-text {
+    opacity: 0.5;
+}
+
+.item2 {
+    width: 20%;
+}
+
+.information {
+    width: 30%;
+}
+
+.trustee {
+    width: 50%;
+}
+
+
+.radio-container, .checkbox-container {
+    grid-column: span 2; /* 또는 필요에 따라 span 값을 조정 */
+    font-weight: normal;
+}
+
+.retrusteeList-classification, .trusteeList-classification {
+    padding: 0px 10px;
+    font-weight: bold;
+
 }
