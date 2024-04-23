@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 from flask import Flask, request, session
 from flask import render_template, redirect, url_for
@@ -108,9 +110,9 @@ def process_form_data1(request):
     df.reset_index(drop=True, inplace=True)
 
     # '개인정보파일의 명칭' 및 '개인정보의 보유기간'데이터가 NaN인 경우, 이전 행의 데이터로 채워넣기
-    df['개인정보파일의 명칭'].fillna(method='ffill', inplace=True)
-    df['개인정보의 보유기간'].fillna(method='ffill', inplace=True)
-    df['개인정보파일에 기록되는 개인정보의 항목'].fillna(method='ffill', inplace=True)
+    df['개인정보파일의 명칭'].ffill(inplace=True)
+    df['개인정보의 보유기간'].ffill(inplace=True)
+    df['개인정보파일에 기록되는 개인정보의 항목'].ffill(inplace=True)
 
     # '개인정보파일의 운영 목적' 열에서 '학사' 또는 '행정'이 포함된 행을 필터링
     # 결측치 제거
@@ -127,10 +129,12 @@ def process_form_data1(request):
     newStudent_df = df[(df['개인정보파일의 운영 목적'].str.contains('입시')) | (df['개인정보파일의 운영 목적'].str.contains('신입'))]
     disorder_df = df[(df['개인정보파일의 운영 목적'].str.contains('장애'))]
     homepage_df = df[(df['개인정보파일의 운영 목적'].str.contains('홈페이지')) | (df['개인정보파일의 운영 목적'].str.contains('웹사이트'))]
+
     # 나머지 데이터 etc_df로 저장
     etc_df = df[~df.index.isin(academic_df.index) & ~df.index.isin(scholarship_df.index) & ~df.index.isin(
         grade_df.index) & ~df.index.isin(graduate_df.index) & ~df.index.isin(newStudent_df.index) & ~df.index.isin(
         disorder_df.index) & ~df.index.isin(homepage_df.index)]
+
     return {
         'name': name,
         'df': df,
@@ -404,8 +408,7 @@ def result():
     print(form_data1)
     print(form_data2)
     print(form_data4)
-
-    return render_template('result.html')
+    return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4)
 
 
 @app.route('/inspectionMain')

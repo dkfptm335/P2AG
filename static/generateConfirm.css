@@ -15,7 +15,7 @@ body, html {
 
 .container {
     width: 80%;
-    max-width: 800px; /* 테이블 너비 조정을 위해 증가 */
+    max-width: 1200px; /* 테이블 너비 조정을 위해 증가 */
     margin: 20px auto;
     background-color: white;
     border-radius: 10px;
@@ -27,6 +27,8 @@ table {
     width: 100%;
     margin-top: 10px;
     border-collapse: collapse;
+    max-height: 100px;
+    overflow: auto;
 }
 
 table caption {
@@ -91,4 +93,9 @@ table tbody tr:nth-child(odd) {
     text-align: center;
     display: block; /* 블록 레벨 요소로 변경 */
     margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
+}
+
+.table-container {
+    max-height: 300px;
+    overflow: auto;
 }
