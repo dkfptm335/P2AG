@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, session, flash
+from flask import Flask, request, session
 from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
@@ -11,9 +11,20 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/preGenerate')
+def preGenerate():
+    return render_template('preGenerate.html')
+
+
 @app.route('/generateMain')
 def generate():
     return render_template('generateMain.html')
+
+
+@app.route('/generateMainMall')
+def generateMainMall():
+    return render_template('generateMainMall.html')
+
 
 def process_form_data1(request):
     name = request.form['name']
@@ -96,6 +107,11 @@ def process_form_data1(request):
     df.columns = columns
     df.reset_index(drop=True, inplace=True)
 
+    # '개인정보파일의 명칭' 및 '개인정보의 보유기간'데이터가 NaN인 경우, 이전 행의 데이터로 채워넣기
+    df['개인정보파일의 명칭'].fillna(method='ffill', inplace=True)
+    df['개인정보의 보유기간'].fillna(method='ffill', inplace=True)
+    df['개인정보파일에 기록되는 개인정보의 항목'].fillna(method='ffill', inplace=True)
+
     # '개인정보파일의 운영 목적' 열에서 '학사' 또는 '행정'이 포함된 행을 필터링
     # 결측치 제거
     df.dropna(subset=['개인정보파일의 운영 목적'], inplace=True)
@@ -108,15 +124,13 @@ def process_form_data1(request):
     grade_df = df[(df['개인정보파일의 운영 목적'].str.contains('성적')) | (df['개인정보파일의 운영 목적'].str.contains('수강')) | (
         df['개인정보파일의 운영 목적'].str.contains('수업'))]
     graduate_df = df[(df['개인정보파일의 운영 목적'].str.contains('졸업')) | (df['개인정보파일의 운영 목적'].str.contains('졸업생'))]
-    # 필터링된 결과에서 최대 2개의 행만 선택
-    if len(academic_df) > 2:
-        academic_df = academic_df.iloc[:2]
-    if len(scholarship_df) > 2:
-        scholarship_df = scholarship_df.iloc[:2]
-    if len(grade_df) > 2:
-        grade_df = grade_df.iloc[:2]
-    if len(graduate_df) > 2:
-        graduate_df = graduate_df.iloc[:2]
+    newStudent_df = df[(df['개인정보파일의 운영 목적'].str.contains('입시')) | (df['개인정보파일의 운영 목적'].str.contains('신입'))]
+    disorder_df = df[(df['개인정보파일의 운영 목적'].str.contains('장애'))]
+    homepage_df = df[(df['개인정보파일의 운영 목적'].str.contains('홈페이지')) | (df['개인정보파일의 운영 목적'].str.contains('웹사이트'))]
+    # 나머지 데이터 etc_df로 저장
+    etc_df = df[~df.index.isin(academic_df.index) & ~df.index.isin(scholarship_df.index) & ~df.index.isin(
+        grade_df.index) & ~df.index.isin(graduate_df.index) & ~df.index.isin(newStudent_df.index) & ~df.index.isin(
+        disorder_df.index) & ~df.index.isin(homepage_df.index)]
     return {
         'name': name,
         'df': df,
@@ -141,8 +155,13 @@ def process_form_data1(request):
         'scholarship_df': scholarship_df,
         'grade_df': grade_df,
         'graduate_df': graduate_df,
-        'date_ranges': date_ranges
+        'date_ranges': date_ranges,
+        'newStudent_df': newStudent_df,
+        'disorder_df': disorder_df,
+        'homepage_df': homepage_df,
+        'etc_df': etc_df
     }
+
 
 @app.route('/generateConfirm', methods=['POST'])
 def generateConfirm():
@@ -158,6 +177,7 @@ def generateConfirm():
 @app.route('/nextForm', methods=['GET', 'POST'])
 def nextForm():
     return render_template('nextForm.html')
+
 
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
@@ -190,9 +210,11 @@ def nextFormConfirm():
     else:
         return redirect(url_for('nextForm1_2'))
 
+
 @app.route('/nextForm1_2', methods=['GET', 'POST'])
 def nextForm1_2():
     return render_template('nextForm1_2.html')
+
 
 @app.route('/nextForm1_2Confirm', methods=['POST'])
 def nextForm1_2Confirm():
@@ -204,19 +226,43 @@ def nextForm1_2Confirm():
 
     if 'checkBox2' in checkBoxList:
         checkbox2 = 1
+    # 체크박스 선택 항목 가져오기
+    selected_checks = request.form.getlist('checklist2')
+    selected_rows = []
+    # 선택된 체크박스에 대응하는 textarea 데이터 처리
+    for check in selected_checks:
+        # 각 항목의 recipient, purpose, items, period, reason 데이터 추출
+        selected_rows.append({
+            'trustee': request.form[f'trustee_{check}'],
+            'text': request.form[f'text_{check}'],  # 숨겨진 텍스트 필드의 값을 가져옴
+        })
 
-    selected_ids = request.form.getlist('checklist2')
-    print(selected_ids)
-    selected_rows = [rows_data[id] for id in selected_ids if id in rows_data]
-    print(selected_rows)
+    #수탁사 이름 받아오기
+    add_trustee = request.form.getlist('add_trustee[]')
+    print(add_trustee)
+
+    text_check3 = request.form.getlist('text_check3')
+    classification1 = request.form['radio_classification1']
+    classification1 = request.form[classification1]
+    print(classification1)
+    try:
+        classification3 = request.form['radio_classification3']
+        classification3 = request.form[classification3]
+        print(classification3)
+    except:
+        classification3 = ''
+
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows)
+        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, selected_rows=selected_rows,
+                               add_trustee=add_trustee, classification1=classification1, classification3=classification3)
     else:
         return redirect(url_for('nextForm2'))
+
 
 @app.route('/nextForm2', methods=['GET', 'POST'])
 def nextForm2():
     return render_template('nextForm2.html')
+
 
 def process_form_data3(request):
     form_data_1 = session.get('form_data_1', {})
@@ -253,7 +299,6 @@ def process_form_data3(request):
         access_position = access_authority.split('/')[0]
         access_affiliation = access_authority.split('/')[1]
         access_phone = access_authority.split('/')[2]
-
 
     # 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법
     shooting_time = request.form['shooting_time']  # 촬영 시간
@@ -326,7 +371,8 @@ def process_form_data3(request):
         'date_ranges': date_ranges
     }
 
-@app.route('/nextForm2Confirm', methods=['GET','POST'])
+
+@app.route('/nextForm2Confirm', methods=['GET', 'POST'])
 def nextForm2Confirm():
     processed_data = process_form_data3(request)
     if processed_data:
@@ -338,9 +384,7 @@ def nextForm2Confirm():
         return redirect(url_for('result'))
 
 
-
-
-@app.route('/result', methods=['GET','POST'])
+@app.route('/result', methods=['GET', 'POST'])
 def result():
     return render_template('result.html')
 
