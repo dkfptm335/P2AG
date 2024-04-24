@@ -34,6 +34,7 @@ newStudent_df = pd.DataFrame()
 disorder_df = pd.DataFrame()
 homepage_df = pd.DataFrame()
 etc_df = pd.DataFrame()
+combined_data_result = dict()
 
 
 def process_form_data1(request):
@@ -45,6 +46,7 @@ def process_form_data1(request):
     global disorder_df
     global homepage_df
     global etc_df
+    global combined_data_result
 
     name = request.form['name']
     file = request.files['file']
@@ -88,7 +90,7 @@ def process_form_data1(request):
     if not result_messages:
         result_messages.append('선택된 항목에 대한 설명이 없습니다.')
     combined_data = zip(result_head, result_messages)
-    session['combined_data_result'] = dict(zip(result_head, result_messages))
+    combined_data_result = dict(combined_data)
 
     # 개인정보 보호책임자(담당부서)
     chargeName = request.form['chargeName']
@@ -426,11 +428,12 @@ def result():
     global disorder_df
     global homepage_df
     global etc_df
+    global combined_data_result
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
     form_data4 = session.get('form_data_4', {})
-    combined_data_result = session.get('combined_data_result', {})
+    print(combined_data_result)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
