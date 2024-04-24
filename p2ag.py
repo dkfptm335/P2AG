@@ -1,5 +1,3 @@
-import json
-
 import pandas as pd
 from flask import Flask, request, session
 from flask import render_template, redirect, url_for
@@ -28,7 +26,26 @@ def generateMainMall():
     return render_template('generateMainMall.html')
 
 
+academic_df = pd.DataFrame()
+scholarship_df = pd.DataFrame()
+grade_df = pd.DataFrame()
+graduate_df = pd.DataFrame()
+newStudent_df = pd.DataFrame()
+disorder_df = pd.DataFrame()
+homepage_df = pd.DataFrame()
+etc_df = pd.DataFrame()
+
+
 def process_form_data1(request):
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+
     name = request.form['name']
     file = request.files['file']
 
@@ -97,9 +114,7 @@ def process_form_data1(request):
     # 제출된 데이터를 가져온다
     start_dates = request.form.getlist('start_date')
     end_dates = request.form.getlist('end_date')
-    print(start_dates, end_dates)
     date_ranges = [{'start_date': start, 'end_date': end} for start, end in zip(start_dates, end_dates)]
-    print(start_dates)
 
     # header=0 옵션으로 첫 번째 행을 칼럼명으로 사용
     df = pd.read_excel(file, header=None)
@@ -402,13 +417,22 @@ def nextForm2Confirm():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
     form_data4 = session.get('form_data_4', {})
-    print(form_data1)
-    print(form_data2)
-    print(form_data4)
-    return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4)
+    return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
+                           academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
+                           graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
+                           homepage_df=homepage_df, etc_df=etc_df)
 
 
 @app.route('/inspectionMain')
