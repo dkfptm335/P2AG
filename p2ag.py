@@ -265,7 +265,7 @@ def nextForm1_2Confirm():
     trustee1_retrustee_business = request.form.getlist('trustee1_retrustee_business[]')
     retrustee = zip(trustee1_retrustee_name, trustee1_retrustee_business)
 
-
+    print(request.form)
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3, selected_rows=selected_rows, add_trustee=add_trustee, text_check3=text_check3, classification1=classification1, classification3=classification3, retrustee=retrustee)
     else:
