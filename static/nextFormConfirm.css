@@ -28,6 +28,7 @@ table {
     margin-top: 10px;
     border-collapse: collapse;
 }
+
 table caption {
     font-size: 18px;
     margin-bottom: 10px;
@@ -53,63 +54,63 @@ table tbody tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
-.Row{
+.Row {
     height: 100px;
 }
 
-.columns{
+.columns {
     height: 50px;
 }
 
 
-td{
+td {
     height: 30px;
 }
 
 
-textarea{
+textarea {
     height: 100%;
     width: 100%;
     border: none;
 }
 
-.trustee-input{
+.trustee-input {
     width: 99%;
     height: 100%;
 }
 
-.purpose{
+.purpose {
     width: 25%;
 }
 
-.items{
+.items {
     width: 20%;
 }
 
-.period{
+.period {
     width: 15%;
 }
 
-.reason{
+.reason {
     width: 25%
 }
 
-.faded-text{
+.faded-text {
     opacity: 0.5;
 }
 
-.item2{
+.item2 {
     width: 20%;
 }
 
-.information{
+.information {
     width: 30%;
 }
 
-.trustee{
+.trustee {
     width: 50%;
 }
 
-.recipient{
+.recipient {
     width: 20%;
 }

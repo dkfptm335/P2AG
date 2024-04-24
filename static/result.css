@@ -186,3 +186,39 @@ table tbody tr:nth-child(odd) {
     cursor: pointer; /* 마우스 오버 시 커서 변경 */
     display: none; /* 기본적으로는 숨김 */
 }
+
+.purpose {
+    width: 25%;
+}
+
+.items {
+    width: 20%;
+}
+
+.period {
+    width: 15%;
+}
+
+.reason {
+    width: 25%
+}
+
+.faded-text {
+    opacity: 0.5;
+}
+
+.item2 {
+    width: 20%;
+}
+
+.information {
+    width: 30%;
+}
+
+.trustee {
+    width: 50%;
+}
+
+.recipient {
+    width: 20%;
+}

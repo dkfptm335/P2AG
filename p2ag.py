@@ -201,8 +201,12 @@ def nextForm():
     return render_template('nextForm.html')
 
 
+selected_rows = []
+
+
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
+    global selected_rows
     form_data_1 = session.get('form_data_1', {})
     session['form_data_2'] = request.form.to_dict()
     name = form_data_1['name']
@@ -215,7 +219,6 @@ def nextFormConfirm():
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist')
-    selected_rows = []
 
     # 선택된 체크박스에 대응하는 textarea 데이터 처리
     for check in selected_checks:
@@ -429,6 +432,7 @@ def result():
     global homepage_df
     global etc_df
     global combined_data_result
+    global selected_rows
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
@@ -441,7 +445,8 @@ def result():
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
                            graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
-                           homepage_df=homepage_df, etc_df=etc_df, combined_data_result=combined_data_result)
+                           homepage_df=homepage_df, etc_df=etc_df, combined_data_result=combined_data_result,
+                           selected_rows=selected_rows)
 
 
 @app.route('/inspectionMain')
