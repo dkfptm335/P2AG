@@ -88,6 +88,7 @@ def process_form_data1(request):
     if not result_messages:
         result_messages.append('선택된 항목에 대한 설명이 없습니다.')
     combined_data = zip(result_head, result_messages)
+    session['combined_data_result'] = dict(zip(result_head, result_messages))
 
     # 개인정보 보호책임자(담당부서)
     chargeName = request.form['chargeName']
@@ -425,14 +426,20 @@ def result():
     global disorder_df
     global homepage_df
     global etc_df
+    print(academic_df)
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
     form_data4 = session.get('form_data_4', {})
+    result_combined_data = session.get('result_combined_data', {})
+    print(form_data1)
+    print(form_data2)
+    print(form_data4)
+    print(result_combined_data)
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
                            graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
-                           homepage_df=homepage_df, etc_df=etc_df)
+                           homepage_df=homepage_df, etc_df=etc_df, result_combined_data=result_combined_data)
 
 
 @app.route('/inspectionMain')
