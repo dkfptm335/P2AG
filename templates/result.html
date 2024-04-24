@@ -223,7 +223,7 @@
     <div>
         <h2>{{ num }}. 개인정보의 파기 절차 및 방법</h2>
         <div>
-            <p>1. <strong>{{ name }}</strong>는 「개인정보보호법」 제21조(개인정보의 파기)에 따라 원칙적으로 처리목적이 달성된 개인정보는 지체 없이 파기합니다. 다만,
+            <p>1. <strong>{{ form_data1['name'] }}</strong>는 「개인정보보호법」 제21조(개인정보의 파기)에 따라 원칙적으로 처리목적이 달성된 개인정보는 지체 없이 파기합니다. 다만,
                 다른
                 법령에
                 따라
@@ -266,9 +266,9 @@
     <div>
         <h2>{{ num }}. 개인정보의 안정성 확보조치</h2>
         <div>
-            <p><strong>{{ name }}</strong>는 「개인정보 보호법」 제29조에 따라 개인정보의 안전성 확보를 위해 다음과 같은 기술적/관리적 및 물리적 조치를 취하고 있습니다.
+            <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제29조에 따라 개인정보의 안전성 확보를 위해 다음과 같은 기술적/관리적 및 물리적 조치를 취하고 있습니다.
             </p>
-            {% for selected_data, result_message in result_combined_data %}
+            {% for selected_data, result_message in combined_data_result.items() %}
                 <div>
                     <p><strong>{{ loop.index }}) {{ selected_data }}</strong></p>
                     <p>{{ result_message }}</p>
@@ -276,6 +276,88 @@
             {% endfor %}
 
         </div>
+    </div>
+    <br>
+    <!-- 제 5조 -->
+    <div>
+        <h2>{{ num }}. 개인정보 보호책임자에 관한 사항</h2>
+        <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제31조제1항에 의거 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인정보 보호책임자 및
+            분야별
+            책임자를 지정하고 있습니다.</p>
+        <br>
+        <div>
+            <p><strong>▶ 개인정보 보호책임자</strong></p>
+            <p>성명: <strong>{{ form_data1['chargeName'] }}</strong></p>
+            <p>소속: <strong>{{ form_data1['chargeAffiliation'] }}</strong></p>
+            <p>연락처: <strong>{{ form_data1['chargePhone'] }} / {{ form_data1['chargeEmail'] }}</strong></p>
+            {% if form_data1['chargeEtc'] %}
+                <p>etc.: <strong>{{ form_data1['chargeEtc'] }}</strong></p>
+            {% endif %}
+        </div>
+        <br>
+        {% if department %}
+            <div>
+                <p>▶ 개인정보보호 담당부서 </p>
+                <p>부서명: <strong>{{ form_data1['department'] }}</strong></p>
+                <p>담당자: <strong>{{ form_data1['departmentName'] }}</strong></p>
+                <p>연락처: <strong>{{ form_data1['departmentPhone'] }} / {{ form_data1['departmentEmail'] }}</strong></p>
+                <p>Etc.: <strong>{{ form_data1['departmentEtc'] }}</strong></p>
+            </div>
+            <br>
+        {% endif %}
+        <div>
+            <p><strong>{{ form_data1['name'] }}</strong>의 서비스(또는 사업)를 이용하시면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자
+                및
+                담당부서로 문의해주시기 바랍니다.</p>
+        </div>
+    </div>
+    <br>
+
+    <!-- 제 6조 -->
+    <div>
+        <h2>{{ num }}. 개인정보의 열람창구 접수/처리[필수]</h2>
+        <p>정보주체는 「개인정보 보호법」 제35조에 따른 개인정보의 열람 청구를 아래의 부서에 할 수 있습니다. </p>
+        <p><strong>{{ form_data1['name'] }}</strong>는 정보주체의 개인정보 열람청구가 신속하게 처리되도록 노력하겠습니다.</p>
+        <br>
+        <div>
+            <p><strong>▶ 개인정보 열람청구 접수·처리 부서</strong></p>
+            <p>부서명: <strong>{{ form_data1['receipt_department'] }}</strong></p>
+            <p>담당자: <strong>{{ form_data1['receipt_departmentName'] }}</strong></p>
+            <p>연락처: <strong>{{ form_data1['receipt_departmentPhone'] }} / {{ form_data1['receipt_departmentEmail'] }}</strong></p>
+            {% if form_data1['chargeFax'] %}
+                <p>Etc.: <strong>{{ form_data1['receipt_departmentEtc'] }}</strong></p>
+            {% endif %}
+        </div>
+        <br>
+        <div>
+            <p>정보주체는 제1항의 접수처리부서 이외에, 개인정보보호위원회의 ‘개인정보보호 종합지원 포털(www.privacy.go.kr)’을 통하여서도 개인정보 열람청구를 하실 수
+                있습니다.</p>
+            <p>▶ 개인정보보호위원회 개인정보보호 종합지원 포털 → 개인정보 민원 → 민원마당 → 개인정보 열람등 요구 (공공 아이핀을 통한 실명인증 필요)</p>
+        </div>
+    </div>
+    <br>
+
+    <!-- 제 7조 -->
+    <div>
+        <h2>{{ num }}. 정보주체의 권익침해에 대한 구제방법[필수]</h2>
+        <p>정보주체는 아래의 기관을 통해 개인정보침해에 대한 피해구제나 상담 등을 신청할 수 있습니다.</p>
+        <p> - 아래의 기관은 <strong>{{ form_data1['name'] }}</strong>와(과)는 별개의 기관으로서, <strong>{{ form_data1['name'] }}</strong>의 자체적인 개인정보 불만처리, 피해구제
+            결과에
+            만족하지 못하시거나 보다 자세한 도움이 필요하시면 문의하여 주시기 바랍니다</p>
+        <div>
+            <p>1. 개인정보분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr) </p>
+            <p>2. 개인정보침해신고센터 : (국번없이) 118 (privacy.kisa.or.kr)</p>
+            <p>3. 대검찰청 : (국번없이) 1301 (www.spo.go.kr)</p>
+            <p>4. 경찰청 : (국번없이) 182 (ecrm.cyber.go.kr)</p>
+        </div>
+    </div>
+    <br>
+
+    <!-- 제 8조 -->
+    <div>
+        <h2>{{ num }}. 개인정보 처리방침의 변경 사항[필수]</h2>
+        <p>이 개인정보 처리방침은 <strong>{{ form_data1['current_date'] }}</strong>부터 적용됩니다.</p>
+        <p><strong>{{ form_data1['name'] }}</strong>은(는) 「개인정보 보호법」 제30조(개인정보처리방침의 수립 및 공개)에 따라 이 전의 개인정보 처리방침을 공개합니다. </p>
     </div>
     <br>
 </div>

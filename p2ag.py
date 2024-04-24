@@ -426,20 +426,16 @@ def result():
     global disorder_df
     global homepage_df
     global etc_df
-    print(academic_df)
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
     form_data4 = session.get('form_data_4', {})
-    result_combined_data = session.get('result_combined_data', {})
-    print(form_data1)
-    print(form_data2)
-    print(form_data4)
-    print(result_combined_data)
+    combined_data_result = session.get('combined_data_result', {})
+
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
                            graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
-                           homepage_df=homepage_df, etc_df=etc_df, result_combined_data=result_combined_data)
+                           homepage_df=homepage_df, etc_df=etc_df, combined_data_result=combined_data_result)
 
 
 @app.route('/inspectionMain')
