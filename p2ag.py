@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, session
+from flask import Flask, request, session, jsonify
 from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
@@ -218,7 +218,7 @@ def nextForm1_2():
     return render_template('nextForm1_2.html')
 
 
-@app.route('/nextForm1_2Confirm', methods=['POST'])
+@app.route('/nextForm1_2Confirm', methods=['GET', 'POST'])
 def nextForm1_2Confirm():
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
@@ -237,37 +237,48 @@ def nextForm1_2Confirm():
     selected_rows = []
     # 선택된 체크박스에 대응하는 textarea 데이터 처리
     for check in selected_checks:
-        # 각 항목의 recipient, purpose, items, period, reason 데이터 추출
         selected_rows.append({
             'trustee': request.form[f'trustee_{check}'],
             'text': request.form[f'text_{check}'],
         })
 
-    #수탁사 이름 받아오기
-    add_trustee = request.form.getlist('add_trustee[]')
-    print(add_trustee)
+    # 수탁사 이름 받아오기
 
-    text_check3 = request.form.getlist('text_check3')
-    try:
-        classification1 = request.form['trustee1_option1']
-        classification1 = request.form[classification1]
-        print(classification1)
-    except:
-        classification1 = ''
-    try:
-        classification3 = request.form['trustee1_option2']
-        classification3 = request.form[classification3]
-        print(classification3)
-    except:
-        classification3 = ''
+    fieldsetCount = request.form['fieldsetCount']
+    print(fieldsetCount)
+    classification1 = []
+    classification2 = []
+    trustees = []
+    trustee_options = []
+    for key in request.form:
+        if key.startswith('add_trustee'):
+            trustees.append(request.form[key])
+    print(trustees)
+    for i in range(1, int(fieldsetCount) + 1):
+        trustee_options = []
+        for key in request.form:
+            if key.startswith(f'trustee{i}_option'):
+                trustee_options.append(request.form[key])
+        classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'classification')), None))
+        classification2.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
+    print(trustees, classification1, classification2)
 
-    trustee1_retrustee_name = request.form.getlist('trustee1_retrustee_name[]')
-    trustee1_retrustee_business = request.form.getlist('trustee1_retrustee_business[]')
-    retrustee = zip(trustee1_retrustee_name, trustee1_retrustee_business)
+    trustees = zip(trustees, classification1, classification2)
+    print(trustees)
 
-    print(request.form)
+    retrustees_dict = {}
+
+    for i in range(1, int(fieldsetCount) + 1):
+        trustee1_retrustee_name = request.form.getlist(f'trustee{i}_retrustee_name[]')
+        trustee1_retrustee_business = request.form.getlist(f'trustee{i}_retrustee_business[]')
+        retrustee_list = zip(trustee1_retrustee_name, trustee1_retrustee_business)
+        # 딕셔너리에 i에 retrustee 추가
+        retrustees_dict[i] = [{'name': name, 'business': business} for name, business in retrustee_list]
+    print(retrustees_dict)
+
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3, selected_rows=selected_rows, add_trustee=add_trustee, text_check3=text_check3, classification1=classification1, classification3=classification3, retrustee=retrustee)
+        return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3,
+                               selected_rows=selected_rows, trustees=trustees, retrustees_dict=retrustees_dict)
     else:
         return redirect(url_for('nextForm2'))
 

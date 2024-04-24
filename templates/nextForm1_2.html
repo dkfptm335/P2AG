@@ -96,6 +96,7 @@
                     작성</strong></label>
                 <ul class="sub_checkbox" id="SubCheckList3">
                     <div id="fieldsetContainer1">
+                        <input type="hidden" id="fieldsetCount" name="fieldsetCount" value="1">
                         <fieldset id="1">
                             <legend>위탁 사항 추가</legend>
                             <p>※ 대학교에서 많이 기재되는 업무내용을 대분류, 중분류, 소분류로 구분하였습니다. 시스템-유지보수/운영-전자도서관 선택 시 업무 내용에 '전자도서관 시스템
@@ -103,7 +104,7 @@
                                 운영'으로 기재됩니다.
                                 <br>해당하는 업무 내용이 없는 경우, 기타()를 선택하고 직접 작성할 수 있습니다.</p>
                             <div class="trusteeList-classification">
-                                <li>수탁사 명<input type="text" name="add_trustee[]" class="form-input"
+                                <li>수탁사 명<input type="text" name="add_trustee1" class="form-input"
                                                 placeholder="수탁사 명"></li>
                             </div>
                             <div class="trusteeList-classification">
@@ -113,7 +114,8 @@
                                         <input type="radio" name="trustee1_option1" value="classification1"> 시스템 운영
                                         및
                                         유지보수<input type="hidden" value="시스템 운영 및 유지보수" name="classification1">
-                                        <input type="radio" name="trustee1_option1" value="classification2"> 시스템 구축<input
+                                        <input type="radio" name="trustee1_option1" value="classification2"> 시스템
+                                        구축<input
                                             type="hidden" value="시스템 구축" name="classification2">
                                         <input type="radio" name="trustee1_option1" value="classification3"> 홈페이지
                                         운영 및
@@ -154,46 +156,46 @@
                                     <div class="radio-container" id="radioContainer1">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_1"> 전자도서관 <input type="hidden" value="전자도서관"
-                                                                                             name="trustee1_option2_1">
+                                                                                        name="trustee1_option2_1">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_2"> DB <input type="hidden" value="DB"
-                                                                                          name="trustee1_option2_2">
+                                                                                     name="trustee1_option2_2">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_3"> 전자문서 <input type="hidden" value="전자문서"
-                                                                                            name="trustee1_option2_3">
+                                                                                       name="trustee1_option2_3">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_4"> 전산 <input type="hidden" value="전산"
-                                                                                          name="trustee1_option2_4">
+                                                                                     name="trustee1_option2_4">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_5"> 전자출결관리 <input type="hidden"
-                                                                                              value="전자출결관리"
-                                                                                              name="trustee1_option2_5">
+                                                                                         value="전자출결관리"
+                                                                                         name="trustee1_option2_5">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_6"> 인터넷증명발급 <input type="hidden"
-                                                                                               value="인터넷증명발급"
-                                                                                               name="trustee1_option2_6">
+                                                                                          value="인터넷증명발급"
+                                                                                          name="trustee1_option2_6">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_7"> 입학관리 <input type="hidden" value="입학관리"
-                                                                                            name="trustee1_option2_7">
+                                                                                       name="trustee1_option2_7">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_8"> 연말정산 <input type="hidden" value="연말정산"
-                                                                                            name="trustee1_option2_8">
+                                                                                       name="trustee1_option2_8">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_9"> 출입관리 <input type="hidden" value="출입관리"
-                                                                                            name="trustee1_option2_9">
+                                                                                       name="trustee1_option2_9">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_10"> 학사행정 <input type="hidden" value="학사행정"
-                                                                                             name="trustee1_option2_10">
+                                                                                        name="trustee1_option2_10">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_11"> 그룹웨어 <input type="hidden" value="그룹웨어"
-                                                                                             name="trustee1_option2_11">
+                                                                                        name="trustee1_option2_11">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_12"> 통합정보 <input type="hidden" value="통합정보"
-                                                                                             name="trustee1_option2_12">
+                                                                                        name="trustee1_option2_12">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_13"> 논문 온라인 제출 <input type="hidden"
-                                                                                                  value="논문 온라인 제출"
-                                                                                                  name="trustee1_option2_13">
+                                                                                             value="논문 온라인 제출"
+                                                                                             name="trustee1_option2_13">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_14" id="otherOption1"> 기타
                                         <input type="text" placeholder="기타사항" id="otherText1"
@@ -207,13 +209,13 @@
                                     <div class="radio-container" id="radioContainer2">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_15"> 대학 <input type="hidden" value="대학"
-                                                                                           name="trustee1_option2_14">
+                                                                                      name="trustee1_option2_15">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_16"> 학과 <input type="hidden" value="학과"
-                                                                                           name="trustee1_option2_15">
+                                                                                      name="trustee1_option2_16">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_17"> 기관 <input type="hidden" value="기관"
-                                                                                           name="trustee1_option2_16">
+                                                                                      name="trustee1_option2_17">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_18" id="otherOption2"> 기타
                                         <input type="text" placeholder="기타사항" id="otherText2"
@@ -227,12 +229,12 @@
                                     <div class="radio-container" id="radioContainer3">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_19"> 영상정보처리기기 <input type="hidden"
-                                                                                                 value="영상정보처리기기"
-                                                                                                 name="trustee1_option2_17">
+                                                                                            value="영상정보처리기기"
+                                                                                            name="trustee1_option2_19">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_20"> 증명서자동발급기 <input type="hidden"
-                                                                                                 value="증명서자동발급기"
-                                                                                                 name="trustee1_option2_18">
+                                                                                            value="증명서자동발급기"
+                                                                                            name="trustee1_option2_20">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_21" id="otherOption3"> 기타
                                         <input type="text" placeholder="기타사항" id="otherText3"
@@ -246,10 +248,10 @@
                                     <div class="radio-container" id="radioContainer4">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_22"> 토익 <input type="hidden" value="토익"
-                                                                                           name="trustee1_option2_19">
+                                                                                      name="trustee1_option2_22">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_23"> 외국어 <input type="hidden" value="외국어"
-                                                                                            name="trustee1_option2_20">
+                                                                                       name="trustee1_option2_23">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_24" id="otherOption4"> 기타
                                         <input type="text" placeholder="기타사항" id="otherText4"
@@ -275,7 +277,7 @@
                                     <input type="checkbox" name="re_trustee1" value="re_trustee1" id="re_trustee1"> 재수탁
                                     하시겠습니까?
                                     <ul class="sub_checkbox" id="re_trusteeList1">
-                                        <div id="fieldsetContainer">
+                                        <div id="trustee1_fieldsetContainer">
                                             <fieldset>
                                                 <legend>재수탁사</legend>
                                                 <div class="retrusteeList-classification">
@@ -316,9 +318,31 @@ document.addEventListener('click', function(event) {
         var trustee_num = event.target.closest('fieldset').id;
         console.log(trustee_num);
         console.log(`click ${trustee_num}에서 반응이 일어났습니다.`);
+
+        if (event.target.id === `addRow_trustee${trustee_num}_retrustee`) {
+            console.log(`click 재수탁사에서 반응이 일어났습니다.`);
+            var fieldset = document.createElement('fieldset');
+
+            // fieldset에 추가할 내용. 예를 들어, 여기에 더 많은 요소를 추가할 수 있습니다.
+            fieldset.innerHTML = `
+                <legend>재수탁사</legend>
+                <div class="retrusteeList-classification">
+                    <li>재수탁사 명<input type="text" name="trustee${trustee_num}_retrustee_name[]"
+                                     class="form-input"
+                                     placeholder="재수탁사 명"></li>
+                    <li>위탁업무<input type="text" name="trustee${trustee_num}_retrustee_business[]"
+                                   class="form-input"
+                                   placeholder="위탁업무"></li>
+                </div>
+                `;
+            // fieldset을 div에 추가
+            document.getElementById(`trustee${trustee_num}_fieldsetContainer`).appendChild(fieldset);
+        }
     }
 });
 
+</script>
+<script>
 document.addEventListener('change', function(event) {
     // 값이 변경된 요소가 fieldset 내의 input인지 확인
     if (event.target.closest('fieldset') && event.target.tagName === 'INPUT') {
@@ -327,76 +351,69 @@ document.addEventListener('change', function(event) {
         console.log(trustee_num);
         console.log(`change${trustee_num}에서 반응이 일어났습니다.`);
 
-        const classificationRadioButtons = document.querySelectorAll(`input[name="trustee${trustee_num}_option1"]`);
-        console.log(classificationRadioButtons);
-        // 라디오 버튼에 change 이벤트 리스너를 추가합니다.
-        classificationRadioButtons.forEach(button => {
-            button.addEventListener('change', function() {
-                console.log(`값 확인 `,trustee_num, this);
-                // 'classification1' 또는 'classification2'가 선택되었는지 확인합니다.
-                if (this.value === 'classification1' || this.value === 'classification2') {
-                    // 새로운 위탁분류를 보여줍니다.
-                    console.log(`if문 진입`);
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'block';
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
-                }
-                else if (this.value === 'classification3' || this.value === 'classification4') {
-                    // 새로운 위탁분류를 보여줍니다.
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'block';
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
-                }
-                else if (this.value === 'classification5' || this.value === 'classification6') {
-                    // 새로운 위탁분류를 보여줍니다.
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'block';
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
-                }
-                else if (this.value === 'classification7' || this.value === 'classification8' || this.value === 'classification9') {
-                    // 새로운 위탁분류를 보여줍니다.
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'block';
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
-                }
-                else if (this.value === 'classification14' || this.value === 'classification15') {
-                    // 새로운 위탁분류를 보여줍니다.
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'block';
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
-                }
-                 else {
-                    // 그 외 경우에는 새로운 위탁분류를 숨깁니다.
-                    document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
-                    document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
-                }
-            });
-
-        });
-        reTrustee = document.getElementById(`re_trustee${trustee_num}`);
-        console.log(reTrustee);
-        reTrustee.addEventListener('change', function() {
+        if (event.target.name === `trustee${trustee_num}_option1`) {
+            console.log(`값 확인 `, trustee_num, event.target);
+            if (event.target.value === 'classification1' || event.target.value === 'classification2') {
+                // 새로운 위탁분류를 보여줍니다.
+                console.log(`if문 진입`);
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'block';
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
+            }
+            else if (event.target.value === 'classification3' || event.target.value === 'classification4') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'block';
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
+            }
+            else if (event.target.value === 'classification5' || event.target.value === 'classification6') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'block';
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
+            }
+            else if (event.target.value === 'classification7' || event.target.value === 'classification8' || event.target.value === 'classification9') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'block';
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
+            }
+            else if (event.target.value === 'classification14' || event.target.value === 'classification15') {
+                // 새로운 위탁분류를 보여줍니다.
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'block';
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
+            }
+             else {
+                // 그 외 경우에는 새로운 위탁분류를 숨깁니다.
+                document.getElementById(`trustee${trustee_num}_additional-classification1`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification2`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification3`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
+                document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
+            }
+        }
+<!--재수탁 여부-->
+        if (event.target.type === 'checkbox') {
             const reTrusteeList = document.getElementById(`re_trusteeList${trustee_num}`);
 
-            if (this.checked) {
+            if (event.target.checked) {
                 reTrusteeList.style.display = 'block';
             } else {
                 reTrusteeList.style.display = 'none';
             }
-        });
+
+        }
     }
 });
 </script>
@@ -404,7 +421,9 @@ document.addEventListener('change', function(event) {
 <!--수탁사 추가되도록 하는 것-->
 <script>
     var trustee_num = 2;
-    var trustee_number = 1;
+    var trustee_number = 2;
+    var fieldsetCount = document.getElementById('fieldsetCount');
+
     document.getElementById('addRow_trustee').addEventListener('click', function() {
         // 새 fieldset 요소 생성
         var fieldset = document.createElement('fieldset');
@@ -417,198 +436,200 @@ document.addEventListener('change', function(event) {
             운영'으로 기재됩니다.
             <br>해당하는 업무 내용이 없는 경우, 기타()를 선택하고 직접 작성할 수 있습니다.</p>
         <div class="trusteeList-classification">
-            <li>수탁사 명<input type="text" name="add_trustee[]" class="form-input"
+            <li>수탁사 명<input type="text" name="add_trustee${trustee_number}" class="form-input"
                             placeholder="수탁사 명"></li>
         </div>
         <div class="trusteeList-classification">
             <!-- 분류 1  -->
             <li>분류 1
                 <div class="radio-container" id="classification1">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification1"> 시스템 운영
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification1"> 시스템 운영
                     및
                     유지보수<input type="hidden" value="시스템 운영 및 유지보수" name="classification1">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification2"> 시스템 구축<input
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification2"> 시스템 구축<input
                         type="hidden" value="시스템 구축" name="classification2">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification3"> 홈페이지
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification3"> 홈페이지
                     운영 및
                     유지보수<input type="hidden" value="홈페이지 운영 및 유지보수" name="classification3">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification4"> 홈페이지
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification4"> 홈페이지
                     구축 <input type="hidden" value="홈페이지 구축" name="classification4">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification5"> 장비 운영
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification5"> 장비 운영
                     및 유지보수 <input type="hidden" value="장비 운영 및 유지보수" name="classification5">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification6"> 장비 구축
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification6"> 장비 구축
                     <input type="hidden" value="장비 구축" name="classification6">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification7"> 교육 컨텐츠
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification7"> 교육 컨텐츠
                     제공 <input type="hidden" value="교육 컨텐츠 제공" name="classification7">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification8"> 교육
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification8"> 교육
                     수강관리 <input type="hidden" value="교육 수강관리" name="classification8">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification9"> 교육 테스트
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification9"> 교육 테스트
                     진행 <input type="hidden" value="교육 테스트 진행" name="classification9">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification10"> 취업정보
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification10"> 취업정보
                     <input type="hidden" value="취업정보" name="classification10">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification11"> 현장실습
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification11"> 현장실습
                     <input type="hidden" value="현장실습" name="classification11">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification12"> 건강 검진
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification12"> 건강 검진
                     <input type="hidden" value="건강 검진" name="classification12">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification13"> 복지카드
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification13"> 복지카드
                     및 복지몰 <input type="hidden" value="복지카드 및 복지몰" name="classification13">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification14"> 시설물
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification14"> 시설물
                     관리 <input type="hidden" value="시설물 관리" name="classification14">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification15"> 사용자
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification15"> 사용자
                     자료관리 <input type="hidden" value="사용자 자료관리" name="classification15">
-                    <input type="radio" name="trustee${trustee_num}_option1" value="classification16"> 기타()
+                    <input type="radio" name="trustee${trustee_number}_option1" value="classification16"> 기타()
                     <input type="text" placeholder="기타사항" id="otherText" name="classification16"
                            disabled>
                 </div>
             </li>
         </div>
-        <div class="trusteeList-classification" id="trustee${trustee_num}_additional-classification1"
+        <div class="trusteeList-classification" id="trustee${trustee_number}_additional-classification1"
              style="display:none;">
             <li>분류 2
                 <div class="radio-container" id="radioContainer1">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_1"> 전자도서관 <input type="hidden" value="전자도서관"
-                                                                         name="trustee${trustee_num}_option2_1">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_2"> DB <input type="hidden" value="DB"
-                                                                      name="trustee${trustee_num}_option2_2">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_3"> 전자문서 <input type="hidden" value="전자문서"
-                                                                        name="trustee${trustee_num}_option2_3">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_4"> 전산 <input type="hidden" value="전산"
-                                                                      name="trustee${trustee_num}_option2_4">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_5"> 전자출결관리 <input type="hidden"
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_1"> 전자도서관 <input type="hidden" value="전자도서관"
+                                                                         name="trustee${trustee_number}_option2_1">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_2"> DB <input type="hidden" value="DB"
+                                                                      name="trustee${trustee_number}_option2_2">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_3"> 전자문서 <input type="hidden" value="전자문서"
+                                                                        name="trustee${trustee_number}_option2_3">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_4"> 전산 <input type="hidden" value="전산"
+                                                                      name="trustee${trustee_number}_option2_4">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_5"> 전자출결관리 <input type="hidden"
                                                                           value="전자출결관리"
-                                                                          name="trustee${trustee_num}_option2_5">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_6"> 인터넷증명발급 <input type="hidden"
+                                                                          name="trustee${trustee_number}_option2_5">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_6"> 인터넷증명발급 <input type="hidden"
                                                                            value="인터넷증명발급"
-                                                                           name="trustee${trustee_num}_option2_6">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_7"> 입학관리 <input type="hidden" value="입학관리"
-                                                                        name="trustee${trustee_num}_option2_7">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_8"> 연말정산 <input type="hidden" value="연말정산"
-                                                                        name="trustee${trustee_num}_option2_8">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_9"> 출입관리 <input type="hidden" value="출입관리"
-                                                                        name="trustee${trustee_num}_option2_9">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_10"> 학사행정 <input type="hidden" value="학사행정"
-                                                                         name="trustee${trustee_num}_option2_10">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_11"> 그룹웨어 <input type="hidden" value="그룹웨어"
-                                                                         name="trustee${trustee_num}_option2_11">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_12"> 통합정보 <input type="hidden" value="통합정보"
-                                                                         name="trustee${trustee_num}_option2_12">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_13"> 논문 온라인 제출 <input type="hidden"
+                                                                           name="trustee${trustee_number}_option2_6">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_7"> 입학관리 <input type="hidden" value="입학관리"
+                                                                        name="trustee${trustee_number}_option2_7">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_8"> 연말정산 <input type="hidden" value="연말정산"
+                                                                        name="trustee${trustee_number}_option2_8">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_9"> 출입관리 <input type="hidden" value="출입관리"
+                                                                        name="trustee${trustee_number}_option2_9">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_10"> 학사행정 <input type="hidden" value="학사행정"
+                                                                         name="trustee${trustee_number}_option2_10">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_11"> 그룹웨어 <input type="hidden" value="그룹웨어"
+                                                                         name="trustee${trustee_number}_option2_11">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_12"> 통합정보 <input type="hidden" value="통합정보"
+                                                                         name="trustee${trustee_number}_option2_12">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_13"> 논문 온라인 제출 <input type="hidden"
                                                                               value="논문 온라인 제출"
-                                                                              name="trustee${trustee_num}_option2_13">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_14" id="otherOption1"> 기타
+                                                                              name="trustee${trustee_number}_option2_13">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_14" id="otherOption1"> 기타
                     <input type="text" placeholder="기타사항" id="otherText1"
-                           name="trustee${trustee_num}_option2_14" disabled>
+                           name="trustee${trustee_number}_option2_14" disabled>
                 </div>
             </li>
         </div>
-        <div class="trusteeList-classification" id="trustee${trustee_num}_additional-classification2"
+        <div class="trusteeList-classification" id="trustee${trustee_number}_additional-classification2"
              style="display:none;">
             <li>분류 2
                 <div class="radio-container" id="radioContainer2">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_15"> 대학 <input type="hidden" value="대학"
-                                                                       name="trustee${trustee_num}_option2_14">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_16"> 학과 <input type="hidden" value="학과"
-                                                                       name="trustee${trustee_num}_option2_15">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_17"> 기관 <input type="hidden" value="기관"
-                                                                       name="trustee${trustee_num}_option2_16">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_18" id="otherOption2"> 기타
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_15"> 대학 <input type="hidden" value="대학"
+                                                                       name="trustee${trustee_number}_option2_15">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_16"> 학과 <input type="hidden" value="학과"
+                                                                       name="trustee${trustee_number}_option2_16">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_17"> 기관 <input type="hidden" value="기관"
+                                                                       name="trustee${trustee_number}_option2_17">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_18" id="otherOption2"> 기타
                     <input type="text" placeholder="기타사항" id="otherText2"
-                           name="trustee${trustee_num}_option2_18" disabled>
+                           name="trustee${trustee_number}_option2_18" disabled>
                 </div>
             </li>
         </div>
-        <div class="trusteeList-classification" id="trustee${trustee_num}_additional-classification3"
+        <div class="trusteeList-classification" id="trustee${trustee_number}_additional-classification3"
              style="display:none;">
             <li>분류 2
                 <div class="radio-container" id="radioContainer3">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_19"> 영상정보처리기기 <input type="hidden"
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_19"> 영상정보처리기기 <input type="hidden"
                                                                              value="영상정보처리기기"
-                                                                             name="trustee${trustee_num}_option2_17">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_20"> 증명서자동발급기 <input type="hidden"
+                                                                             name="trustee${trustee_number}_option2_19">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_20"> 증명서자동발급기 <input type="hidden"
                                                                              value="증명서자동발급기"
-                                                                             name="trustee${trustee_num}_option2_18">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_21" id="otherOption3"> 기타
+                                                                             name="trustee${trustee_number}_option2_20">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_21" id="otherOption3"> 기타
                     <input type="text" placeholder="기타사항" id="otherText3"
-                           name="trustee${trustee_num}_option2_21" disabled>
+                           name="trustee${trustee_number}_option2_21" disabled>
                 </div>
             </li>
         </div>
-        <div class="trusteeList-classification" id="trustee${trustee_num}_additional-classification4"
+        <div class="trusteeList-classification" id="trustee${trustee_number}_additional-classification4"
              style="display:none;">
             <li>분류 2
                 <div class="radio-container" id="radioContainer4">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_22"> 토익 <input type="hidden" value="토익"
-                                                                       name="trustee${trustee_num}_option2_19">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_23"> 외국어 <input type="hidden" value="외국어"
-                                                                        name="trustee${trustee_num}_option2_20">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_24" id="otherOption4"> 기타
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_22"> 토익 <input type="hidden" value="토익"
+                                                                       name="trustee${trustee_number}_option2_22">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_23"> 외국어 <input type="hidden" value="외국어"
+                                                                        name="trustee${trustee_number}_option2_23">
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_24" id="otherOption4"> 기타
                     <input type="text" placeholder="기타사항" id="otherText4"
-                           name="trustee${trustee_num}_option2_24" disabled>
+                           name="trustee${trustee_number}_option2_24" disabled>
                 </div>
             </li>
         </div>
-        <div class="trusteeList-classification" id="trustee${trustee_num}_additional-classification5"
+        <div class="trusteeList-classification" id="trustee${trustee_number}_additional-classification5"
              style="display:none;">
             <li>분류 2
                 <div class="radio-container" id="radioContainer5">
-                    <input type="radio" name="trustee${trustee_num}_option2"
-                           value="trustee${trustee_num}_option2_25" id="otherOption5"> 시설물
+                    <input type="radio" name="trustee${trustee_number}_option2"
+                           value="trustee${trustee_number}_option2_25" id="otherOption5"> 시설물
                     명
                     <input type="text" placeholder="시설물 명" id="otherText5"
-                           name="trustee${trustee_num}_option2_25" disabled>
+                           name="trustee${trustee_number}_option2_25" disabled>
                 </div>
             </li>
         </div>
         <!-- 재위탁 여부 -->
         <div class="trusteeList-classification">
             <li>재수탁 여부
-                <input type="checkbox" name="re_trustee${trustee_num}" value="re_trustee${trustee_num}" id="re_trustee${trustee_num}"> 재수탁
+                <input type="checkbox" name="re_trustee${trustee_number}" value="re_trustee${trustee_number}" id="re_trustee${trustee_number}"> 재수탁
                 하시겠습니까?
-                <ul class="sub_checkbox" id="re_trusteeList${trustee_num}">
-                    <div id="fieldsetContainer">
+                <ul class="sub_checkbox" id="re_trusteeList${trustee_number}">
+                    <div id="trustee${trustee_number}_fieldsetContainer">
                         <fieldset>
                             <legend>재수탁사</legend>
                             <div class="retrusteeList-classification">
-                                <li>재수탁사 명<input type="text" name="trustee${trustee_num}_retrustee_name[]"
+                                <li>재수탁사 명<input type="text" name="trustee${trustee_number}_retrustee_name[]"
                                                  class="form-input"
                                                  placeholder="재수탁사 명"></li>
-                                <li>위탁업무<input type="text" name="trustee${trustee_num}_retrustee_business[]"
+                                <li>위탁업무<input type="text" name="trustee${trustee_number}_retrustee_business[]"
                                                class="form-input"
                                                placeholder="위탁업무"></li>
                             </div>
                         </fieldset>
                     </div>
-                    <button type="button" id="addRow_trustee${trustee_num}_retrustee">재수탁사 추가하기</button>
+                    <button type="button" id="addRow_trustee${trustee_number}_retrustee">재수탁사 추가하기</button>
                 </ul>
             </li>
         </div>`;
-        trustee_number++;
         // fieldset을 div에 추가
         fieldset.id = trustee_number;
+        fieldsetCount.value = trustee_number;
+        trustee_number++;
+
 
         console.log(fieldset.id);
         document.getElementById('fieldsetContainer1').appendChild(fieldset);
@@ -616,24 +637,9 @@ document.addEventListener('change', function(event) {
 </script>
 <!--재수탁사 추가하기-->
 <script>
-    document.getElementById('addRow_trustee${trustee_num}_retrustee').addEventListener('click', function() {
+    document.getElementById(`addRow_trustee${trustee_num}_retrustee`).addEventListener('click', function() {
         // 새 fieldset 요소 생성
-        var fieldset = document.createElement('fieldset');
 
-        // fieldset에 추가할 내용. 예를 들어, 여기에 더 많은 요소를 추가할 수 있습니다.
-        fieldset.innerHTML = `
-        <legend>재수탁사</legend>
-        <div class="retrusteeList-classification">
-            <li>재수탁사 명<input type="text" name="trustee${trustee_num}_retrustee_name[]"
-                             class="form-input"
-                             placeholder="재수탁사 명"></li>
-            <li>위탁업무<input type="text" name="trustee${trustee_num}_retrustee_business[]"
-                           class="form-input"
-                           placeholder="위탁업무"></li>
-        </div>
-        `;
-        // fieldset을 div에 추가
-        document.getElementById('fieldsetContainer').appendChild(fieldset);
     });
 </script>
 
@@ -713,7 +719,11 @@ document.addEventListener('change', function(event) {
             alert(message);
         }
     }
+
+
 </script>
+
+
 </body>
 
 </html>
