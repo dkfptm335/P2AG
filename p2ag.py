@@ -89,8 +89,8 @@ def process_form_data1(request):
 
     if not result_messages:
         result_messages.append('선택된 항목에 대한 설명이 없습니다.')
-    combined_data = zip(result_head, result_messages)
-    combined_data_result = dict(combined_data)
+    combined_data = dict(zip(result_head, result_messages))
+    combined_data_result = combined_data
 
     # 개인정보 보호책임자(담당부서)
     chargeName = request.form['chargeName']
@@ -433,6 +433,9 @@ def result():
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
     form_data4 = session.get('form_data_4', {})
+    print(form_data1)
+    print(form_data2)
+    print(form_data4)
     print(combined_data_result)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
