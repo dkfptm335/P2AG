@@ -401,87 +401,227 @@
         </p>
     </div>
     <br>
-    <h2 id="list9">{{ num }}. 개인정보 제3자 제공에 관한 사항</h2>
-    <p><strong>{{ form_data1['name'] }}</strong>에서 개인정보의 이용 또는 제공은 소관업무를 수행하기 위한 최소한의 범위로 제한하며, 다른 법률에 따라 연세대학교 내부에서
-        이용하거나 제3자에게
-        제공하는
-        경우를 제외하고는 개인정보파일의 보유목적 외의 목적으로 타 기관 및 타인에게 제공하지 않습니다.</p>
-    <p><strong>{{ form_data1['name'] }}</strong>는 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조에 해당하는 경우 다음과 같이 개인정보를 제3자에게
-        제공하고 있습니다.
-    </p>
+    {% if form_data2['checkBoxList'] %}
+        <h2 id="list9">{{ num }}. 개인정보 제3자 제공에 관한 사항</h2>
+        <p><strong>{{ form_data1['name'] }}</strong>에서 개인정보의 이용 또는 제공은 소관업무를 수행하기 위한 최소한의 범위로 제한하며, 다른 법률에 따라 연세대학교 내부에서
+            이용하거나 제3자에게
+            제공하는
+            경우를 제외하고는 개인정보파일의 보유목적 외의 목적으로 타 기관 및 타인에게 제공하지 않습니다.</p>
+        <p><strong>{{ form_data1['name'] }}</strong>는 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조에 해당하는 경우 다음과 같이 개인정보를 제3자에게
+            제공하고 있습니다.
+        </p>
 
-    <table>
-        <thead>
-        <tr class="columns">
-            <th class="recipient">제공받는 자</th>
-            <th class="purpose">제공 목적</th>
-            <th class="items">제공 항목</th>
-            <th class="period">보유 및 이용 기간</th>
-            <th class="reason">제공 근거</th>
-        </tr>
-        </thead>
-        {% for row in selected_rows %}
-            <tr>
-                <td>
-                    <div class="preformatted"> {{ row.recipient }}</div>
-                </td>
-                <td>
-                    <div class="preformatted"> {{ row.purpose }}</div>
-                </td>
-                <td>
-                    <div class="preformatted"> {{ row.data_items }}</div>
-                </td>
-                <td>
-                    <div class="preformatted"> {{ row.period }}</div>
-                </td>
-                <td>
-                    <div class="preformatted"> {{ row.reason }}</div>
-                </td>
+        <table>
+            <thead>
+            <tr class="columns">
+                <th class="recipient">제공받는 자</th>
+                <th class="purpose">제공 목적</th>
+                <th class="items">제공 항목</th>
+                <th class="period">보유 및 이용 기간</th>
+                <th class="reason">제공 근거</th>
             </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <hr>
-</div>
-<button id="scrollToTopBtn">맨 위로</button>
-<script>
-    function updateDateTime() {
-        var now = new Date();
-        var datetimeString = now.toLocaleString();
-        document.getElementById("datetime").innerHTML = datetimeString;
-    }
+            </thead>
+            {% for row in selected_rows %}
+                <tr>
+                    <td>
+                        <div class="preformatted"> {{ row.recipient }}</div>
+                    </td>
+                    <td>
+                        <div class="preformatted"> {{ row.purpose }}</div>
+                    </td>
+                    <td>
+                        <div class="preformatted"> {{ row.data_items }}</div>
+                    </td>
+                    <td>
+                        <div class="preformatted"> {{ row.period }}</div>
+                    </td>
+                    <td>
+                        <div class="preformatted"> {{ row.reason }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <hr>
+    {% endif %}
+    {% if form_data4['checkBox1'] %}
 
-    // 페이지 로드 시 1초마다 현재 날짜와 시간을 업데이트하기
-    window.onload = function () {
-        updateDateTime(); // 초기 로드 시 한 번 실행
-    };
-</script>
-<script>
-    // 스크롤 버튼 표시
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("scrollToTopBtn").style.display = "block";
-        } else {
-            document.getElementById("scrollToTopBtn").style.display = "none";
+        <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
+        <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.</p>
+        <!-- 1. 영상정보처리기기 설치근거·목적 -->
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['purpose'] %}
+            <div>
+                <h2>{{ num }}. 영상정보처리기기 설치근거·목적 </h2>
+                <p>‣ {{ form_data4['purpose'] }}</p>
+            </div>
+        {% endif %}
+        <!-- 2. 영상정보처리기기 설치대수 및 위치 -->
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['installation_number'] %}
+            <div>
+                <h2>{{ num }}. 영상정보처리기기 설치대수 및 위치</h2>
+                <table>
+                    <tr>
+                        <th>설치 대수</th>
+                        <th>설치 위치 및 촬영 범위</th>
+                    </tr>
+                    <tr>
+                        <td>{{ form_data4['installation_number'] }}</td>
+                        <td>{{ form_data4['installation_location'] }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+
+        <!-- 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자 -->
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and manager_position or access_position %}
+            <div>
+                <h2>{{ num }}. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자</h2>
+                <table>
+                    <tr>
+                        <th>구분</th>
+                        <th>직위</th>
+                        <th>소속</th>
+                        <th>연락처</th>
+                    </tr>
+                    {% if manager_position %}
+                        <tr>
+                            <td>관리책임자</td>
+                            <td>{{ manager_position }}</td>
+                            <td>{{ manager_affiliation }}</td>
+                            <td>{{ manager_phone }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if access_position %}
+                        <tr>
+                            <td>접근권한자</td>
+                            <td>{{ access_position }}</td>
+                            <td>{{ access_affiliation }}</td>
+                            <td>{{ access_phone }}</td>
+                        </tr>
+                    {% endif %}
+                </table>
+            </div>
+        {% endif %}
+
+        <!-- 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법 -->
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['shooting_time'] or form_data4['storage_period'] or form_data4['storage_location'] or checkBox4 %}
+            <div>
+                <h2>{{ num }}. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법</h2>
+                <table>
+                    <tr>
+                        <th>촬영시간</th>
+                        <th>보관기간</th>
+                        <th>보관장소</th>
+                    </tr>
+                    <tr>
+                        <td>{{ form_data4['shooting_time'] }}</td>
+                        <td>{{ form_data4['storage_period'] }}</td>
+                        <td>{{ form_data4['storage_location'] }}</td>
+                    </tr>
+                </table>
+                <p>{{ checkBox4 }}</p>
+            </div>
+        {% endif %}
+
+        <!-- 5번 해당시 의무사항이 없다.-->
+
+        <!-- 6. 영상정보 확인 방법 및 장소 -->
+        {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
+            <div>
+                <h2>{{ num }}. 영상정보 확인 방법 및 장소</h2>
+                <table>
+                    <tr>
+                        <th>확인 방법</th>
+                        <td>{{ checking_method }}</td>
+                    </tr>
+                    <tr>
+                        <th>확인 장소</th>
+                        <td>{{ checking_location }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+
+        <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
+        {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
+            <div>
+                <h2>{{ num }}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
+                {% for item in checkList7 %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
+        <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
+        {% if 'checkBox-sub8' in checkBoxList and checkList8 %}
+            <div>
+                <h2>{{ num }}. 영상정보 보호를 위한 안정성 확보 조치</h2>
+                {% for item in checkList8 %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- 9. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항 -->
+        {% if 'checkBox-sub9' in checkBoxList and current_date and date_ranges %}
+            <div>
+            <h2>{{ num }}. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항</h2>
+            <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ current_date }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제 및 수정이 있을
+                시에는 지체 없이 본 기관 홈페이지를 통해 변경사유 및 내용을 공지하도록 하겠습니다.</p>
+            <div id="dateInputsContainer">
+                <h3>변경 이력</h3>
+                {% for range in date_ranges %}
+                    <p>- {{ range.start_date }} ~ {{ range.end_date }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
+
+    {% else %}
+        영상정보처리기기 설치 및 운영 안함
+    {% endif %}
+    </div>
+    <button id="scrollToTopBtn">맨 위로</button>
+    <script>
+        function updateDateTime() {
+            var now = new Date();
+            var datetimeString = now.toLocaleString();
+            document.getElementById("datetime").innerHTML = datetimeString;
         }
-    }
 
-    // 최상단으로 스크롤
-    function topFunction() {
-        document.body.scrollTop = 0; // Safari
-        document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
-    }
+        // 페이지 로드 시 1초마다 현재 날짜와 시간을 업데이트하기
+        window.onload = function () {
+            updateDateTime(); // 초기 로드 시 한 번 실행
+        };
+    </script>
+    <script>
+        // 스크롤 버튼 표시
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollToTopBtn").style.display = "block";
+            } else {
+                document.getElementById("scrollToTopBtn").style.display = "none";
+            }
+        }
 
-    // 스크롤 이벤트에 함수 연결
-    window.onscroll = function () {
-        scrollFunction()
-    };
+        // 최상단으로 스크롤
+        function topFunction() {
+            document.body.scrollTop = 0; // Safari
+            document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
+        }
 
-    // 버튼 클릭 이벤트에 함수 연결
-    document.getElementById("scrollToTopBtn").onclick = function () {
-        topFunction()
-    };
+        // 스크롤 이벤트에 함수 연결
+        window.onscroll = function () {
+            scrollFunction()
+        };
 
-</script>
+        // 버튼 클릭 이벤트에 함수 연결
+        document.getElementById("scrollToTopBtn").onclick = function () {
+            topFunction()
+        };
+
+    </script>
 </body>
 </html>

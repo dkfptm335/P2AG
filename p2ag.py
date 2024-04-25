@@ -300,7 +300,24 @@ def nextForm2():
     return render_template('nextForm2.html')
 
 
+manager_position = ''
+manager_affiliation = ''
+manager_phone = ''
+access_position = ''
+access_affiliation = ''
+access_phone = ''
+checkBox4 = ''
+
+
 def process_form_data3(request):
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
+
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
     checkBoxList = request.form.getlist('checkBoxList')
@@ -319,18 +336,12 @@ def process_form_data3(request):
     manager = request.form['manager']  # 관리책임자
     # '/'가 정확히 2개 포함되어 있는지 확인
 
-    manager_position = ''
-    manager_affiliation = ''
-    manager_phone = ''
     if manager:  # manager에서 / 단위로 잘라서 책임자 직위 소속 연락처로 넣기
         manager_position = manager.split('/')[0]
         manager_affiliation = manager.split('/')[1]
         manager_phone = manager.split('/')[2]
 
     access_authority = request.form['access_authority']  # 접근 권한자
-    access_position = ''
-    access_affiliation = ''
-    access_phone = ''
     if access_authority:
         access_position = access_authority.split('/')[0]
         access_affiliation = access_authority.split('/')[1]
@@ -343,7 +354,6 @@ def process_form_data3(request):
 
     ###############보류################
     # 체크박스 확인
-    checkBox4 = ''
     if 'Processing_method' in request.form.getlist('Processing_method'):
         checkBox4 = '‣ 처리방법 : 개인영상정보의 목적 외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록ㆍ관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다.'
 
@@ -433,6 +443,13 @@ def result():
     global etc_df
     global combined_data_result
     global selected_rows
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
@@ -446,7 +463,10 @@ def result():
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
                            graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
                            homepage_df=homepage_df, etc_df=etc_df, combined_data_result=combined_data_result,
-                           selected_rows=selected_rows)
+                           selected_rows=selected_rows, manager_position=manager_position,
+                           manager_affiliation=manager_affiliation, manager_phone=manager_phone,
+                           access_position=access_position, access_affiliation=access_affiliation,
+                           access_phone=access_phone, checkBox4=checkBox4)
 
 
 @app.route('/inspectionMain')
