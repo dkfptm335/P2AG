@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request, session, jsonify
+from flask import Flask, request, session
 from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
@@ -26,7 +26,28 @@ def generateMainMall():
     return render_template('generateMainMall.html')
 
 
+academic_df = pd.DataFrame()
+scholarship_df = pd.DataFrame()
+grade_df = pd.DataFrame()
+graduate_df = pd.DataFrame()
+newStudent_df = pd.DataFrame()
+disorder_df = pd.DataFrame()
+homepage_df = pd.DataFrame()
+etc_df = pd.DataFrame()
+combined_data_result = dict()
+
+
 def process_form_data1(request):
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+    global combined_data_result
+
     name = request.form['name']
     file = request.files['file']
 
@@ -68,7 +89,8 @@ def process_form_data1(request):
 
     if not result_messages:
         result_messages.append('선택된 항목에 대한 설명이 없습니다.')
-    combined_data = zip(result_head, result_messages)
+    combined_data = dict(zip(result_head, result_messages))
+    combined_data_result = combined_data
 
     # 개인정보 보호책임자(담당부서)
     chargeName = request.form['chargeName']
@@ -95,9 +117,7 @@ def process_form_data1(request):
     # 제출된 데이터를 가져온다
     start_dates = request.form.getlist('start_date')
     end_dates = request.form.getlist('end_date')
-    print(start_dates, end_dates)
     date_ranges = [{'start_date': start, 'end_date': end} for start, end in zip(start_dates, end_dates)]
-    print(start_dates)
 
     # header=0 옵션으로 첫 번째 행을 칼럼명으로 사용
     df = pd.read_excel(file, header=None)
@@ -108,9 +128,9 @@ def process_form_data1(request):
     df.reset_index(drop=True, inplace=True)
 
     # '개인정보파일의 명칭' 및 '개인정보의 보유기간'데이터가 NaN인 경우, 이전 행의 데이터로 채워넣기
-    df['개인정보파일의 명칭'].fillna(method='ffill', inplace=True)
-    df['개인정보의 보유기간'].fillna(method='ffill', inplace=True)
-    df['개인정보파일에 기록되는 개인정보의 항목'].fillna(method='ffill', inplace=True)
+    df['개인정보파일의 명칭'].ffill(inplace=True)
+    df['개인정보의 보유기간'].ffill(inplace=True)
+    df['개인정보파일에 기록되는 개인정보의 항목'].ffill(inplace=True)
 
     # '개인정보파일의 운영 목적' 열에서 '학사' 또는 '행정'이 포함된 행을 필터링
     # 결측치 제거
@@ -127,10 +147,12 @@ def process_form_data1(request):
     newStudent_df = df[(df['개인정보파일의 운영 목적'].str.contains('입시')) | (df['개인정보파일의 운영 목적'].str.contains('신입'))]
     disorder_df = df[(df['개인정보파일의 운영 목적'].str.contains('장애'))]
     homepage_df = df[(df['개인정보파일의 운영 목적'].str.contains('홈페이지')) | (df['개인정보파일의 운영 목적'].str.contains('웹사이트'))]
+
     # 나머지 데이터 etc_df로 저장
     etc_df = df[~df.index.isin(academic_df.index) & ~df.index.isin(scholarship_df.index) & ~df.index.isin(
         grade_df.index) & ~df.index.isin(graduate_df.index) & ~df.index.isin(newStudent_df.index) & ~df.index.isin(
         disorder_df.index) & ~df.index.isin(homepage_df.index)]
+
     return {
         'name': name,
         'df': df,
@@ -179,11 +201,14 @@ def nextForm():
     return render_template('nextForm.html')
 
 
+selected_rows = []
+
+
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
+    global selected_rows
     form_data_1 = session.get('form_data_1', {})
     session['form_data_2'] = request.form.to_dict()
-
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
@@ -194,7 +219,6 @@ def nextFormConfirm():
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist')
-    selected_rows = []
 
     # 선택된 체크박스에 대응하는 textarea 데이터 처리
     for check in selected_checks:
@@ -218,7 +242,7 @@ def nextForm1_2():
     return render_template('nextForm1_2.html')
 
 
-@app.route('/nextForm1_2Confirm', methods=['GET', 'POST'])
+@app.route('/nextForm1_2Confirm', methods=['POST'])
 def nextForm1_2Confirm():
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
@@ -323,7 +347,24 @@ def nextForm2():
     return render_template('nextForm2.html')
 
 
+manager_position = ''
+manager_affiliation = ''
+manager_phone = ''
+access_position = ''
+access_affiliation = ''
+access_phone = ''
+checkBox4 = ''
+
+
 def process_form_data3(request):
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
+
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
     checkBoxList = request.form.getlist('checkBoxList')
@@ -342,18 +383,12 @@ def process_form_data3(request):
     manager = request.form['manager']  # 관리책임자
     # '/'가 정확히 2개 포함되어 있는지 확인
 
-    manager_position = ''
-    manager_affiliation = ''
-    manager_phone = ''
     if manager:  # manager에서 / 단위로 잘라서 책임자 직위 소속 연락처로 넣기
         manager_position = manager.split('/')[0]
         manager_affiliation = manager.split('/')[1]
         manager_phone = manager.split('/')[2]
 
     access_authority = request.form['access_authority']  # 접근 권한자
-    access_position = ''
-    access_affiliation = ''
-    access_phone = ''
     if access_authority:
         access_position = access_authority.split('/')[0]
         access_affiliation = access_authority.split('/')[1]
@@ -366,7 +401,6 @@ def process_form_data3(request):
 
     ###############보류################
     # 체크박스 확인
-    checkBox4 = ''
     if 'Processing_method' in request.form.getlist('Processing_method'):
         checkBox4 = '‣ 처리방법 : 개인영상정보의 목적 외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록ㆍ관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다.'
 
@@ -433,6 +467,7 @@ def process_form_data3(request):
 
 @app.route('/nextForm2Confirm', methods=['GET', 'POST'])
 def nextForm2Confirm():
+    session['form_data_4'] = request.form.to_dict()
     processed_data = process_form_data3(request)
     if processed_data:
         if 'action' in request.form and request.form['action'] == 'confirm':
@@ -445,7 +480,45 @@ def nextForm2Confirm():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    return render_template('result.html')
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+    global combined_data_result
+    global selected_rows
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
+
+    form_data1 = session.get('form_data_1', {})
+    form_data2 = session.get('form_data_2', {})
+    form_data4 = session.get('form_data_4', {})
+    print(form_data1)
+    print(form_data2)
+    print(form_data4)
+    print(combined_data_result)
+
+    return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
+                           academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
+                           graduate_df=graduate_df, newStudent_df=newStudent_df, disorder_df=disorder_df,
+                           homepage_df=homepage_df, etc_df=etc_df, combined_data_result=combined_data_result,
+                           selected_rows=selected_rows, manager_position=manager_position,
+                           manager_affiliation=manager_affiliation, manager_phone=manager_phone,
+                           access_position=access_position, access_affiliation=access_affiliation,
+                           access_phone=access_phone, checkBox4=checkBox4)
+
+
+@app.route('/inspectionMain')
+def inspectionMain():
+    return render_template('inspectionMain.html')
 
 
 if __name__ == '__main__':

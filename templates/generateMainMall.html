@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>개인정보처리방침 생성 폼</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/generateMain.css">
+    <link rel="stylesheet" href="../static/generateMainMall.css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var num = 1; // 시작 번호
@@ -16,6 +16,7 @@
             });
         });
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -456,37 +457,6 @@
         var fileName = this.files[0].name;
         document.getElementById('customFileName').textContent = fileName;
     });
-
-    document.getElementById('addDateButton').addEventListener('click', function () {
-        // 새로운 div 요소 생성
-        var newDiv = document.createElement('div');
-
-        // 첫 번째 날짜 입력 필드 생성 및 설정
-        var newInput1 = document.createElement('input');
-        newInput1.type = 'date';
-        newInput1.name = 'start_date';
-        newInput1.className = 'form-input';
-
-        // <p> 요소 생성 및 '~' 텍스트 설정
-        var pElement = document.createElement('p');
-        pElement.innerText = ' ~ '; // 혹은 pElement.textContent = ' ~ ';
-        pElement.style.display = 'inline'; // <p>를 인라인 요소처럼 보이도록 설정
-
-        // 두 번째 날짜 입력 필드 생성 및 설정
-        var newInput2 = document.createElement('input');
-        newInput2.type = 'date';
-        newInput2.name = 'end_date';
-        newInput2.className = 'form-input';
-
-        // 새로운 div에 첫 번째 입력 필드, <p> 요소, 두 번째 입력 필드 추가
-        newDiv.appendChild(newInput1);
-        newDiv.appendChild(pElement);
-        newDiv.appendChild(newInput2);
-
-        // 날짜 입력 필드를 담고 있는 컨테이너에 새로운 div 요소 추가
-        document.getElementById('dateInputsContainer').appendChild(newDiv);
-    });
-
 </script>
 <script>
     window.onload = function () {
@@ -496,5 +466,21 @@
         }
     }
 </script>
+<script>
+    $(document).ready(function () {
+        $("#addRow").click(function () {
+            var newRow = `<tr class="Row">
+                <td class="check"><input type="checkbox" name="checklist"></td>
+                <td class="recipient"><input type="text" name="recipient" /></td>
+                <td class="purpose"><textarea name="purpose"></textarea></td>
+                <td class="items"><textarea name="items"></textarea></td>
+                <td class="period"><textarea name="period"></textarea></td>
+                <td class="reason"><textarea name="reason"></textarea></td>
+            </tr>`;
+            $("#data-table tbody").append(newRow);
+        });
+    });
+</script>
+
 </body>
 </html>

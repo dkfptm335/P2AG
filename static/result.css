@@ -1,0 +1,224 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.header {
+    font-size: 32px;
+    text-align: center;
+    color: #30d5c8;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px; /* 테이블 너비 조정을 위해 증가 */
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    max-height: 100px;
+    overflow: auto;
+}
+
+table caption {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+}
+
+table, .table th, .table td {
+    border: 1px solid #ccc;
+}
+
+table th, .table td {
+    text-align: left;
+    padding: 8px;
+}
+
+table th {
+    background-color: #30d5c8;
+    color: white;
+}
+
+.preformatted {
+    white-space: pre-wrap;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.submit-button {
+    width: 45%;
+    display: inline-block;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    background-color: #30d5c8;
+}
+
+.submit-button:hover {
+    background-color: #279a93
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .header {
+        font-size: 24px;
+    }
+}
+
+.submit-div {
+    justify-content: space-between;
+    text-align: center;
+    display: block; /* 블록 레벨 요소로 변경 */
+    margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
+}
+
+.table-container {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.datetime-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-around; /* 이미지 사이의 공간을 균등하게 조정 */
+}
+
+.image-box {
+    position: relative;
+    width: 100px; /* 이미지의 크기 조정 */
+    height: 100px;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+}
+
+.info {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* 반투명 배경 */
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.image-box:hover .info {
+    visibility: visible; /* 이미지 위에 마우스를 올리면 정보를 보여줌 */
+}
+
+/* Google Fonts에서 Noto Sans KR 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+.panel_box {
+    font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 폰트 적용 */
+    color: #000000; /* 텍스트 색상 변경 */
+    padding: 20px; /* 패널 내부 여백 */
+    border-radius: 10px; /* 경계선 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.cnt_list {
+    list-style: none; /* 기본 목록 스타일 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    display: flex; /* 항목들을 플렉스 박스로 만듦 */
+    flex-wrap: wrap; /* 내용이 넘칠 경우 다음 줄로 */
+}
+
+.cnt_list li {
+    margin-bottom: 10px; /* 항목 간 여백 */
+    width: 50%; /* 각 항목 너비를 부모의 50%로 설정 */
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+}
+
+.cnt_list li a {
+    color: #000000; /* 링크 텍스트 색상 변경 */
+    text-decoration: none; /* 밑줄 제거 */
+    font-weight: 700; /* 글자 굵기 */
+}
+
+.cnt_list li a:hover {
+    text-decoration: underline; /* 마우스 호버 시 밑줄 표시 */
+}
+
+#scrollToTopBtn {
+    position: fixed; /* 고정 위치 */
+    bottom: 20px; /* 하단에서 20px 위 */
+    right: 20px; /* 오른쪽에서 20px 안쪽 */
+    padding: 10px 20px; /* 패딩 */
+    font-size: 16px; /* 글자 크기 */
+    background-color: #30D5C8; /* 배경 색상 */
+    color: white; /* 글자 색상 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 마우스 오버 시 커서 변경 */
+    display: none; /* 기본적으로는 숨김 */
+}
+
+.purpose {
+    width: 25%;
+}
+
+.items {
+    width: 20%;
+}
+
+.period {
+    width: 15%;
+}
+
+.reason {
+    width: 25%
+}
+
+.faded-text {
+    opacity: 0.5;
+}
+
+.item2 {
+    width: 20%;
+}
+
+.information {
+    width: 30%;
+}
+
+.trustee {
+    width: 50%;
+}
+
+.recipient {
+    width: 20%;
+}
