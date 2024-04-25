@@ -85,6 +85,9 @@
             <li>
                 <a href="#list10">‣ 개인정보 처리업무의 위탁에 관한 사항</a>
             </li>
+            <li>
+                <a href="#list11">‣ 영상정보처리기기 운영 관리에 관한 사항</a>
+            </li>
         </ul>
     </div>
     <div>
@@ -526,24 +529,24 @@
         <!-- 5번 해당시 의무사항이 없다.-->
 
         <!-- 6. 영상정보 확인 방법 및 장소 -->
-        {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['checking_method'] or form_data4['checking_location'] %}
             <div>
                 <h2>{{ num }}. 영상정보 확인 방법 및 장소</h2>
                 <table>
                     <tr>
                         <th>확인 방법</th>
-                        <td>{{ checking_method }}</td>
+                        <td>{{ form_data4['checking_method'] }}</td>
                     </tr>
                     <tr>
                         <th>확인 장소</th>
-                        <td>{{ checking_location }}</td>
+                        <td>{{ form_data4['checking_location'] }}</td>
                     </tr>
                 </table>
             </div>
         {% endif %}
 
         <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
-        {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
+        {% if 'checkBox-sub1' in form_data4['checkBoxList'] and checkList7 %}
             <div>
                 <h2>{{ num }}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
                 {% for item in checkList7 %}
