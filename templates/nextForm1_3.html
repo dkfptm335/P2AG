@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>개인정보처리방침 생성 폼 입력</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nextForm.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var num = 1; // 시작 번호
+            var security_num = 1;
+            var elements = document.querySelectorAll('h2');
+
+            elements.forEach(function(element) {
+                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="header">
+    {{name}} 개인정보처리방침 생성 두번째 폼
+</div>
+<div class="form-container">
+    <form id="privacyForm" action="/nextForm1_3Confirm" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="checkbox-option">
+                <input type="checkbox" id="checkBox1" name="checkBoxList" value="checkBox1" class="checkbox-input">
+                <label for="checkBox1" class="checkbox-custom-label"><strong>가명정보 처리에 관한 사항</strong></label>
+                <ul class="sub_checkbox" id="SubCheckList">
+                </ul>
+            </div>
+            <!-- 두번째 checkbox -->
+            <div class="checkbox-option">
+                <input type="checkbox" id="checkBox2" name="checkBoxList" value="checkBox2" class="checkbox-input">
+                <label for="checkBox2" class="checkbox-custom-label"><strong>개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한
+                    사항 </strong></label>
+                <div id="auto_collect">
+                <fieldset>
+                    <legend>개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한 사항</legend>
+                    <textarea class="auto_collect_textarea" name="auto_collect">1. 회사의 쿠키 사용목적
+- 회원과 비회원의 접속 빈도나 방문 시간 등을 분석
+- 정보주체의 취향과 관심분야 파악 및 자취 추적
+2. 쿠키의 설치/운영 및 거부
+- 정보주체는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서 정보주체는 웹 브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.
+- 다만, 쿠키의 저장을 거부할 경우에는 로그인이 필요한 회사의 일부 서비스는 이용에 어려움이 있을 수 있습니다.
+- 쿠키 설치 허용 여부를 지정하는 방법은 다음과 같습니다.
+- 쿠키 설정 방법(Internet Explorer의 경우) : 웹 브라우저 우측 상단의 도구 메뉴>인터넷 옵션>개인정보>설정>고급
+- 쿠키 설정 방법(Edge의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>쿠키 및 사이트 권한>쿠키 및 사이트 데이터 관리 및 삭제
+- 쿠키 설정 방법(Chrome의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>개인정보 및 보안>쿠키 및 기타 사이트 데이터</textarea>
+
+                </fieldset>
+                </div>
+            </div>
+        </div>
+        <!-- 제출 버튼 -->
+        <div class="submit-div">
+            <button type="submit" id="confirm" class="submit-button" name="action" value="confirm">미리보기</button>
+            <button type="submit" id="result" class="submit-button" name="action" value="result">다음 폼</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('confirm').addEventListener('click', function() {
+        const selectedRows = document.querySelectorAll('#data-table .Row input[type="checkbox"]:checked');
+
+        Array.from(selectedRows).forEach(row => {
+            const recipient = row.closest('.Row').querySelector('.recipient').textContent;
+            const purpose = row.closest('.Row').querySelector('.purpose textarea').value;
+            const items = row.closest('.Row').querySelector('.items textarea').value;
+
+            console.log(`제공받는 자: ${recipient}, 제공 목적: ${purpose}, 제공 항목: ${items}`); // 콘솔에 출력
+            // 여기에서 선택된 정보를 서버에 전송하거나 로컬 스토리지에 저장할 수 있습니다.
+        });
+    });
+</script>
+
+<script>
+
+    const Checkbox2 = document.getElementById('checkBox2');
+    const auto_collect = document.getElementById('auto_collect');
+
+    Checkbox2.addEventListener('change', function() {
+        if (this.checked) {
+            auto_collect.style.display = 'block';
+        } else {
+            auto_collect.style.display = 'none';
+        }
+    });
+
+</script>
+
+<script>
+    window.onload = function () {
+        var message = "{{ error }}";
+        if (message) {
+            alert(message);
+        }
+    }
+</script>
+</body>
+
+</html>

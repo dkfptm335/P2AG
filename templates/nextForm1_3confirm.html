@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>개인정보처리방침 생성 폼 입력 확인</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nextFormConfirm.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var num = 1; // 시작 번호
+            var security_num = 1;
+            var elements = document.querySelectorAll('h2');
+
+            elements.forEach(function(element) {
+                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    {% if checkbox1%}
+    <div class="header">가명정보 처리에 관한 사항</div>
+    <p></p>
+    <br>
+    <hr>
+    {% endif %}
+    {% if checkbox2 %}
+    <div class="header">개인정보 자동 수집에 관한 사항</div>
+    <div>
+            <pre>{{ auto_collect }}</pre>
+    </div>
+    {% endif %}
+    <!-- end -->
+    <div>
+        <button onclick="goBack()">뒤로 가기</button>
+        <a href="/nextForm2">
+            <button>다음으로</button>
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+    function goBack(){
+    window.history.back();
+    }
+</script>
+</body>
+</html>
