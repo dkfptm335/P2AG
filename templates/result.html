@@ -513,9 +513,9 @@
         <br>
     {% endif %}
 
-    {% if form_data4['checkBox1'] %}
 
-        <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
+    <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
+    {% if form_data4['checkBox1'] %}
         <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.
         </p>
         <!-- 1. 영상정보처리기기 설치근거·목적 -->
@@ -651,7 +651,7 @@
 
 
     {% else %}
-        영상정보처리기기 설치 및 운영 안함
+        영상정보처리기기 설치 및 운영에 대한 내용이 없습니다.
     {% endif %}
     </div>
     <button id="scrollToTopBtn">맨 위로</button>
