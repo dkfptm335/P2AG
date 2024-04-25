@@ -65,10 +65,15 @@
                                             placeholder="ex) 촬영일로부터 15일"></li>
                             <li>보관 장소<input type="text" id="storage_location" name="storage_location" class="form-input"
                                             placeholder="ex) 상황실 (보관시설 명)"></li>
-                            <li>처리 방법<br><input type="checkbox" value="Processing_method" id="Processing_method"
-                                                name="Processing_method">해당 항목은 본
-                                프로그램의 추천문구로 작성됩니다. 이예 동의하십니까?
+                            <li>처리 방법
+                                <br>
+                                ※ 이 항목은 해당 시 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로
+                                    작성됩니다. 필요 시 수정 가능합니다.
+                                <div class="form-input">
+                                <textarea id="processing_method" name="processing_method">‣  개인영상정보의 목적 외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록ㆍ관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다.</textarea>
+                                </div>
                             </li>
+
                         </ul>
                     </li>
                     <li><input type="checkbox" name="checkBoxList" value="checkBox-sub5" id="checkBox-sub5"
@@ -76,8 +81,10 @@
                         <label for="checkBox-sub5" class="checkbox-custom-label"><strong>영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항
                             [해당시 의무작성]</strong></label>
                         <ul class="sub2-checklist" id="checkBox2-sub5">
-                            <li>수탁업체<input type="text" id="trustee" name="trustee" class="form-input"></li>
-                            <li>연락처<input type="text" id="trustee_tel" name="trustee_tel" class="form-input"></li>
+                            <li>수탁업체<input type="text" id="trustee" name="trustee" class="form-input" placeholder="기업명">
+                            </li>
+                            <li>연락처<input type="text" id="trustee_tel" name="trustee_tel" class="form-input"
+                                          placeholder="연락처"></li>
                         </ul>
                     </li>
                     <li>
@@ -137,10 +144,26 @@
                 <input type="checkbox" id="checkBox2" name="checkBox2"
                        value="checkBox2"
                        class="checkbox-input">
-                <label for="checkBox2" class="checkbox-custom-label"><strong>영상정보처리기기 운영 관리에 관한 사항</strong></label>
+                <label for="checkBox2" class="checkbox-custom-label"><strong>만 14세 미만 아동의 개인정보 처리에 관한
+                    사항</strong></label>
 
-                <ul class="sub_checkbox" id="SubCheckList2"> <li><strong>만 14세 미만 아동 가입</strong><input type="radio" name="radio14">예
-                    <input type="radio" name="radio14">아니오</li></ul>
+                <ul class="sub_checkbox" id="SubCheckList2">
+                    <li><strong>만 14세 미만 아동 가입</strong><input type="radio" name="radio14">예
+                        <input type="radio" name="radio14">아니오
+                    </li>
+                    <li>
+                        <p><strong><14세 미만 아동이 가입 불가능한 경우></strong></p>
+                        <p><strong>개인정보처리자명</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
+                    </li>
+                    <li>
+                        <p><strong><14세 미만 아동 가입 가능한 경우></strong></p>
+                        <p> 1) <strong>개인정보처리자명</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
+                        <p> 2) 만 14세 미만 아동회원 및 법정 대리인의 정보는 관련 법령이 허용하는 용도 이외에는 어떠한 용도로도 사용하지 않습니다.</p>
+                        <p> 3) 부모님 등 법정대리인의 요청이 있을 경우 아동회원의 개인정보의 열람·변경·탈퇴가 가능합니다.</p>
+                        <p> 4) 만 14세 미만 아동회원에게는 광고메일을 보내지 않으며, 게임 및 이벤트를 이용하여 더 많은 정보를 공개하도록 유도하지 않습니다.</p>
+
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- 제출 버튼 -->

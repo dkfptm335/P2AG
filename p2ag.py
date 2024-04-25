@@ -407,11 +407,7 @@ def process_form_data3(request):
     shooting_time = request.form['shooting_time']  # 촬영 시간
     storage_period = request.form['storage_period']  # 보관 기간
     storage_location = request.form['storage_location']  # 보관 장소
-
-    ###############보류################
-    # 체크박스 확인
-    if 'Processing_method' in request.form.getlist('Processing_method'):
-        checkBox4 = '‣ 처리방법 : 개인영상정보의 목적 외 이용, 제3자 제공, 파기, 열람 등 요구에 관한 사항을 기록ㆍ관리하고, 보관기간 만료시 복원이 불가능한 방법으로 영구 삭제(출력물의 경우 파쇄 또는 소각)합니다.'
+    processing_method = request.form['processing_method'] # 처리 방법
 
     # 이거 예시가 없음
     trustee = request.form['trustee']
@@ -438,6 +434,11 @@ def process_form_data3(request):
     # 현재 날짜 받아오기
     current_date = request.form['current_date']
 
+    # 만 14세 미만 개인정보 처리
+    checkBox2 = ''
+    if 'checkBox2' in request.form.getlist('checkBox2'):
+        checkBox2 = 1
+
     # 처리된 데이터를 딕셔너리로 반환
     return {
         'name': name,
@@ -455,6 +456,7 @@ def process_form_data3(request):
         'shooting_time': shooting_time,
         'storage_period': storage_period,
         'storage_location': storage_location,
+        'processing_method': processing_method,
         'trustee': trustee,
         'trustee_tel': trustee_tel,
         'checkList7': checkList7,
@@ -463,6 +465,7 @@ def process_form_data3(request):
         'checking_method': checking_method,
         'checking_location': checking_location,
         'current_date': current_date,
+        'checkBox2': checkBox2
     }
 
 

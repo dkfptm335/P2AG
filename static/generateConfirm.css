@@ -99,3 +99,10 @@ table tbody tr:nth-child(odd) {
     max-height: 300px;
     overflow: auto;
 }
+
+div > pre {
+    white-space: pre-wrap; /* 공백과 줄바꿈을 유지하면서 필요시 자동으로 줄바꿈 */
+    word-wrap: break-word; /* 긴 단어가 div의 너비를 넘어갈 때 자동으로 줄바꿈 */
+    overflow: auto; /* 내용이 div를 넘어갈 경우 스크롤바가 생김 */
+    max-width: 100%; /* div의 최대 너비를 부모 요소에 맞춤 */
+}
