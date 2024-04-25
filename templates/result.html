@@ -446,10 +446,78 @@
         </table>
         <br>
     {% endif %}
+
+    {% if checkbox2 or checkbox3 %}
+        <h2 id="list10">{{ num }}. 개인정보처리 위탁에 관한 사항</h2>
+        <p>위탁계약 체결 시 「개인정보 보호법」 제26조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적·관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리·감독, 손해배상 등 책임에 관한
+            사항을
+            계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지 관리 현황을 정기적으로 점검하며 감독하고 있습니다.</p>
+        <p><strong>{{ form_data1['name'] }}</strong>는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있으며, 위탁업무의 내용이나 수탁자가 변경될
+            경우에는 본
+            개인정보처리방침을 통하여 공개하겠습니다.
+        </p>
+        <table>
+            <thead>
+            <tr class="columns">
+                <th class="trustee">위탁받은자(수탁자)</th>
+                <th class="text">업무 내용</th>
+            </tr>
+            </thead>
+            {% for row in selected_rows2 %}
+                <tr>
+                    <td>
+                        <div class="trustee"> {{ row.trustee }}</div>
+                    </td>
+                    <td>
+                        <div class="text"> {{ row.text }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% if checkbox3 %}
+                {% for trustee, classification1, classification2 in trustees %}
+                    {% if trustee %}
+                        <tr>
+                            <td>
+                                <div> {{ trustee }}</div>
+                            </td>
+
+                            <td>
+                                <div>
+                                    {% if classification2 %}
+                                        {{ classification2 }}
+                                    {% endif %}
+                                    {% if classification1 %}
+                                        {{ classification1 }}
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                            {% if retrustees_dict[loop.index] %}
+                                {% for retrustee in retrustees_dict[loop.index] %}
+                                    {% if retrustee['name'] %}
+                                        <tr>
+                                            <td> ㄴ {{ retrustee['name'] }} </td>
+                                            <td> {{ retrustee['business'] }} </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+
+            {% endif %}
+
+        </table>
+        <br>
+    {% endif %}
+
     {% if form_data4['checkBox1'] %}
 
         <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
-        <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.</p>
+        <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.
+        </p>
         <!-- 1. 영상정보처리기기 설치근거·목적 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['purpose'] %}
             <div>
@@ -569,7 +637,8 @@
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['current_date'] and date_ranges %}
             <div>
             <h2>{{ num }}. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항</h2>
-            <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ form_data4['current_date'] }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제 및 수정이 있을
+            <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ form_data4['current_date'] }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라
+                내용의 추가·삭제 및 수정이 있을
                 시에는 지체 없이 본 기관 홈페이지를 통해 변경사유 및 내용을 공지하도록 하겠습니다.</p>
             <div id="dateInputsContainer">
                 <h3>변경 이력</h3>
