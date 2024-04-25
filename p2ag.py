@@ -244,9 +244,25 @@ def nextForm1_2():
     return render_template('nextForm1_2.html')
 
 
+checkbox2 = ''
+checkbox3 = ''
+selected_rows2 = []
+trustees = []
+trustee_options = []
+retrustees_dict = {}
+
+
 @app.route('/nextForm1_2Confirm', methods=['POST'])
 def nextForm1_2Confirm():
+    global checkbox2
+    global checkbox3
+    global selected_rows2
+    global trustees
+    global trustee_options
+    global retrustees_dict
+
     form_data_1 = session.get('form_data_1', {})
+    session['form_data_3'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
@@ -260,10 +276,10 @@ def nextForm1_2Confirm():
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist2')
-    selected_rows = []
+    selected_rows2 = []
     # 선택된 체크박스에 대응하는 textarea 데이터 처리
     for check in selected_checks:
-        selected_rows.append({
+        selected_rows2.append({
             'trustee': request.form[f'trustee_{check}'],
             'text': request.form[f'text_{check}'],
         })
@@ -287,7 +303,8 @@ def nextForm1_2Confirm():
                 trustee_options.append(request.form[key])
         print('option확인', trustee_options)
         classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee')), None))
-        classification2.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
+        classification2.append(
+            next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
     print(trustees, classification1, classification2)
 
     trustees = zip(trustees, classification1, classification2)
@@ -305,13 +322,15 @@ def nextForm1_2Confirm():
 
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3,
-                               selected_rows=selected_rows, trustees=trustees, retrustees_dict=retrustees_dict)
+                               selected_rows=selected_rows2, trustees=trustees, retrustees_dict=retrustees_dict)
     else:
         return redirect(url_for('nextForm1_3'))
+
 
 @app.route('/nextForm1_3', methods=['GET', 'POST'])
 def nextForm1_3():
     return render_template('nextForm1_3.html')
+
 
 @app.route('/nextForm1_3Confirm', methods=['GET', 'POST'])
 def nextForm1_3Confirm():
@@ -344,6 +363,7 @@ def nextForm1_3Confirm():
                                selected_rows=selected_rows, auto_collect=auto_collect)
     else:
         return redirect(url_for('nextForm2'))
+
 
 @app.route('/nextForm2', methods=['GET', 'POST'])
 def nextForm2():
@@ -504,13 +524,22 @@ def result():
     global checkList7
     global checkList8
     global date_ranges
+    global checkbox2
+    global checkbox3
+    global selected_rows2
+    global trustees
+    global trustee_options
+    global retrustees_dict
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
+    form_data3 = session.get('form_data_3', {})
     form_data4 = session.get('form_data_4', {})
     print(form_data1)
     print(form_data2)
+    print(form_data3)
     print(form_data4)
+    print(checkbox3)
     print(combined_data_result)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
@@ -521,7 +550,9 @@ def result():
                            manager_affiliation=manager_affiliation, manager_phone=manager_phone,
                            access_position=access_position, access_affiliation=access_affiliation,
                            access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
-                           date_ranges=date_ranges)
+                           date_ranges=date_ranges, checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
+                           trustee_options=trustee_options, retrustees_dict=retrustees_dict, form_data3=form_data3,
+                           selected_rows2=selected_rows2)
 
 
 @app.route('/inspectionMain')
