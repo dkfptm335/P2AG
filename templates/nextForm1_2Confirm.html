@@ -40,7 +40,16 @@
             {% if trustee %}
             <tr>
                 <td><div> {{trustee}}</div></td>
-                <td><div> {{classification2}} {{classification1}}</div></td>
+
+                <td><div>
+                    {% if classification2 %}
+                    {{classification2}}
+                    {% endif %}
+                    {% if classification1 %}
+                    {{classification1}}
+                    {% endif %}
+
+                </div></td>
                 {% if retrustees_dict[loop.index] %}
                     {% for retrustee in retrustees_dict[loop.index] %}
                         {% if retrustee['name'] %}

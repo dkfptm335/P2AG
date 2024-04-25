@@ -284,8 +284,7 @@ def nextForm1_2Confirm():
             if key.startswith(f'trustee{i}_option'):
                 trustee_options.append(request.form[key])
         print('option확인', trustee_options)
-        print('option확인', request.form['classification16'] )
-        classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'classification')), None))
+        classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee')), None))
         classification2.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
     print(trustees, classification1, classification2)
 
