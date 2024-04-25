@@ -35,6 +35,7 @@ disorder_df = pd.DataFrame()
 homepage_df = pd.DataFrame()
 etc_df = pd.DataFrame()
 combined_data_result = dict()
+date_ranges = []
 
 
 def process_form_data1(request):
@@ -47,6 +48,7 @@ def process_form_data1(request):
     global homepage_df
     global etc_df
     global combined_data_result
+    global date_ranges
 
     name = request.form['name']
     file = request.files['file']
@@ -354,6 +356,8 @@ access_position = ''
 access_affiliation = ''
 access_phone = ''
 checkBox4 = ''
+checkList7 = []
+checkList8 = []
 
 
 def process_form_data3(request):
@@ -364,6 +368,8 @@ def process_form_data3(request):
     global access_affiliation
     global access_phone
     global checkBox4
+    global checkList7
+    global checkList8
 
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
@@ -414,8 +420,6 @@ def process_form_data3(request):
 
     # 6~7
     checkListYes = request.form.getlist('checkListYes')
-    checkList7 = []
-    checkList8 = []
     print(checkList7)
     if 'sub7' in checkListYes:
         checkList7.append('‣  귀하는 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다. ')
@@ -497,6 +501,9 @@ def result():
     global access_affiliation
     global access_phone
     global checkBox4
+    global checkList7
+    global checkList8
+    global date_ranges
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
@@ -513,7 +520,8 @@ def result():
                            selected_rows=selected_rows, manager_position=manager_position,
                            manager_affiliation=manager_affiliation, manager_phone=manager_phone,
                            access_position=access_position, access_affiliation=access_affiliation,
-                           access_phone=access_phone, checkBox4=checkBox4)
+                           access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
+                           date_ranges=date_ranges)
 
 
 @app.route('/inspectionMain')
