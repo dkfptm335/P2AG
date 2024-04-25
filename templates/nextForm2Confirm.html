@@ -4,12 +4,12 @@
     <title>개인정보처리방침 생성 폼 입력 확인</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='generateConfirm.css') }}">
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var num = 1; // 시작 번호
             var security_num = 1;
             var elements = document.querySelectorAll('h2');
 
-            elements.forEach(function(element) {
+            elements.forEach(function (element) {
                 element.innerHTML = element.innerHTML.replace('{{num}}', num++);
             });
         });
@@ -19,140 +19,146 @@
 <div class="container">
     {% if checkBox1 %}
 
-    <div class="header">영상정보처리기기 설치 및 운영</div>
-    <p><strong>{{ name }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.</p>
-    <!-- 1. 영상정보처리기기 설치근거·목적 -->
-    {% if 'checkBox-sub1' in checkBoxList and purpose %}
-    <div>
-        <h2>{{num}}. 영상정보처리기기 설치근거·목적 </h2>
-        <p>‣ {{purpose}}</p>
-    </div>
-    {% endif %}
-    <!-- 2. 영상정보처리기기 설치대수 및 위치 -->
-    {% if 'checkBox-sub2' in checkBoxList and installation_number %}
-    <div>
-        <h2>{{num}}. 영상정보처리기기 설치대수 및 위치</h2>
-        <table>
-            <tr>
-                <th>설치 대수</th>
-                <th>설치 위치 및 촬영 범위</th>
-            </tr>
-            <tr>
-                <td>{{installation_number}}</td>
-                <td>{{installation_location}}</td>
-            </tr>
-        </table>
-    </div>
-    {% endif %}
+        <div class="header">영상정보처리기기 설치 및 운영</div>
+        <p><strong>{{ name }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.</p>
+        <!-- 1. 영상정보처리기기 설치근거·목적 -->
+        {% if 'checkBox-sub1' in checkBoxList and purpose %}
+            <div>
+                <h2>{{ num }}. 영상정보처리기기 설치근거·목적 </h2>
+                <p>‣ {{ purpose }}</p>
+            </div>
+        {% endif %}
+        <!-- 2. 영상정보처리기기 설치대수 및 위치 -->
+        {% if 'checkBox-sub2' in checkBoxList and installation_number %}
+            <div>
+                <h2>{{ num }}. 영상정보처리기기 설치대수 및 위치</h2>
+                <table>
+                    <tr>
+                        <th>설치 대수</th>
+                        <th>설치 위치 및 촬영 범위</th>
+                    </tr>
+                    <tr>
+                        <td>{{ installation_number }}</td>
+                        <td>{{ installation_location }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
 
-    <!-- 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자 -->
-    {% if 'checkBox-sub3' in checkBoxList and manager_position or access_position %}
-    <div>
-        <h2>{{num}}. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자</h2>
-        <table>
-            <tr>
-                <th>구분</th>
-                <th>직위</th>
-                <th>소속</th>
-                <th>연락처</th>
-            </tr>
-            {% if manager_position %}
-            <tr>
-                <td>관리책임자</td>
-                <td>{{manager_position}}</td>
-                <td>{{manager_affiliation}}</td>
-                <td>{{manager_phone}}</td>
-            </tr>
-            {% endif %}
-            {% if access_position %}
-            <tr>
-                <td>접근권한자</td>
-                <td>{{access_position}}</td>
-                <td>{{access_affiliation}}</td>
-                <td>{{access_phone}}</td>
-            </tr>
-            {% endif %}
-        </table>
-    </div>
-    {% endif %}
+        <!-- 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자 -->
+        {% if 'checkBox-sub3' in checkBoxList and manager_position or access_position %}
+            <div>
+                <h2>{{ num }}. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자</h2>
+                <table>
+                    <tr>
+                        <th>구분</th>
+                        <th>직위</th>
+                        <th>소속</th>
+                        <th>연락처</th>
+                    </tr>
+                    {% if manager_position %}
+                        <tr>
+                            <td>관리책임자</td>
+                            <td>{{ manager_position }}</td>
+                            <td>{{ manager_affiliation }}</td>
+                            <td>{{ manager_phone }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if access_position %}
+                        <tr>
+                            <td>접근권한자</td>
+                            <td>{{ access_position }}</td>
+                            <td>{{ access_affiliation }}</td>
+                            <td>{{ access_phone }}</td>
+                        </tr>
+                    {% endif %}
+                </table>
+            </div>
+        {% endif %}
 
-    <!-- 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법 -->
-    {% if 'checkBox-sub4' in checkBoxList and shooting_time or storage_period or storage_location or checkBox4 %}
-    <div>
-        <h2>{{num}}. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법</h2>
-        <table>
-            <tr>
-                <th>촬영시간</th>
-                <th>보관기간</th>
-                <th>보관장소</th>
-            </tr>
-            <tr>
-                <td>{{shooting_time}}</td>
-                <td>{{storage_period}}</td>
-                <td>{{storage_location}}</td>
-            </tr>
-        </table>
-        <p>{{checkBox4}}</p>
-    </div>
-    {% endif %}
+        <!-- 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법 -->
+        {% if 'checkBox-sub4' in checkBoxList and shooting_time or storage_period or storage_location or checkBox4 %}
+            <div>
+                <h2>{{ num }}. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법</h2>
+                <table>
+                    <tr>
+                        <th>촬영시간</th>
+                        <th>보관기간</th>
+                        <th>보관장소</th>
+                    </tr>
+                    <tr>
+                        <td>{{ shooting_time }}</td>
+                        <td>{{ storage_period }}</td>
+                        <td>{{ storage_location }}</td>
+                    </tr>
+                </table>
+                <p>{{ checkBox4 }}</p>
+            </div>
+        {% endif %}
 
-<!-- 5번 해당시 의무사항이 없다.-->
+        <!-- 5번 영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항-->
+        {% if 'checkBox-sub5' in checkBoxList %}
+            <div>
+                <h2>{{ num }}. 영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항</h2>
+            </div>
+        {% endif %}
 
-    <!-- 6. 영상정보 확인 방법 및 장소 -->
-    {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
-    <div>
-        <h2>{{num}}. 영상정보 확인 방법 및 장소</h2>
-        <table>
-            <tr>
-                <th>확인 방법</th>
-                <td>{{checking_method}}</td>
-            </tr>
-            <tr>
-                <th>확인 장소</th>
-                <td>{{checking_location}}</td>
-            </tr>
-        </table>
-    </div>
-    {% endif %}
+        <!-- 6. 영상정보 확인 방법 및 장소 -->
+        {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
+            <div>
+                <h2>{{ num }}. 영상정보 확인 방법 및 장소</h2>
+                <table>
+                    <tr>
+                        <th>확인 방법</th>
+                        <td>{{ checking_method }}</td>
+                    </tr>
+                    <tr>
+                        <th>확인 장소</th>
+                        <td>{{ checking_location }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
 
-    <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
-    {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
-    <div>
-        <h2>{{num}}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
-        {% for item in checkList7 %}
-        <p>{{item}}</p>
-        {% endfor %}
-    </div>
+        <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
+        {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
+            <div>
+                <h2>{{ num }}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
+                {% for item in checkList7 %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
 
-    {% endif %}
+        {% endif %}
 
-    <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
-    {% if 'checkBox-sub8' in checkBoxList and checkList8 %}
-    <div>
-        <h2>{{num}}. 영상정보 보호를 위한 안정성 확보 조치</h2>
-        {% for item in checkList8 %}
-        <p>{{item}}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
+        <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
+        {% if 'checkBox-sub8' in checkBoxList and checkList8 %}
+            <div>
+                <h2>{{ num }}. 영상정보 보호를 위한 안정성 확보 조치</h2>
+                {% for item in checkList8 %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    <!-- 9. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항 -->
-    {% if 'checkBox-sub9' in checkBoxList and current_date and date_ranges %}
-    <div>
-        <h2>{{num}}. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항</h2>
-        <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{current_date}}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제 및 수정이 있을 시에는 지체 없이 본 기관 홈페이지를 통해 변경사유 및 내용을 공지하도록 하겠습니다.</p>
-        <div id="dateInputsContainer">
-            <h3>변경 이력</h3>
-            {% for range in date_ranges %}
-            <p>- {{range.start_date}} ~ {{range.end_date}}</p>
-            {% endfor %}
-    </div>
-    {% endif %}
+        <!-- 9. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항 -->
+        {% if 'checkBox-sub9' in checkBoxList and current_date and date_ranges %}
+            <div>
+            <h2>{{ num }}. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항</h2>
+            <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ current_date }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제 및 수정이 있을
+                시에는 지체 없이 본 기관 홈페이지를 통해 변경사유 및 내용을 공지하도록 하겠습니다.</p>
+            <div id="dateInputsContainer">
+                <h3>변경 이력</h3>
+                {% for range in date_ranges %}
+                    <p>- {{ range.start_date }} ~ {{ range.end_date }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
 
 
     {% else %}
-    영상정보처리기기 설치 및 운영 안함
+        영상정보처리기기 설치 및 운영 안함
     {% endif %}
     <!-- end -->
     <div>
@@ -163,12 +169,12 @@
 
     </div>
 
-</div>
+    </div>
 
-<script>
-    function goBack(){
-    window.history.back();
-    }
-</script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

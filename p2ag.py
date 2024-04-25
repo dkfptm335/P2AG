@@ -370,6 +370,8 @@ def process_form_data3(request):
     global checkBox4
     global checkList7
     global checkList8
+    checkList7 = []
+    checkList8 = []
 
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
