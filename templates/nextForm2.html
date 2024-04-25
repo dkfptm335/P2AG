@@ -131,6 +131,18 @@
                 </ul>
             </div>
         </div>
+        <!-- 두번재 checkbox(만14세 미만 아동) -->
+        <div class="form-group">
+            <div class="checkbox-option">
+                <input type="checkbox" id="checkBox2" name="checkBox2"
+                       value="checkBox2"
+                       class="checkbox-input">
+                <label for="checkBox2" class="checkbox-custom-label"><strong>영상정보처리기기 운영 관리에 관한 사항</strong></label>
+
+                <ul class="sub_checkbox" id="SubCheckList2"> <li><strong>만 14세 미만 아동 가입</strong><input type="radio" name="radio14">예
+                    <input type="radio" name="radio14">아니오</li></ul>
+            </div>
+        </div>
         <!-- 제출 버튼 -->
         <div class="submit-div">
             <button type="submit" class="submit-button" name="action" value="confirm">미리보기</button>
@@ -148,6 +160,16 @@
             SubChecklist.style.display = 'block';
         } else {
             SubChecklist.style.display = 'none';
+        }
+    });
+    const Checkbox2 = document.getElementById('checkBox2');
+    const SubChecklist2 = document.getElementById('SubCheckList2');
+
+    Checkbox2.addEventListener('change', function() {
+        if (this.checked) {
+            SubChecklist2.style.display = 'block';
+        } else {
+            SubChecklist2.style.display = 'none';
         }
     });
 

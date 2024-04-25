@@ -283,6 +283,8 @@ def nextForm1_2Confirm():
         for key in request.form:
             if key.startswith(f'trustee{i}_option'):
                 trustee_options.append(request.form[key])
+        print('option확인', trustee_options)
+        print('option확인', request.form['classification16'] )
         classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'classification')), None))
         classification2.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
     print(trustees, classification1, classification2)
@@ -431,11 +433,6 @@ def process_form_data3(request):
     # 현재 날짜 받아오기
     current_date = request.form['current_date']
 
-    # 제출된 데이터를 가져온다
-    start_dates = request.form.getlist('start_date')
-    end_dates = request.form.getlist('end_date')
-    date_ranges = [{'start_date': start, 'end_date': end} for start, end in zip(start_dates, end_dates)]
-
     # 처리된 데이터를 딕셔너리로 반환
     return {
         'name': name,
@@ -461,7 +458,6 @@ def process_form_data3(request):
         'checking_method': checking_method,
         'checking_location': checking_location,
         'current_date': current_date,
-        'date_ranges': date_ranges
     }
 
 

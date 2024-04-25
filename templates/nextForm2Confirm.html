@@ -97,7 +97,22 @@
     {% endif %}
 
 <!-- 5번 해당시 의무사항이 없다.-->
-
+    {% if 'checkBox-sub4' in checkBoxList and shooting_time or storage_period or storage_location or checkBox4 %}
+    <div>
+        <h2>{{num}}. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법</h2>
+        <table>
+            <tr>
+                <th>확인방법</th>
+                <th>확인장소</th>
+            </tr>
+            <tr>
+                <td>{{shooting_time}}</td>
+                <td>{{storage_period}}</td>
+                <td>{{storage_location}}</td>
+            </tr>
+        </table>
+        <p>{{checkBox4}}</p>
+    </div>
     <!-- 6. 영상정보 확인 방법 및 장소 -->
     {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
     <div>

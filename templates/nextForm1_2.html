@@ -145,7 +145,7 @@
                                         <input type="radio" name="trustee1_option1" value="classification15"> 사용자
                                         자료관리 <input type="hidden" value="사용자 자료관리" name="classification15">
                                         <input type="radio" name="trustee1_option1" value="classification16"> 기타()
-                                        <input type="text" placeholder="기타사항" id="otherText" name="classification16"
+                                        <input type="text" placeholder="기타사항" id="trustee1_otherText" name="classification16"
                                                disabled>
                                     </div>
                                 </li>
@@ -198,7 +198,7 @@
                                                                                              name="trustee1_option2_13">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_14" id="otherOption1"> 기타
-                                        <input type="text" placeholder="기타사항" id="otherText1"
+                                        <input type="text" placeholder="기타사항" id="trustee1_otherText1"
                                                name="trustee1_option2_14" disabled>
                                     </div>
                                 </li>
@@ -218,7 +218,7 @@
                                                                                       name="trustee1_option2_17">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_18" id="otherOption2"> 기타
-                                        <input type="text" placeholder="기타사항" id="otherText2"
+                                        <input type="text" placeholder="기타사항" id="trustee1_otherText2"
                                                name="trustee1_option2_18" disabled>
                                     </div>
                                 </li>
@@ -237,7 +237,7 @@
                                                                                             name="trustee1_option2_20">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_21" id="otherOption3"> 기타
-                                        <input type="text" placeholder="기타사항" id="otherText3"
+                                        <input type="text" placeholder="기타사항" id="trustee1_otherText3"
                                                name="trustee1_option2_21" disabled>
                                     </div>
                                 </li>
@@ -254,7 +254,7 @@
                                                                                        name="trustee1_option2_23">
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_24" id="otherOption4"> 기타
-                                        <input type="text" placeholder="기타사항" id="otherText4"
+                                        <input type="text" placeholder="기타사항" id="trustee1_otherText4"
                                                name="trustee1_option2_24" disabled>
                                     </div>
                                 </li>
@@ -266,7 +266,7 @@
                                         <input type="radio" name="trustee1_option2"
                                                value="trustee1_option2_25" id="otherOption5"> 시설물
                                         명
-                                        <input type="text" placeholder="시설물 명" id="otherText5"
+                                        <input type="text" placeholder="시설물 명" id="trustee1_otherText5"
                                                name="trustee1_option2_25" disabled>
                                     </div>
                                 </li>
@@ -315,7 +315,7 @@ document.addEventListener('click', function(event) {
     // 클릭된 요소가 fieldset 내의 button인지 확인
     if (event.target.closest('fieldset') && event.target.tagName === 'BUTTON') {
         // 클릭된 button이 속한 fieldset의 ID를 추출하여 trustee_num에 할당
-        var trustee_num = event.target.closest('fieldset').id;
+        trustee_num = event.target.closest('fieldset').id;
         console.log(trustee_num);
         console.log(`click ${trustee_num}에서 반응이 일어났습니다.`);
 
@@ -347,8 +347,8 @@ document.addEventListener('change', function(event) {
     // 값이 변경된 요소가 fieldset 내의 input인지 확인
     if (event.target.closest('fieldset') && event.target.tagName === 'INPUT') {
         // 변경된 input이 속한 fieldset의 ID를 추출하여 trustee_num에 할당
-        var trustee_num = event.target.closest('fieldset').id;
-        console.log(trustee_num);
+        trustee_num = event.target.closest('fieldset').id;
+        console.log(trustee_num, trustee_number);
         console.log(`change${trustee_num}에서 반응이 일어났습니다.`);
 
         if (event.target.name === `trustee${trustee_num}_option1`) {
@@ -402,6 +402,13 @@ document.addEventListener('change', function(event) {
                 document.getElementById(`trustee${trustee_num}_additional-classification4`).style.display = 'none';
                 document.getElementById(`trustee${trustee_num}_additional-classification5`).style.display = 'none';
             }
+            if (event.target.value === 'classification16'){
+                console.log(`기타 진입`, trustee_num, event.target);
+                document.getElementById(`trustee${trustee_num}_otherText`).disabled = false;
+
+            } else {
+                document.getElementById(`trustee${trustee_num}_otherText`).disabled = true;
+            }
         }
 <!--재수탁 여부-->
         if (event.target.type === 'checkbox') {
@@ -412,7 +419,6 @@ document.addEventListener('change', function(event) {
             } else {
                 reTrusteeList.style.display = 'none';
             }
-
         }
     }
 });
@@ -421,11 +427,12 @@ document.addEventListener('change', function(event) {
 <!--수탁사 추가되도록 하는 것-->
 <script>
     var trustee_num = 2;
-    var trustee_number = 2;
+    var trustee_number = 1;
     var fieldsetCount = document.getElementById('fieldsetCount');
 
     document.getElementById('addRow_trustee').addEventListener('click', function() {
         // 새 fieldset 요소 생성
+        trustee_number++;
         var fieldset = document.createElement('fieldset');
 
         // fieldset에 추가할 내용. 예를 들어, 여기에 더 많은 요소를 추가할 수 있습니다.
@@ -476,7 +483,7 @@ document.addEventListener('change', function(event) {
                     <input type="radio" name="trustee${trustee_number}_option1" value="classification15"> 사용자
                     자료관리 <input type="hidden" value="사용자 자료관리" name="classification15">
                     <input type="radio" name="trustee${trustee_number}_option1" value="classification16"> 기타()
-                    <input type="text" placeholder="기타사항" id="otherText" name="classification16"
+                    <input type="text" placeholder="기타사항" id="trustee${trustee_number}_otherText" name="classification16"
                            disabled>
                 </div>
             </li>
@@ -529,7 +536,7 @@ document.addEventListener('change', function(event) {
                                                                               name="trustee${trustee_number}_option2_13">
                     <input type="radio" name="trustee${trustee_number}_option2"
                            value="trustee${trustee_number}_option2_14" id="otherOption1"> 기타
-                    <input type="text" placeholder="기타사항" id="otherText1"
+                    <input type="text" placeholder="기타사항" id="trustee${trustee_number}_otherText1"
                            name="trustee${trustee_number}_option2_14" disabled>
                 </div>
             </li>
@@ -549,7 +556,7 @@ document.addEventListener('change', function(event) {
                                                                        name="trustee${trustee_number}_option2_17">
                     <input type="radio" name="trustee${trustee_number}_option2"
                            value="trustee${trustee_number}_option2_18" id="otherOption2"> 기타
-                    <input type="text" placeholder="기타사항" id="otherText2"
+                    <input type="text" placeholder="기타사항" id="trustee${trustee_number}_otherText2"
                            name="trustee${trustee_number}_option2_18" disabled>
                 </div>
             </li>
@@ -568,7 +575,7 @@ document.addEventListener('change', function(event) {
                                                                              name="trustee${trustee_number}_option2_20">
                     <input type="radio" name="trustee${trustee_number}_option2"
                            value="trustee${trustee_number}_option2_21" id="otherOption3"> 기타
-                    <input type="text" placeholder="기타사항" id="otherText3"
+                    <input type="text" placeholder="기타사항" id="trustee${trustee_number}_otherText3"
                            name="trustee${trustee_number}_option2_21" disabled>
                 </div>
             </li>
@@ -585,7 +592,7 @@ document.addEventListener('change', function(event) {
                                                                         name="trustee${trustee_number}_option2_23">
                     <input type="radio" name="trustee${trustee_number}_option2"
                            value="trustee${trustee_number}_option2_24" id="otherOption4"> 기타
-                    <input type="text" placeholder="기타사항" id="otherText4"
+                    <input type="text" placeholder="기타사항" id="trustee${trustee_number}_otherText4"
                            name="trustee${trustee_number}_option2_24" disabled>
                 </div>
             </li>
@@ -597,7 +604,7 @@ document.addEventListener('change', function(event) {
                     <input type="radio" name="trustee${trustee_number}_option2"
                            value="trustee${trustee_number}_option2_25" id="otherOption5"> 시설물
                     명
-                    <input type="text" placeholder="시설물 명" id="otherText5"
+                    <input type="text" placeholder="시설물 명" id="trustee${trustee_number}_otherText5"
                            name="trustee${trustee_number}_option2_25" disabled>
                 </div>
             </li>
@@ -628,18 +635,10 @@ document.addEventListener('change', function(event) {
         // fieldset을 div에 추가
         fieldset.id = trustee_number;
         fieldsetCount.value = trustee_number;
-        trustee_number++;
 
 
         console.log(fieldset.id);
         document.getElementById('fieldsetContainer1').appendChild(fieldset);
-    });
-</script>
-<!--재수탁사 추가하기-->
-<script>
-    document.getElementById(`addRow_trustee${trustee_num}_retrustee`).addEventListener('click', function() {
-        // 새 fieldset 요소 생성
-
     });
 </script>
 
@@ -666,48 +665,7 @@ document.addEventListener('change', function(event) {
         }
     });
 
-    document.getElementById("classification1").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "classification16") {
-            document.getElementById("otherText").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText").disabled = true;
-        }
-    });
-    document.getElementById("radioContainer1").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "trustee${trustee_num}_option2_14") {
-            document.getElementById("otherText1").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText1").disabled = true;
-        }
-    });
-    document.getElementById("radioContainer2").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "trustee${trustee_num}_option2_18") {
-            document.getElementById("otherText2").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText2").disabled = true;
-        }
-    });
-    document.getElementById("radioContainer3").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "trustee${trustee_num}_option2_21") {
-            document.getElementById("otherText3").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText3").disabled = true;
-        }
-    });
-    document.getElementById("radioContainer4").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "trustee${trustee_num}_option2_24") {
-            document.getElementById("otherText4").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText4").disabled = true;
-        }
-    });
-    document.getElementById("radioContainer5").addEventListener("click", function(event) {
-        if (event.target.type === "radio" && event.target.value === "trustee${trustee_num}_option2_25") {
-            document.getElementById("otherText5").disabled = false;
-        } else if (event.target.type === "radio") {
-            document.getElementById("otherText5").disabled = true;
-        }
-    });
+
 
 
 </script>
