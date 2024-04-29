@@ -134,23 +134,19 @@
     {% endif %}
 
     <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
-    {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
+    {% if 'checkBox-sub7' in checkBoxList and requestView %}
     <div>
         <h2>{{ num }}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
-        {% for item in checkList7 %}
-        <p>{{ item }}</p>
-        {% endfor %}
+        <pre>{{ requestView }}</pre>
     </div>
 
     {% endif %}
 
-    <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
-    {% if 'checkBox-sub8' in checkBoxList and checkList8 %}
+    <!-- 8. 영상정보 보호를 위한 안전성 확보 조치 -->
+    {% if 'checkBox-sub8' in checkBoxList and stability %}
     <div>
         <h2>{{ num }}. 영상정보 보호를 위한 안정성 확보 조치</h2>
-        {% for item in checkList8 %}
-        <p>{{ item }}</p>
-        {% endfor %}
+        <pre>{{ stability }}</pre>
     </div>
     {% endif %}
 
