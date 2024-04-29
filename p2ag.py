@@ -270,6 +270,7 @@ selected_rows = []
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
     global selected_rows
+    selected_rows = []
     form_data_1 = session.get('form_data_1', {})
     session['form_data_2'] = request.form.to_dict()
     name = form_data_1['name']
@@ -393,7 +394,6 @@ def nextForm1_3Confirm():
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
-    print(checkBoxList)
     checkbox1 = ''
     checkbox2 = ''
     if 'checkBox1' in checkBoxList:
