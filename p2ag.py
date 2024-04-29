@@ -458,8 +458,8 @@ def nextForm1_2Confirm():
     fieldsetCount = request.form['fieldsetCount']
     classification1 = []
     classification2 = []
-    trustees = []
     trustee_options = []
+    trustees = []
     for key in request.form:
         if key.startswith('add_trustee'):
             trustees.append(request.form[key])
@@ -473,7 +473,6 @@ def nextForm1_2Confirm():
             next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
 
     trustees = zip(trustees, classification1, classification2)
-
     retrustees_dict = {}
 
     for i in range(1, int(fieldsetCount) + 1):
@@ -492,6 +491,9 @@ def nextForm1_2Confirm():
 
 @app.route('/nextForm1_3', methods=['GET', 'POST'])
 def nextForm1_3():
+    global trustees
+    print(list(trustees))
+
     return render_template('nextForm1_3.html')
 
 
