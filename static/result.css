@@ -93,6 +93,7 @@ table tbody tr:nth-child(odd) {
     text-align: center;
     display: block; /* 블록 레벨 요소로 변경 */
     margin: auto; /* 상하 마진 0, 좌우 마진 자동 */
+    width: 40%;
 }
 
 .table-container {

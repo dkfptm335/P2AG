@@ -8,6 +8,67 @@ app.secret_key = 'your_secret_key'  # 세션을 위한 시크릿 키 설정
 
 @app.route('/')
 def index():
+    # 모든 global 변수 초기화
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+    global combined_data_result
+    global date_ranges
+    global selected_rows
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
+    global checkList7
+    global checkList8
+    global checkbox2
+    global checkbox3
+    global selected_rows2
+    global trustees
+    global trustee_options
+    global retrustees_dict
+
+    academic_df = pd.DataFrame()
+    scholarship_df = pd.DataFrame()
+    grade_df = pd.DataFrame()
+    graduate_df = pd.DataFrame()
+    newStudent_df = pd.DataFrame()
+    disorder_df = pd.DataFrame()
+    homepage_df = pd.DataFrame()
+    etc_df = pd.DataFrame()
+    combined_data_result = dict()
+    date_ranges = []
+    selected_rows = []
+    manager_position = ''
+    manager_affiliation = ''
+    manager_phone = ''
+    access_position = ''
+    access_affiliation = ''
+    access_phone = ''
+    checkBox4 = ''
+    checkList7 = []
+    checkList8 = []
+    checkbox2 = ''
+    checkbox3 = ''
+    selected_rows2 = []
+    trustees = []
+    trustee_options = []
+    retrustees_dict = {}
+
+    # 모든 세션 데이터 초기화
+    session.pop('form_data_1', None)
+    session.pop('form_data_2', None)
+    session.pop('form_data_3', None)
+    session.pop('form_data_4', None)
+
     return render_template('index.html')
 
 
@@ -427,7 +488,7 @@ def process_form_data3(request):
     shooting_time = request.form['shooting_time']  # 촬영 시간
     storage_period = request.form['storage_period']  # 보관 기간
     storage_location = request.form['storage_location']  # 보관 장소
-    processing_method = request.form['processing_method'] # 처리 방법
+    processing_method = request.form['processing_method']  # 처리 방법
 
     # 이거 예시가 없음
     trustee = request.form['trustee']

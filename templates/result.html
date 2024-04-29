@@ -39,14 +39,18 @@
             <img src="../static/images/고충처리부서.png" alt="고충처리부서">
             <div class="info">고충처리부서</div>
         </div>
-        <div class="image-box">
-            <img src="../static/images/제3자 제공.png" alt="제3자 제공">
-            <div class="info">제3자 제공</div>
-        </div>
-        <div class="image-box">
-            <img src="../static/images/처리위탁.png" alt="처리위탁">
-            <div class="info">처리위탁</div>
-        </div>
+        {% if form_data2['checkBoxList'] %}
+            <div class="image-box">
+                <img src="../static/images/제3자 제공.png" alt="제3자 제공">
+                <div class="info">제3자 제공</div>
+            </div>
+        {% endif %}
+        {% if checkbox2 or checkbox3 %}
+            <div class="image-box">
+                <img src="../static/images/처리위탁.png" alt="처리위탁">
+                <div class="info">처리위탁</div>
+            </div>
+        {% endif %}
         <div class="image-box">
             <img src="../static/images/가명정보 처리.png" alt="가명정보 처리">
             <div class="info">가명정보 처리</div>
@@ -655,6 +659,12 @@
     {% endif %}
     </div>
     <button id="scrollToTopBtn">맨 위로</button>
+    <div class="submit-div">
+        <a href="/" style="text-decoration: none;">
+            <button class="submit-button">첫 화면으로</button>
+        </a>
+    </div>
+
     <script>
         function updateDateTime() {
             var now = new Date();
