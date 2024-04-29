@@ -115,7 +115,6 @@ def index():
     global homepage_df
     global etc_df
     global combined_data_result
-    global date_ranges
     global selected_rows
     global manager_position
     global manager_affiliation
@@ -704,7 +703,6 @@ def result():
     global checkBox4
     global checkList7
     global checkList8
-    global date_ranges
     global checkbox2
     global checkbox3
     global selected_rows2
@@ -737,7 +735,7 @@ def result():
                            manager_affiliation=manager_affiliation, manager_phone=manager_phone,
                            access_position=access_position, access_affiliation=access_affiliation,
                            access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
-                           date_ranges=date_ranges, checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
+                           checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
                            trustee_options=trustee_options, retrustees_dict=retrustees_dict, form_data3=form_data3,
                            selected_rows2=selected_rows2)
 
