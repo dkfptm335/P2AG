@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>검증 결과</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='inspectionresult.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>개인정보처리방침 검증 결과</h1>
+            <p>P2AG의 개인정보 처리방침 검증 서비스는 개인정보 보호법과 관련 지침을 기반으로 
+                다양한 사이트를 분석하여 검증 기준을 마련했습니다.
+                귀사의 개인정보 처리방침 페이지 URL을 입력하시면 자동 검증이 시작됩니다.</p>
+            <p>검사가 완료된 URL: {{ url }}</p>
+        </header>
+        <section class="results-section">
+            {% for category, results in categories.items() %}
+                <h2>{{ category }}</h2>
+                <ul>
+                    {% for result in results.split("\n") %}
+                        <li>{{ result }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </section>
+        <a href="{{ url_for('inspectionMain') }}" style="text-decoration: none;">
+            <button type="button">돌아가기</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,13 +1,158 @@
 import pandas as pd
 from flask import Flask, request, session
 from flask import render_template, redirect, url_for
+import requests, re
+from bs4 import BeautifulSoup as bs
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # 세션을 위한 시크릿 키 설정
 
+def extract_and_verify(url):
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers, verify=False)
+    html_content = response.content.decode('utf-8', 'replace')
+    soup = bs(html_content, 'html.parser')
+    text = soup.get_text()
+    text = text.replace(' ', '').replace('\n', '').replace('\r', '').replace('\t', '')
+
+ # 각 검사 함수를 호출
+    item_results = check_required_items(text)
+    keyword_results = check_keywords(text)
+    description_results = check_descriptions(text)
+    compliance_results = check_compliance(text)
+
+    # 결과를 카테고리별로 저장
+    categories = {
+        '필수항목 유무 검사 결과': item_results,
+        '키워드 검사 결과': keyword_results,
+        '서술 방식 검사 결과': description_results,
+        '표현방식 검사 결과': compliance_results
+    }
+    return categories
+
+def check_required_items(text):
+    missing_items = []
+    required_items = [
+        "목적", "처리", "보유기간", "항목", "파기", "정보주체", "법정대리인",
+        "권리", "의무", "행사방법", "안전성확보조치", "책임자", ("열람청구", "열람요구"),
+        "접수", "처리", "권익침해", ("처리방침의변경", "처리방침변경"), "제3자제공", "위탁"
+    ]
+
+    for item in required_items:
+        if isinstance(item, tuple):
+            if not any(variation in text for variation in item):
+                missing_items.append(item[0])
+        else:
+            if item not in text:
+                missing_items.append(item)
+
+    return "누락된 필수 항목: " + ", ".join(missing_items) if missing_items else "모든 필수 항목이 존재합니다."
+
+def check_keywords(text):
+    missing_keywords = []
+    keywords = [
+    ('개인정보파일명', '파일명', '개인정보파일', '개인정보파일의명칭'),
+    ('수집목적', '개인정보파일의운영목적', '운영목적', '개인정보수집/이용목적', '처리목적'),
+    ('수집항목', '처리하는개인정보의항목', '처리하는개인정보항목', '개인정보의항목'),
+    ('보유근거', '처리근거', '운영근거'),
+    ('보유및이용기간','개인정보보유기간', '제공기간', '처리기간', '처리및보유기간','보유및처리기간'),
+    ('제공받는자', '제공기관', '제공받는기관','제공현황','제공목록', '제공리스트'),
+    ('제공목적', '제공받는자의이용목적', '이용목적'),
+    ('제공정보', '제공하는항목', '제공하는개인정보항목', '제공항목', '개인정보파일명','제공현황', '제공리스트'),
+    ('수탁자', '업체명', '위탁대상', '위탁업체명', '수탁기관', '수탁업체명', '수탁사', '수탁업체', '수탁업체명칭'),
+    ('위탁하는업무내용', '업무목적', '위탁업무내용', '위탁업무', '위탁항목', '업무내용', '위탁하는업무의내용')
+    ]
+
+    for group in keywords:
+        if not any(keyword in text for keyword in group):
+            missing_keywords.append(group[0])
+
+    return "누락된 키워드: " + ", ".join(missing_keywords) if missing_keywords else "모든 키워드가 존재합니다."
+
+def check_descriptions(text):
+    issues = []
+    ambiguous_terms = ["기타등등", "등", "기타", "정부기관", "공공기관", "관련기관", "협회",
+                       "보험회사", "목적달성시", "타법령에따라", "수시", "상시", "사유발생시","관계법률에"]
+    for term in ambiguous_terms:
+        if term in text:
+            issues.append(f"모호한 용어 '{term}'이(가) 사용됨.")
+
+    return "\n".join(issues) if issues else "문서에 모호한 용어가 없습니다."
+
+def check_compliance(text):
+    results = []
+    # 전화번호 형식 검사
+    if not re.search(r'\d{2,3}-\d{3,4}-\d{4}', text):
+        results.append("전화번호 형식이 잘못되었습니다. 올바른 형식 예: 010-1234-5678")
+    # 이메일 형식 검사
+    if not re.search(r'[\w.-]+@[\w.-]+\.\w+', text):
+        results.append("이메일 형식이 잘못되었습니다. 올바른 형식 예: example@example.com")
+
+    return "\n".join(results) if results else "모든 표현이 적절합니다."
 
 @app.route('/')
 def index():
+    # 모든 global 변수 초기화
+    global academic_df
+    global scholarship_df
+    global grade_df
+    global graduate_df
+    global newStudent_df
+    global disorder_df
+    global homepage_df
+    global etc_df
+    global combined_data_result
+    global date_ranges
+    global selected_rows
+    global manager_position
+    global manager_affiliation
+    global manager_phone
+    global access_position
+    global access_affiliation
+    global access_phone
+    global checkBox4
+    global checkList7
+    global checkList8
+    global checkbox2
+    global checkbox3
+    global selected_rows2
+    global trustees
+    global trustee_options
+    global retrustees_dict
+
+    academic_df = pd.DataFrame()
+    scholarship_df = pd.DataFrame()
+    grade_df = pd.DataFrame()
+    graduate_df = pd.DataFrame()
+    newStudent_df = pd.DataFrame()
+    disorder_df = pd.DataFrame()
+    homepage_df = pd.DataFrame()
+    etc_df = pd.DataFrame()
+    combined_data_result = dict()
+    date_ranges = []
+    selected_rows = []
+    manager_position = ''
+    manager_affiliation = ''
+    manager_phone = ''
+    access_position = ''
+    access_affiliation = ''
+    access_phone = ''
+    checkBox4 = ''
+    checkList7 = []
+    checkList8 = []
+    checkbox2 = ''
+    checkbox3 = ''
+    selected_rows2 = []
+    trustees = []
+    trustee_options = []
+    retrustees_dict = {}
+
+    # 모든 세션 데이터 초기화
+    session.pop('form_data_1', None)
+    session.pop('form_data_2', None)
+    session.pop('form_data_3', None)
+    session.pop('form_data_4', None)
+
     return render_template('index.html')
 
 
@@ -209,6 +354,7 @@ selected_rows = []
 @app.route('/nextFormConfirm', methods=['POST'])
 def nextFormConfirm():
     global selected_rows
+    selected_rows = []
     form_data_1 = session.get('form_data_1', {})
     session['form_data_2'] = request.form.to_dict()
     name = form_data_1['name']
@@ -287,7 +433,6 @@ def nextForm1_2Confirm():
     # 수탁사 이름 받아오기
 
     fieldsetCount = request.form['fieldsetCount']
-    print(fieldsetCount)
     classification1 = []
     classification2 = []
     trustees = []
@@ -295,20 +440,16 @@ def nextForm1_2Confirm():
     for key in request.form:
         if key.startswith('add_trustee'):
             trustees.append(request.form[key])
-    print(trustees)
     for i in range(1, int(fieldsetCount) + 1):
         trustee_options = []
         for key in request.form:
             if key.startswith(f'trustee{i}_option'):
                 trustee_options.append(request.form[key])
-        print('option확인', trustee_options)
         classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee')), None))
         classification2.append(
             next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
-    print(trustees, classification1, classification2)
 
     trustees = zip(trustees, classification1, classification2)
-    print(trustees)
 
     retrustees_dict = {}
 
@@ -318,7 +459,6 @@ def nextForm1_2Confirm():
         retrustee_list = zip(trustee1_retrustee_name, trustee1_retrustee_business)
         # 딕셔너리에 i에 retrustee 추가
         retrustees_dict[i] = [{'name': name, 'business': business} for name, business in retrustee_list]
-    print(retrustees_dict)
 
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3,
@@ -340,7 +480,6 @@ def nextForm1_3Confirm():
     checkBoxList = request.form.getlist('checkBoxList')
     checkbox1 = ''
     checkbox2 = ''
-    print(checkBoxList)
     if 'checkBox1' in checkBoxList:
         checkbox1 = 1
     if 'checkBox2' in checkBoxList:
@@ -372,7 +511,6 @@ def nextForm1_3Confirm():
 
     # 체크박스 선택 항목 가져오기
     auto_collect = request.form['auto_collect']
-    print(auto_collect)
 
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox2, checkbox1=checkbox1,
@@ -443,7 +581,7 @@ def process_form_data3(request):
     shooting_time = request.form['shooting_time']  # 촬영 시간
     storage_period = request.form['storage_period']  # 보관 기간
     storage_location = request.form['storage_location']  # 보관 장소
-    processing_method = request.form['processing_method'] # 처리 방법
+    processing_method = request.form['processing_method']  # 처리 방법
 
     # 이거 예시가 없음
     trustee = request.form['trustee']
@@ -455,7 +593,6 @@ def process_form_data3(request):
 
     # 6~7
     checkListYes = request.form.getlist('checkListYes')
-    print(checkList7)
     if 'sub7' in checkListYes:
         checkList7.append('‣  귀하는 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다. ')
         checkList7.append('‣  단, 귀하가 촬영된 개인영상정보 및 명백히 정보주체의 급박한 생명, 신체, 재산의 이익을 위하여 필요한 개인영상정보에 한정됩니다.')
@@ -551,12 +688,6 @@ def result():
     form_data2 = session.get('form_data_2', {})
     form_data3 = session.get('form_data_3', {})
     form_data4 = session.get('form_data_4', {})
-    print(form_data1)
-    print(form_data2)
-    print(form_data3)
-    print(form_data4)
-    print(checkbox3)
-    print(combined_data_result)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,

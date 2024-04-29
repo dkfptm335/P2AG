@@ -10,20 +10,22 @@
     <div class="container">
         <header>
             <h1>개인정보처리방침 검증</h1>
-            <p>P2AG의 개인정보 처리방침 검증 서비스는 개인정보보호법과 개인정보처리방침을 기반으로 AI가 학습한 결과로 검증한 내용입니다. 단, 이 서비스의 결과는 법적 효력이 없음을 유의하시길 바랍니다.</p>
+            <p>P2AG의 개인정보 처리방침 검증 서비스는 
+                개인정보 보호법과 관련 지침을 기반으로 
+                다양한 사이트를 분석하여 검증 기준을 마련했습니다. 
+                귀사의 개인정보 처리방침 페이지 URL을 입력하시면 자동 검증이 시작됩니다.</p>
         </header>
         <section class="verification-application">
             <h2>검증 적용</h2>
-            <form>
+            <form method="POST" action="/inspectionMain">
                 <label for="verification-type">검증 유형</label>
-                <select id="verification-type">
+                <select id="verification-type" name="verification-type">
                     <option value="shopping">쇼핑몰</option>
                     <option value="university">대학교</option>
                 </select>
                 <label for="target-input">처리방침 검증 적용할 대상</label>
-                <input type="text" id="target-input" placeholder="URL 사용자입력">
-                <input type="file">
-                <button type="submit">업로드</button>
+                <input type="text" id="target-input" name="target-input" placeholder="URL 사용자입력">
+                <button type="submit">검증 시작</button>
             </form>
         </section>
         <section class="verification-criteria">
