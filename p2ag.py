@@ -165,6 +165,7 @@ def index():
     session.pop('form_data_2', None)
     session.pop('form_data_3', None)
     session.pop('form_data_4', None)
+    session.pop('form_data_5', None)
 
     return render_template('index.html')
 
@@ -488,6 +489,7 @@ def nextForm1_3():
 @app.route('/nextForm1_3Confirm', methods=['GET', 'POST'])
 def nextForm1_3Confirm():
     form_data_1 = session.get('form_data_1', {})
+    session['form_data_5'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
@@ -702,10 +704,18 @@ def result():
     form_data2 = session.get('form_data_2', {})
     form_data3 = session.get('form_data_3', {})
     form_data4 = session.get('form_data_4', {})
+    form_data5 = session.get('form_data_5', {})
+    print("================================")
     print(form_data1)
+    print("================================")
     print(form_data2)
+    print("================================")
     print(form_data3)
+    print("================================")
     print(form_data4)
+    print("================================")
+    print(form_data5)
+    print("================================")
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,

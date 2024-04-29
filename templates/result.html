@@ -521,6 +521,7 @@
         <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
         <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.
         </p>
+        <br>
         <!-- 1. 영상정보처리기기 설치근거·목적 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['purpose'] %}
             <div>
@@ -528,6 +529,7 @@
                 <p>‣ {{ form_data4['purpose'] }}</p>
             </div>
         {% endif %}
+        <br>
         <!-- 2. 영상정보처리기기 설치대수 및 위치 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['installation_number'] %}
             <div>
@@ -544,7 +546,7 @@
                 </table>
             </div>
         {% endif %}
-
+        <br>
         <!-- 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and manager_position or access_position %}
             <div>
@@ -575,7 +577,7 @@
                 </table>
             </div>
         {% endif %}
-
+        <br>
         <!-- 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['shooting_time'] or form_data4['storage_period'] or form_data4['storage_location'] or checkBox4 %}
             <div>
@@ -595,7 +597,7 @@
                 <p>{{ checkBox4 }}</p>
             </div>
         {% endif %}
-
+        <br>
         <!-- 5번 해당시 의무사항이 없다.-->
 
         <!-- 6. 영상정보 확인 방법 및 장소 -->
@@ -614,7 +616,7 @@
                 </table>
             </div>
         {% endif %}
-
+        <br>
         <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and checkList7 %}
             <div>
@@ -625,7 +627,7 @@
             </div>
 
         {% endif %}
-
+        <br>
         <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and checkList8 %}
             <div>
@@ -635,7 +637,7 @@
                 {% endfor %}
             </div>
         {% endif %}
-
+        <br>
         <!-- 9. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항 -->
         {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['current_date'] and date_ranges %}
             <div>
@@ -650,7 +652,7 @@
                 {% endfor %}
             </div>
         {% endif %}
-
+    <br>
     </div>
     {% endif %}
 </div>
