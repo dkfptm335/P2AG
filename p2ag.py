@@ -1,10 +1,9 @@
-import re
-
 import pandas as pd
-import requests
-from bs4 import BeautifulSoup as bs
 from flask import Flask, request, session
 from flask import render_template, redirect, url_for
+
+from verifyFunc import check_bangchim_highlighted, extract_bangchim, parse_body, check1check
+from show import to_html_table, to_html_results
 
 from flask_session import Session
 
@@ -14,94 +13,6 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 sess = Session()
 sess.init_app(app)
-
-
-def extract_and_verify(url):
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    response = requests.get(url, headers=headers, verify=False)
-    html_content = response.content.decode('utf-8', 'replace')
-    soup = bs(html_content, 'html.parser')
-    text = soup.get_text()
-    text = text.replace(' ', '').replace('\n', '').replace('\r', '').replace('\t', '')
-
-    # 각 검사 함수를 호출
-    item_results = check_required_items(text)
-    keyword_results = check_keywords(text)
-    description_results = check_descriptions(text)
-    compliance_results = check_compliance(text)
-
-    # 결과를 카테고리별로 저장
-    categories = {
-        '필수항목 유무 검사 결과': item_results,
-        '키워드 검사 결과': keyword_results,
-        '서술 방식 검사 결과': description_results,
-        '표현방식 검사 결과': compliance_results
-    }
-    return categories
-
-
-def check_required_items(text):
-    missing_items = []
-    required_items = [
-        "목적", "처리", "보유기간", "항목", "파기", "정보주체", "법정대리인",
-        "권리", "의무", "행사방법", "안전성확보조치", "책임자", ("열람청구", "열람요구"),
-        "접수", "처리", "권익침해", ("처리방침의변경", "처리방침변경"), "제3자제공", "위탁"
-    ]
-
-    for item in required_items:
-        if isinstance(item, tuple):
-            if not any(variation in text for variation in item):
-                missing_items.append(item[0])
-        else:
-            if item not in text:
-                missing_items.append(item)
-
-    return "누락된 필수 항목: " + ", ".join(missing_items) if missing_items else "모든 필수 항목이 존재합니다."
-
-
-def check_keywords(text):
-    missing_keywords = []
-    keywords = [
-        ('개인정보파일명', '파일명', '개인정보파일', '개인정보파일의명칭'),
-        ('수집목적', '개인정보파일의운영목적', '운영목적', '개인정보수집/이용목적', '처리목적'),
-        ('수집항목', '처리하는개인정보의항목', '처리하는개인정보항목', '개인정보의항목'),
-        ('보유근거', '처리근거', '운영근거'),
-        ('보유및이용기간', '개인정보보유기간', '제공기간', '처리기간', '처리및보유기간', '보유및처리기간'),
-        ('제공받는자', '제공기관', '제공받는기관', '제공현황', '제공목록', '제공리스트'),
-        ('제공목적', '제공받는자의이용목적', '이용목적'),
-        ('제공정보', '제공하는항목', '제공하는개인정보항목', '제공항목', '개인정보파일명', '제공현황', '제공리스트'),
-        ('수탁자', '업체명', '위탁대상', '위탁업체명', '수탁기관', '수탁업체명', '수탁사', '수탁업체', '수탁업체명칭'),
-        ('위탁하는업무내용', '업무목적', '위탁업무내용', '위탁업무', '위탁항목', '업무내용', '위탁하는업무의내용')
-    ]
-
-    for group in keywords:
-        if not any(keyword in text for keyword in group):
-            missing_keywords.append(group[0])
-
-    return "누락된 키워드: " + ", ".join(missing_keywords) if missing_keywords else "모든 키워드가 존재합니다."
-
-
-def check_descriptions(text):
-    issues = []
-    ambiguous_terms = ["기타등등", "등", "기타", "정부기관", "공공기관", "관련기관", "협회",
-                       "보험회사", "목적달성시", "타법령에따라", "수시", "상시", "사유발생시", "관계법률에"]
-    for term in ambiguous_terms:
-        if term in text:
-            issues.append(f"모호한 용어 '{term}'이(가) 사용됨.")
-
-    return "\n".join(issues) if issues else "문서에 모호한 용어가 없습니다."
-
-
-def check_compliance(text):
-    results = []
-    # 전화번호 형식 검사
-    if not re.search(r'\d{2,3}-\d{3,4}-\d{4}', text):
-        results.append("전화번호 형식이 잘못되었습니다. 올바른 형식 예: 010-1234-5678")
-    # 이메일 형식 검사
-    if not re.search(r'[\w.-]+@[\w.-]+\.\w+', text):
-        results.append("이메일 형식이 잘못되었습니다. 올바른 형식 예: example@example.com")
-
-    return "\n".join(results) if results else "모든 표현이 적절합니다."
 
 
 @app.route('/')
@@ -768,9 +679,27 @@ def result():
                            table3=table3, fourteen=fourteen)
 
 
-@app.route('/inspectionMain')
+
+@app.route('/inspectionMain', methods=['GET', 'POST'])
 def inspectionMain():
+    if request.method == 'POST':
+        url = request.form['target-input']
+        highlighted = check_bangchim_highlighted(url)
+    
+        _, content = extract_bangchim(url)
+        bodies = parse_body(content)
+        check_list = check1check(bodies)
+        
+        tables = to_html_table(bodies, check_list)
+        results = to_html_results(bodies, check_list)
+
+        return render_template('inspectionresult.html', highlighted=highlighted, results=results, tables=tables, url=url)
+    
     return render_template('inspectionMain.html')
+
+@app.route('/inspectionresult')
+def inspectionresult():
+    return render_template('inspectionresult.html')
 
 
 if __name__ == '__main__':
