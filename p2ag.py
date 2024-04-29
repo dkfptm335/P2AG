@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 import pandas as pd
 import requests
@@ -376,11 +377,12 @@ def nextFormConfirm():
     session['form_data_2'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
-    checkBoxList = request.form.getlist('checkBoxList')
     checkbox1 = ''
-
-    if 'checkBox1' in checkBoxList:
-        checkbox1 = 1
+    try:
+        if request.form['checkBox1']:
+            checkbox1 = 1
+    except:
+        checkbox1 = 0
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist')
@@ -428,14 +430,19 @@ def nextForm1_2Confirm():
     session['form_data_3'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
-    checkBoxList = request.form.getlist('checkBoxList')
     checkbox2 = ''
     checkbox3 = ''
 
-    if 'checkBox2' in checkBoxList:
-        checkbox2 = 1
-    if 'checkBox3' in checkBoxList:
-        checkbox3 = 1
+    try:
+        if request.form['checkBox2']:
+            checkbox2 = 1
+    except:
+        checkbox2 = 0
+    try:
+        if request.form['checkBox3']:
+            checkbox3 = 1
+    except:
+        eheckbox3 = 0
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist2')
@@ -495,13 +502,18 @@ def nextForm1_3Confirm():
     session['form_data_5'] = request.form.to_dict()
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
-    checkBoxList = request.form.getlist('checkBoxList')
-    checkbox11 = ''
-    checkbox12 = ''
-    if 'checkBox1' in checkBoxList:
-        checkbox11 = 1
-    if 'checkBox2' in checkBoxList:
-        checkbox12 = 1
+    checkbox1 = ''
+    checkbox2 = ''
+    try:
+        if 'checkBox1' in request.form['checkBox1']:
+            checkbox1 = 1
+    except:
+        checkbox1 = 0
+    try:
+        if 'checkBox2' in request.form['checkBox2']:
+            checkbox2 = 1
+    except:
+        checkbox2 = 0
 
     table1_1 = request.form.getlist('table1_1')
     table1_2 = request.form.getlist('table1_2')
@@ -533,7 +545,7 @@ def nextForm1_3Confirm():
     auto_collect = request.form['auto_collect']
 
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox12, checkbox1=checkbox11,
+        return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox2, checkbox1=checkbox1,
                                auto_collect=auto_collect, safety_measure=safety_measure, table1=table1, table2=table2,
                                table3=table3, sub_check1=sub_check1, sub_check2=sub_check2)
     else:
@@ -571,11 +583,13 @@ def process_form_data3(request):
 
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
-    checkBoxList = request.form.getlist('checkBoxList')
     # 체크박스 확인
     checkBox1 = ''
-    if 'checkBox1' in request.form.getlist('checkBox1'):
-        checkBox1 = 1
+    try:
+        if 'checkBox1' in request.form['checkBox1']:
+            checkBox1 = 1
+    except:
+        checkBox1 = 0
 
     # 1. 영상정보처리기기 설치근거·목적
     purpose = request.form['purpose']  # 근거 목적
@@ -624,8 +638,11 @@ def process_form_data3(request):
 
     # 만 14세 미만 개인정보 처리
     checkBox2 = ''
-    if 'checkBox2' in request.form.getlist('checkBox2'):
-        checkBox2 = 1
+    try:
+        if request.form['checkBox2']:
+            checkBox2 = 1
+    except:
+        checkBox2 = 0
     fourteen = 0
     try:
         radio14 = request.form['radio14']
@@ -642,7 +659,6 @@ def process_form_data3(request):
     return {
         'name': name,
         'checkBox1': checkBox1,
-        'checkBoxList': checkBoxList,
         'purpose': purpose,
         'installation_number': installation_number,
         'installation_location': installation_location,
