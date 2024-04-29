@@ -346,21 +346,37 @@ def nextForm1_3Confirm():
     if 'checkBox2' in checkBoxList:
         checkbox2 = 1
 
+    table1_1 = request.form.getlist('table1_1')
+    table1_2 = request.form.getlist('table1_2')
+    table1_3 = request.form.getlist('table1_3')
+    table1 = zip(table1_1, table1_2, table1_3)
+
+    table2_1 = request.form.getlist('table2_1')
+    table2_2 = request.form.getlist('table2_2')
+    table2_3 = request.form.getlist('table2_3')
+    table2_4 = request.form.getlist('table2_4')
+    table2 = zip(table2_1, table2_2, table2_3, table2_4)
+
+    table3_1 = request.form.getlist('table3_1')
+    table3_2 = request.form.getlist('table3_2')
+    table3 = zip(table3_1, table3_2)
+
+    try:
+        sub_check1 = request.form['sub_check1']
+    except:
+        sub_check1 = ''
+    try:
+        sub_check2 = request.form['sub_check2']
+    except:
+        sub_check2 = ''
+
     # 체크박스 선택 항목 가져오기
-    selected_checks = request.form.getlist('checklist2')
-    selected_rows = []
     auto_collect = request.form['auto_collect']
     print(auto_collect)
-    # 선택된 체크박스에 대응하는 textarea 데이터 처리
-    for check in selected_checks:
-        selected_rows.append({
-            'trustee': request.form[f'trustee_{check}'],
-            'text': request.form[f'text_{check}'],
-        })
 
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox2, checkbox1=checkbox1,
-                               selected_rows=selected_rows, auto_collect=auto_collect)
+                               auto_collect=auto_collect, table1=table1, table2=table2, table3=table3, sub_check1=sub_check1, sub_check2=sub_check2)
     else:
         return redirect(url_for('nextForm2'))
 

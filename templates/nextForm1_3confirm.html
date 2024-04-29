@@ -7,7 +7,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var num = 1; // 시작 번호
             var security_num = 1;
-            var elements = document.querySelectorAll('h2');
+            var elements = document.querySelectorAll('strong');
 
             elements.forEach(function(element) {
                 element.innerHTML = element.innerHTML.replace('{{num}}', num++);
@@ -19,14 +19,68 @@
 <div class="container">
     {% if checkbox1%}
     <div class="header">가명정보 처리에 관한 사항</div>
-    <p></p>
+    <p><strong>{{num}}. {{name}}</strong>은(는) 수집한 개인정보를 특정 개인을 알아볼 수 없도록 가명 처리하여 통계작성, 과학적 연구, 공익적 기록보존 등을 위하여 처리할 수 있습니다.</p>
+    <p><strong>{{num}}. {{name}}</strong>(는) 가명정보를 처리하는 경우에는 원래의 상태로 복원하기 위한 추가 정보를 별도로 분리하여 보관ㆍ관리하는 등 해당 정보가 분실ㆍ도난ㆍ유출ㆍ위조ㆍ변조 또는 훼손되지 않도록 개인정보보호법 제29조에 따라 확보에 필요한 기술적ㆍ관리적 및 물리적 조치를 취하고 있습니다.</p>
+    <div>
+        {% if table1 %}
+        <p><strong>{{num}}. 가명정보의 처리목적 및 항목, 보유기간</strong></p>
+        <table>
+            <tr>
+                <th>수집·이용 목적</th>
+                <th>처리항목</th>
+                <th>보유 및 이용기간</th>
+            </tr>
+            {% for table1_1, table1_2, table1_3 in table1 %}
+            <tr>
+                <td>{{ table1_1 }}</td>
+                <td>{{ table1_2 }}</td>
+                <td>{{ table1_3 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if sub_check1 %}
+        <p><strong>{{num}}. 가명정보의 제 3자 제공에 관한 사항(해당되는 경우)</strong></p>
+        <table>
+            <tr>
+                <th>제공받는 자</th>
+                <th>제공받는 자의 이용 목적</th>
+                <th>제공하는 항목</th>
+                <th>제공받는 자의 보유 및 이용기간</th>
+            </tr>
+            {% for table2_1, table2_2, table2_3, table2_4 in table2 %}
+            <tr>
+                <td>{{ table2_1 }}</td>
+                <td>{{ table2_2 }}</td>
+                <td>{{ table2_3 }}</td>
+                <td>{{ table2_4 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if sub_check2 %}
+        <p><strong>{{num}}. 가명정보의 처리위탁에 관한 사항(해당되는 경우)</strong></p>
+        <table>
+            <tr>
+                <th>수탁사 명</th>
+                <th>업무 내용</th>
+            </tr>
+            {% for table3_1, table3_2 in table3 %}
+            <tr>
+                <td>{{ table3_1 }}</td>
+                <td>{{ table3_2 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
     <br>
     <hr>
     {% endif %}
     {% if checkbox2 %}
     <div class="header">개인정보 자동 수집에 관한 사항</div>
     <div>
-            <pre>{{ auto_collect }}</pre>
+        <pre>{{ auto_collect }}</pre>
     </div>
     {% endif %}
     <!-- end -->

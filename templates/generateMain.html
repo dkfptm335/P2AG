@@ -33,25 +33,68 @@
         <div class="form-group">
             <!--                ※ 본교가 법령에 근거하여 수집·보유하고 있는 주요 개인정보파일의 상세내용은 개인정보보호 포털(www.privacy.go.kr)에 접속 후 개인정보파일 목록 검색란에서 기관명으로-->
             <!--                조회하시면 확인 하실 수 있습니다. ☞ Click<br><br>-->
-            <h2>{{num}}. 처리 목적 및 항목 파일:</h2>
+            <h2>{{num}}. 개인정보의 처리목적 및 항목, 보유기간</h2>
             <!-- 사용자 정의 파일 선택 버튼 -->
             <button type="button" id="customFileBtn" class="btn">파일 선택 (.xlsx)</button>
             <!-- 실제 파일 입력 필드는 숨김 처리 -->
             <input type="file" id="customFile" name="file" accept=".xlsx" hidden required>
             <!-- 선택된 파일 이름을 표시할 공간 -->
             <span id="customFileName">선택된 파일 없음</span>
-            <p>
+            <p> ‣ 학교별 개인정보파일의 정보를 이용해서 작성됩니다. 귀 기관에서 관리하는 개인정보보호 파일을 xlsx 형식으로 업로드 해주세요.<br>
                 ※ 개인정보보호 포털>개인서비스>정보주체 권리행사>개인정보 열람등요구>개인정보파일 검색(
-                https://www.privacy.go.kr/front/wcp/dcl/per/personalInfoFileSrhList.do)에 접속 > 검색란에서 대학교명으로 조회 > 엑셀
-                파일 다운로드 ☞ 클릭
+                https://www.privacy.go.kr/front/wcp/dcl/per/personalInfoFileSrhList.do)에 접속 > 검색란에서 대학교명으로 조회 > 엑셀 파일
+                다운로드 ☞ 클릭
             </p>
+            <p>
+                ‣ 대학교에서 많이 처리되는 개인정보 항목을 다음과 같이 유형별로 묶어 작성합니다.<br>
+                ※ 업로드한 파일 내 '개인정보파일의 운영 목적', '개인정보파일의 명칭' 내 다음과 같은 키워드가 존재할 때 해당 유형으로 분류하였습니다.
+            </p>
+            <table>
+                <thead>
+                <tr>
+                    <th>유형</th>
+                    <th>운영목적 키워드</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>학적관리</td>
+                    <td>학사, 행정</td>
+                </tr>
+                <tr>
+                    <td>장학관리</td>
+                    <td>장학</td>
+                </tr>
+                <tr>
+                    <td>수강관리</td>
+                    <td>수강, 성적, 수업</td>
+                </tr>
+                <tr>
+                    <td>졸업생관리</td>
+                    <td>졸업</td>
+                </tr>
+                <tr>
+                    <td>입시관리</td>
+                    <td>신입, 입시</td>
+                </tr>
+                <tr>
+                    <td>장애학생지원</td>
+                    <td>장애</td>
+                </tr>
+                <tr>
+                    <td>홈페이지관리</td>
+                    <td>홈페이지</td>
+                </tr>
+                </tbody>
+
+            </table>
             <!--            테이블 내용보기-->
         </div>
 
         <!-- 4. 개인정보의 파기 절차 및 방법 -->
         <div class="form-group checkbox-group">
             <h2 class="checkbox-label">{{num}}. 개인정보의 파기 절차 및 방법</h2>
-            해당 항목은 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 이에 동의하십니까?
+            ※ 해당 항목은 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 필요 시 수정 가능합니다.
             <div class="checkbox-option">
                 <input type="checkbox" id="destructionProcedureAgree" name="destructionProcedure" value="yes"
                        class="checkbox-input" required>

@@ -229,3 +229,33 @@ body, html {
     font-size: 18px;
     margin-top: 10px;
 }
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+table caption {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+}
+
+table, .table th, .table td {
+    border: 1px solid #ccc;
+}
+
+table th, .table td {
+    text-align: left;
+    padding: 8px;
+}
+
+table th {
+    background-color: #30d5c8;
+    color: white;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}

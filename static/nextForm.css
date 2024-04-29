@@ -387,3 +387,10 @@ tr:nth-child(odd) textarea{
 .auto_collect{
     display: none;
 }
+
+.table_input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}

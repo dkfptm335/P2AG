@@ -3,17 +3,6 @@
 <head>
     <title>개인정보처리방침 생성 폼 입력</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='nextForm.css') }}">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var num = 1; // 시작 번호
-            var security_num = 1;
-            var elements = document.querySelectorAll('h2');
-
-            elements.forEach(function(element) {
-                element.innerHTML = element.innerHTML.replace('{{num}}', num++);
-            });
-        });
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -27,29 +16,101 @@
             <div class="checkbox-option">
                 <input type="checkbox" id="checkBox1" name="checkBoxList" value="checkBox1" class="checkbox-input">
                 <label for="checkBox1" class="checkbox-custom-label"><strong>가명정보 처리에 관한 사항</strong></label>
-                <ul class="sub_checkbox" id="SubCheckList">
-                </ul>
+                <div id="SubCheckList" style="display: none;">
+                    <div>
+                        <p> ◉ 가명정보의 처리목적 및 항목, 보유기간</p>
+                        <div id="table1">
+                            <table>
+                                <tr>
+                                    <th>처리목적</th>
+                                    <td><input type="text" name="table1_1" class="table_input"
+                                               placeholder="ex) OO통계작성, OO연구, OO 기록보존, OO 분석 등"></td>
+                                </tr>
+                                <tr>
+                                    <th>항목</th>
+                                    <td><input type="text" name="table1_2" class="table_input"
+                                               placeholder="ex) 성명, 휴대전화번호, 학번 등"></td>
+                                </tr>
+                                <tr>
+                                    <th>보유 및 이용기간</th>
+                                    <td><input type="text" name="table1_3" class="table_input"
+                                               placeholder="ex) 5년, 결합데이터 분석 완료시까지"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" id="addRow1">추가하기</button>
+                    </div>
+                    <div>
+                        <p><input type="checkbox" id="sub_check1" name="sub_check1" value="sub_check1">
+                            가명정보의 제 3자 제공에 관한 사항(해당되는 경우)
+                        </p>
+                        <div id="table2">
+                            <table>
+                                <tr>
+                                    <th>제공받는 자</th>
+                                    <td><input type="text" name="table2_1" class="table_input" placeholder="사용자 입력">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>제공받는 자의 이용 목적</th>
+                                    <td><input type="text" name="table2_2" class="table_input" placeholder="사용자 입력">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>제공하는 항목</th>
+                                    <td><input type="text" name="table2_3" class="table_input" placeholder="사용자 입력">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>제공받는 자의 보유 및 이용기간</th>
+                                    <td><input type="text" name="table2_4" class="table_input" placeholder="사용자 입력">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" id="addRow2">추가하기</button>
+                    </div>
+                    <div>
+                        <p><input type="checkbox" id="sub_check2" name="sub_check2" value="sub_check2">
+                            가명정보 처리의 위탁에 관한 사항(해당되는 경우)
+                        </p>
+                        <div id="table3">
+                            <table>
+                                <tr>
+                                    <th>수탁사 명</th>
+                                    <td><input type="text" class="table_input" name="table3_1" placeholder="사용자 입력"></td>
+                                </tr>
+                                <tr>
+                                    <th>업무 내용</th>
+                                    <td><input type="text" class="table_input" name="table3_2" placeholder="사용자 입력"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" id="addRow3">추가하기</button>
+                    </div>
+                    <br>
+                </div>
             </div>
             <!-- 두번째 checkbox -->
             <div class="checkbox-option">
                 <input type="checkbox" id="checkBox2" name="checkBoxList" value="checkBox2" class="checkbox-input">
                 <label for="checkBox2" class="checkbox-custom-label"><strong>개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한
                     사항 </strong></label>
-                <div id="auto_collect">
-                <fieldset>
-                    <legend>개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한 사항</legend>
-                    <textarea class="auto_collect_textarea" name="auto_collect">1. 회사의 쿠키 사용목적
-- 회원과 비회원의 접속 빈도나 방문 시간 등을 분석
-- 정보주체의 취향과 관심분야 파악 및 자취 추적
+                <div id="auto_collect" style="display: none;">
+                    <fieldset>
+                        <legend>개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한 사항</legend>
+                        <textarea class="auto_collect_textarea" name="auto_collect">1. 회사의 쿠키 사용목적
+ 1) 회원과 비회원의 접속 빈도나 방문 시간 등을 분석
+ 2) 정보주체의 취향과 관심분야 파악 및 자취 추적
 2. 쿠키의 설치/운영 및 거부
-- 정보주체는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서 정보주체는 웹 브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.
-- 다만, 쿠키의 저장을 거부할 경우에는 로그인이 필요한 회사의 일부 서비스는 이용에 어려움이 있을 수 있습니다.
-- 쿠키 설치 허용 여부를 지정하는 방법은 다음과 같습니다.
-- 쿠키 설정 방법(Internet Explorer의 경우) : 웹 브라우저 우측 상단의 도구 메뉴>인터넷 옵션>개인정보>설정>고급
-- 쿠키 설정 방법(Edge의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>쿠키 및 사이트 권한>쿠키 및 사이트 데이터 관리 및 삭제
-- 쿠키 설정 방법(Chrome의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>개인정보 및 보안>쿠키 및 기타 사이트 데이터</textarea>
+ 1) 정보주체는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서 정보주체는 웹 브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.
+ 2) 다만, 쿠키의 저장을 거부할 경우에는 로그인이 필요한 회사의 일부 서비스는 이용에 어려움이 있을 수 있습니다.
+ 3) 쿠키 설치 허용 여부를 지정하는 방법은 다음과 같습니다.
+ ‣  쿠키 설정 방법(Internet Explorer의 경우) : 웹 브라우저 우측 상단의 도구 메뉴>인터넷 옵션>개인정보>설정>고급
+ ‣  쿠키 설정 방법(Edge의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>쿠키 및 사이트 권한>쿠키 및 사이트 데이터 관리 및 삭제
+ ‣  쿠키 설정 방법(Chrome의 경우) : 웹 브라우저의 우측 상단의 설정 메뉴>개인정보 및 보안>쿠키 및 기타 사이트 데이터</textarea>
 
-                </fieldset>
+                    </fieldset>
                 </div>
             </div>
         </div>
@@ -62,21 +123,80 @@
 </div>
 
 <script>
-    document.getElementById('confirm').addEventListener('click', function() {
-        const selectedRows = document.querySelectorAll('#data-table .Row input[type="checkbox"]:checked');
-
-        Array.from(selectedRows).forEach(row => {
-            const recipient = row.closest('.Row').querySelector('.recipient').textContent;
-            const purpose = row.closest('.Row').querySelector('.purpose textarea').value;
-            const items = row.closest('.Row').querySelector('.items textarea').value;
-
-            console.log(`제공받는 자: ${recipient}, 제공 목적: ${purpose}, 제공 항목: ${items}`); // 콘솔에 출력
-            // 여기에서 선택된 정보를 서버에 전송하거나 로컬 스토리지에 저장할 수 있습니다.
+    $(document).ready(function(){
+        $("#addRow1").click(function(){
+            var newRow = `<table>
+                <tr>
+                    <th>처리목적</th>
+                    <td><input type="text" name="table1_1" class="table_input"
+                               placeholder="ex) OO통계작성, OO연구, OO 기록보존, OO 분석 등"></td>
+                </tr>
+                <tr>
+                    <th>항목</th>
+                    <td><input type="text" name="table1_2" class="table_input"
+                               placeholder="ex) 성명, 휴대전화번호, 학번 등"></td>
+                </tr>
+                <tr>
+                    <th>보유 및 이용기간</th>
+                    <td><input type="text" name="table1_3" class="table_input"
+                               placeholder="ex) 5년, 결합데이터 분석 완료시까지"></td>
+                </tr>
+            </table>`;
+            $("#table1").append(newRow);
+        });
+        $("#addRow2").click(function(){
+            var newRow = `<table>
+                <tr>
+                    <th>제공받는 자</th>
+                    <td><input type="text" name="table2_1" class="table_input" placeholder="사용자 입력">
+                    </td>
+                </tr>
+                <tr>
+                    <th>제공받는 자의 이용 목적</th>
+                    <td><input type="text" name="table2_2" class="table_input" placeholder="사용자 입력">
+                    </td>
+                </tr>
+                <tr>
+                    <th>제공하는 항목</th>
+                    <td><input type="text" name="table2_3" class="table_input" placeholder="사용자 입력">
+                    </td>
+                </tr>
+                <tr>
+                    <th>제공받는 자의 보유 및 이용기간</th>
+                    <td><input type="text" name="table2_4" class="table_input" placeholder="사용자 입력">
+                    </td>
+                </tr>
+            </table>`;
+            $("#table2").append(newRow);
+        });
+        $("#addRow3").click(function(){
+            var newRow = `<table>
+                <tr>
+                    <th>수탁사 명</th>
+                    <td><input type="text" class="table_input" name="table3_1" placeholder="사용자 입력"></td>
+                </tr>
+                <tr>
+                    <th>업무 내용</th>
+                    <td><input type="text" class="table_input" name="table3_2" placeholder="사용자 입력"></td>
+                </tr>
+            </table>`;
+            $("#table3").append(newRow);
         });
     });
 </script>
 
 <script>
+
+    const Checkbox1 = document.getElementById('checkBox1');
+    const SubCheckList = document.getElementById('SubCheckList');
+
+    Checkbox1.addEventListener('change', function() {
+        if (this.checked) {
+            SubCheckList.style.display = 'block';
+        } else {
+            SubCheckList.style.display = 'none';
+        }
+    });
 
     const Checkbox2 = document.getElementById('checkBox2');
     const auto_collect = document.getElementById('auto_collect');
