@@ -441,7 +441,7 @@ def nextForm1_2Confirm():
         if request.form['checkBox3']:
             checkbox3 = 1
     except:
-        eheckbox3 = 0
+        checkbox3 = 0
 
     # 체크박스 선택 항목 가져오기
     selected_checks = request.form.getlist('checklist2')
@@ -653,10 +653,8 @@ def process_form_data3(request):
     fourteen = 0
     try:
         radio14 = request.form['radio14']
-        print(radio14)
         if radio14 == 'yes':
             fourteen = 1
-            print(fourteen)
         else:
             fourteen = 0
     except:
@@ -753,6 +751,8 @@ def result():
     print("================================")
     print(form_data5)
     print("================================")
+    print(list(trustees))
+    print(retrustees_dict)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
