@@ -348,7 +348,6 @@ def nextForm1_2Confirm():
     # 수탁사 이름 받아오기
 
     fieldsetCount = request.form['fieldsetCount']
-    print(fieldsetCount)
     classification1 = []
     classification2 = []
     trustees = []
@@ -356,20 +355,16 @@ def nextForm1_2Confirm():
     for key in request.form:
         if key.startswith('add_trustee'):
             trustees.append(request.form[key])
-    print(trustees)
     for i in range(1, int(fieldsetCount) + 1):
         trustee_options = []
         for key in request.form:
             if key.startswith(f'trustee{i}_option'):
                 trustee_options.append(request.form[key])
-        print('option확인', trustee_options)
         classification1.append(next((request.form[key] for key in trustee_options if key.startswith(f'trustee')), None))
         classification2.append(
             next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
-    print(trustees, classification1, classification2)
 
     trustees = zip(trustees, classification1, classification2)
-    print(trustees)
 
     retrustees_dict = {}
 
@@ -379,7 +374,6 @@ def nextForm1_2Confirm():
         retrustee_list = zip(trustee1_retrustee_name, trustee1_retrustee_business)
         # 딕셔너리에 i에 retrustee 추가
         retrustees_dict[i] = [{'name': name, 'business': business} for name, business in retrustee_list]
-    print(retrustees_dict)
 
     if request.form['action'] == 'confirm':
         return render_template('nextForm1_2Confirm.html', name=name, checkbox2=checkbox2, checkbox3=checkbox3,
@@ -399,9 +393,9 @@ def nextForm1_3Confirm():
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
+    print(checkBoxList)
     checkbox1 = ''
     checkbox2 = ''
-    print(checkBoxList)
     if 'checkBox1' in checkBoxList:
         checkbox1 = 1
     if 'checkBox2' in checkBoxList:
@@ -411,7 +405,6 @@ def nextForm1_3Confirm():
     selected_checks = request.form.getlist('checklist2')
     selected_rows = []
     auto_collect = request.form['auto_collect']
-    print(auto_collect)
     # 선택된 체크박스에 대응하는 textarea 데이터 처리
     for check in selected_checks:
         selected_rows.append({
@@ -500,7 +493,6 @@ def process_form_data3(request):
 
     # 6~7
     checkListYes = request.form.getlist('checkListYes')
-    print(checkList7)
     if 'sub7' in checkListYes:
         checkList7.append('‣  귀하는 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다. ')
         checkList7.append('‣  단, 귀하가 촬영된 개인영상정보 및 명백히 정보주체의 급박한 생명, 신체, 재산의 이익을 위하여 필요한 개인영상정보에 한정됩니다.')
@@ -596,12 +588,6 @@ def result():
     form_data2 = session.get('form_data_2', {})
     form_data3 = session.get('form_data_3', {})
     form_data4 = session.get('form_data_4', {})
-    print(form_data1)
-    print(form_data2)
-    print(form_data3)
-    print(form_data4)
-    print(checkbox3)
-    print(combined_data_result)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
