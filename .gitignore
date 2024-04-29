@@ -1,4 +1,4 @@
 .idea/
 RunServer.cmd
 __pycache__/
-
+flask_session/
