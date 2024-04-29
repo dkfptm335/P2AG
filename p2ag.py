@@ -584,10 +584,6 @@ def process_form_data3(request):
     global access_affiliation
     global access_phone
     global checkBox4
-    global checkList7
-    global checkList8
-    checkList7 = []
-    checkList8 = []
 
     form_data_1 = session.get('form_data_1', {})
     name = form_data_1['name']
@@ -598,6 +594,7 @@ def process_form_data3(request):
             checkBox1 = 1
     except:
         checkBox1 = 0
+    checkBoxList = request.form.getlist('checkBoxList')
 
     # 1. 영상정보처리기기 설치근거·목적
     purpose = request.form['purpose']  # 근거 목적
@@ -667,6 +664,7 @@ def process_form_data3(request):
     return {
         'name': name,
         'checkBox1': checkBox1,
+        'checkBoxList': checkBoxList,
         'purpose': purpose,
         'installation_number': installation_number,
         'installation_location': installation_location,
@@ -682,8 +680,6 @@ def process_form_data3(request):
         'processing_method': processing_method,
         'trustee': trustee,
         'trustee_tel': trustee_tel,
-        'checkList7': checkList7,
-        'checkList8': checkList8,
         'checking_method': checking_method,
         'checking_location': checking_location,
         'current_date': current_date,
@@ -696,7 +692,7 @@ def process_form_data3(request):
 
 @app.route('/nextForm2Confirm', methods=['GET', 'POST'])
 def nextForm2Confirm():
-    session['form_data_4'] = request.form.to_dict()
+    session['form_data_4'] = request.form.to_dict(flat=False)
     processed_data = process_form_data3(request)
     if processed_data:
         if 'action' in request.form and request.form['action'] == 'confirm':
