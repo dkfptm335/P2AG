@@ -574,6 +574,7 @@ access_phone = ''
 checkBox4 = ''
 checkList7 = []
 checkList8 = []
+fourteen = 0
 
 
 def process_form_data3(request):
@@ -586,6 +587,7 @@ def process_form_data3(request):
     global checkBox4
     global checkList7
     global checkList8
+    global fourteen
     checkList7 = []
     checkList8 = []
 
@@ -696,7 +698,7 @@ def process_form_data3(request):
 
 @app.route('/nextForm2Confirm', methods=['GET', 'POST'])
 def nextForm2Confirm():
-    session['form_data_4'] = request.form.to_dict()
+    session['form_data_4'] = request.form.to_dict(flat=False)
     processed_data = process_form_data3(request)
     if processed_data:
         if 'action' in request.form and request.form['action'] == 'confirm':
@@ -737,6 +739,7 @@ def result():
     global table1
     global table2
     global table3
+    global fourteen
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
@@ -765,7 +768,8 @@ def result():
                            access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
                            checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
                            trustee_options=trustee_options, retrustees_dict=retrustees_dict, form_data3=form_data3,
-                           selected_rows2=selected_rows2, form_data5=form_data5, table1=table1, table2=table2, table3=table3)
+                           selected_rows2=selected_rows2, form_data5=form_data5, table1=table1, table2=table2,
+                           table3=table3, fourteen=fourteen)
 
 
 @app.route('/inspectionMain')

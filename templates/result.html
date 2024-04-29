@@ -547,14 +547,14 @@
             <h2 id="list11">{{ num }}. 영상정보처리기기 설치 및 운영</h2>
             <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제25조 및 시행령 제25조에 따라 아래와 같이 영상정보처리기기를 설치ㆍ운영하고 있습니다.</p>
             <!-- 1. 영상정보처리기기 설치근거·목적 -->
-            {% if 'checkBox-sub1' in checkBoxList and purpose %}
+            {% if 'checkBox-sub1' in form_data4['checkBoxList'] and form_data4['purpose'] %}
                 <div>
                     <h2>{{ num }}. 영상정보처리기기 설치근거·목적 </h2>
-                    <p>‣ {{ purpose }}</p>
+                    <p>‣ {{ form_data4['purpose'][0] }}</p>
                 </div>
             {% endif %}
             <!-- 2. 영상정보처리기기 설치대수 및 위치 -->
-            {% if 'checkBox-sub2' in checkBoxList and installation_number %}
+            {% if 'checkBox-sub2' in form_data4['checkBoxList'] and form_data4['installation_number'] %}
                 <div>
                     <h2>{{ num }}. 영상정보처리기기 설치대수 및 위치</h2>
                     <table>
@@ -563,15 +563,15 @@
                             <th>설치 위치 및 촬영 범위</th>
                         </tr>
                         <tr>
-                            <td>{{ installation_number }}</td>
-                            <td>{{ installation_location }}</td>
+                            <td>{{ form_data4['installation_number'][0] }}</td>
+                            <td>{{ form_data4['installation_location'][0] }}</td>
                         </tr>
                     </table>
                 </div>
             {% endif %}
 
             <!-- 3. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자 -->
-            {% if 'checkBox-sub3' in checkBoxList and manager_position or access_position %}
+            {% if 'checkBox-sub3' in form_data4['checkBoxList'] and manager_position or access_position %}
                 <div>
                     <h2>{{ num }}. 관리책임자, 담당부서 및 영상정보에 대한 접근권한자</h2>
                     <table>
@@ -602,7 +602,7 @@
             {% endif %}
 
             <!-- 4. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법 -->
-            {% if 'checkBox-sub4' in checkBoxList and shooting_time or storage_period or storage_location or checkBox4 %}
+            {% if 'checkBox-sub4' in form_data4['checkBoxList'] and form_data4['shooting_time'] or form_data4['storage_period'] or form_data4['storage_location'] or checkBox4 %}
                 <div>
                     <h2>{{ num }}. 영상정보 촬영시간, 보관기간, 보관장소, 처리방법</h2>
                     <table>
@@ -612,19 +612,19 @@
                             <th>보관장소</th>
                         </tr>
                         <tr>
-                            <td>{{ shooting_time }}</td>
-                            <td>{{ storage_period }}</td>
-                            <td>{{ storage_location }}</td>
+                            <td>{{ form_data4['shooting_time'][0] }}</td>
+                            <td>{{ form_data4['storage_period'][0] }}</td>
+                            <td>{{ form_data4['storage_location'][0] }}</td>
                         </tr>
                     </table>
                     <div>
-                        <pre>{{ processing_method }}</pre>
+                        <pre>{{ form_data4['processing_method'][0] }}</pre>
                     </div>
                 </div>
             {% endif %}
 
             <!-- 5번 영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항-->
-            {% if 'checkBox-sub5' in checkBoxList %}
+            {% if 'checkBox-sub5' in form_data4['checkBoxList'] %}
                 <div>
                     <h2>{{ num }}. 영상정보처리기기 설치 및 관리 등의 위탁에 관한 사항</h2>
                     <table>
@@ -634,32 +634,32 @@
 
                         </tr>
                         <tr>
-                            <td>{{ trustee }}</td>
-                            <td>{{ trustee_tel }}</td>
+                            <td>{{ form_data4['trustee'][0] }}</td>
+                            <td>{{ form_data4['trustee_tel'][0] }}</td>
                         </tr>
                     </table>
                 </div>
             {% endif %}
 
             <!-- 6. 영상정보 확인 방법 및 장소 -->
-            {% if 'checkBox-sub6' in checkBoxList and checking_method or checking_location %}
+            {% if 'checkBox-sub6' in form_data4['checkBoxList'][0] and form_data4['checking_method'] or form_data4['checking_location'] %}
                 <div>
                     <h2>{{ num }}. 영상정보 확인 방법 및 장소</h2>
                     <table>
                         <tr>
                             <th>확인 방법</th>
-                            <td>{{ checking_method }}</td>
+                            <td>{{ form_data4['checking_method'][0] }}</td>
                         </tr>
                         <tr>
                             <th>확인 장소</th>
-                            <td>{{ checking_location }}</td>
+                            <td>{{ form_data4['checking_location'][0] }}</td>
                         </tr>
                     </table>
                 </div>
             {% endif %}
 
             <!-- 7. 정보주체의 영상정보 열람 등 요구에 대한 조치 -->
-            {% if 'checkBox-sub7' in checkBoxList and checkList7 %}
+            {% if 'checkBox-sub7' in form_data4['checkBoxList'] and form_data4['requestView'] %}
                 <div>
                     <h2>{{ num }}. 정보주체의 영상정보 열람 등 요구에 대한 조치</h2>
                     {% for item in checkList7 %}
@@ -670,7 +670,7 @@
             {% endif %}
 
             <!-- 8. 영상정보 보호를 위한 안정성 확보 조치 -->
-            {% if 'checkBox-sub8' in checkBoxList and checkList8 %}
+            {% if 'checkBox-sub8' in form_data4['checkBoxList'] and form_data4['stability'] %}
                 <div>
                     <h2>{{ num }}. 영상정보 보호를 위한 안정성 확보 조치</h2>
                     {% for item in checkList8 %}
@@ -680,26 +680,26 @@
             {% endif %}
 
             <!-- 9. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항 -->
-            {% if 'checkBox-sub9' in checkBoxList and current_date %}
+            {% if 'checkBox-sub9' in form_data4['checkBoxList'] and form_data4['current_date'] %}
                 <div>
                     <h2>{{ num }}. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항</h2>
-                    <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ current_date }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제
+                    <p>이 영상정보처리기기 운영·관리 방침은 <strong>{{ form_data4['current_date'] }}</strong> 제정되었으며, 법령·정책 또는 보안기술의 변경에 따라 내용의 추가·삭제
                         및 수정이 있을
                         시에는 지체 없이 본 기관 홈페이지를 통해 변경사유 및 내용을 공지하도록 하겠습니다.</p>
                 </div>
             {% endif %}
 
         {% endif %}
-        {% if checkBox2 %}
+        {% if form_data4['checkBox2'] %}
             <div class="header">만 14세 미만 아동의 개인정보 처리</div>
             {% if fourteen %}
-                <p> - <strong>{{ name }}</strong>는 만 14세 미만 아동 회원의 정보보호를 위하여 아동이 회원으로 가입할 경우에는 부모님 등 법정대리인의 동의 의사를
+                <p> - <strong>{{ form_data1['name'] }}</strong>는 만 14세 미만 아동 회원의 정보보호를 위하여 아동이 회원으로 가입할 경우에는 부모님 등 법정대리인의 동의 의사를
                     확인합니다. 또한 법정대리인의 동의 여부 및 본인 확인을 위하여 법정대리인의 최소한의 정보(ID, 이름, 관계, 연락처, 동의결과)를 수집하고 있습니다.</p>
                 <p> - 만 14세 미만 아동회원 및 법정 대리인의 정보는 관련 법령이 허용하는 용도 이외에는 어떠한 용도로도 사용하지 않습니다.</p>
                 <p> - 부모님 등 법정대리인의 요청이 있을 경우 아동회원의 개인정보의 열람·변경·탈퇴가 가능합니다.</p>
                 <p> - 만 14세 미만 아동회원에게는 광고메일을 보내지 않으며, 게임 및 이벤트를 이용하여 더 많은 정보를 공개하도록 유도하지 않습니다.</p>
             {% else %}
-                <p><strong>{{ name }}</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
+                <p><strong>{{ form_data1['name'] }}</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
             {% endif %}
         {% endif %}
         <!-- end -->
