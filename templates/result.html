@@ -75,7 +75,7 @@
                 <a href="#list5">‣ 개인정보의 파기 절차 및 방법에 관한 사항</a>
             </li>
             <li>
-                <a href="#list6">‣ 개인정보의 안정성 확보조치에 관한 사항</a>
+                <a href="#list6">‣ 개인정보의 안전성 확보조치에 관한 사항</a>
             </li>
             <li>
                 <a href="#list7">‣ 개인정보 보호책임자에 관한 사항</a>
@@ -395,7 +395,7 @@
     <br>
 
     <div>
-        <h2 id="list6">{{ num }}. 개인정보의 안정성 확보조치</h2>
+        <h2 id="list6">{{ num }}. 개인정보의 안전성 확보조치</h2>
         <div>
             <p><strong>{{ form_data1['name'] }}</strong>는 「개인정보 보호법」 제29조에 따라 개인정보의 안전성 확보를 위해 다음과 같은 기술적/관리적 및 물리적 조치를
                 취하고 있습니다.
@@ -467,15 +467,22 @@
     </div>
     <br>
 
+
+
+    <!-- 제 7조 -->
     <div>
-        {% if 'checkBox2' in form_data5['checkBoxList'] %}
-            <h2 id="list9">{{ num }}. 개인정보 자동 수집에 관한 사항</h2>
-            <div>
-                <pre>{{ form_data5['auto_collect'] }}</pre>
-            </div>
-        {% endif %}
-        <!-- end -->
+        <h2 id="list12">{{ num }}. 정보주체의 권익침해에 대한 구제방법</h2>
+        <pre>{{ form_data1['remedyMethod'] }}</pre>
     </div>
+    <br>
+
+    <!-- 제 8조 -->
+    <div>
+        <h2 id="list13">{{ num }}. 개인정보 처리방침의 변경 사항</h2>
+        <p>이 개인정보 처리방침은 <strong>{{ form_data1['current_date'] }}</strong>부터 적용됩니다.</p>
+        <p><strong>{{ form_data1['name'] }}</strong>은(는) 「개인정보 보호법」 제30조(개인정보처리방침의 수립 및 공개)에 따라 이 전의 개인정보 처리방침을 공개합니다. </p>
+    </div>
+    <br>
 
 </div>
 <button id="scrollToTopBtn">맨 위로</button>
