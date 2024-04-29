@@ -459,10 +459,10 @@ def nextForm1_2Confirm():
     classification1 = []
     classification2 = []
     trustee_options = []
-    trustees = []
+    tmpTrustee = []
     for key in request.form:
         if key.startswith('add_trustee'):
-            trustees.append(request.form[key])
+            tmpTrustee.append(request.form[key])
     for i in range(1, int(fieldsetCount) + 1):
         trustee_options = []
         for key in request.form:
@@ -472,7 +472,7 @@ def nextForm1_2Confirm():
         classification2.append(
             next((request.form[key] for key in trustee_options if key.startswith(f'trustee{i}_option2')), None))
 
-    trustees = zip(trustees, classification1, classification2)
+    trustees = list(zip(tmpTrustee, classification1, classification2))
     retrustees_dict = {}
 
     for i in range(1, int(fieldsetCount) + 1):
@@ -491,9 +491,6 @@ def nextForm1_2Confirm():
 
 @app.route('/nextForm1_3', methods=['GET', 'POST'])
 def nextForm1_3():
-    global trustees
-    print(list(trustees))
-
     return render_template('nextForm1_3.html')
 
 
@@ -742,19 +739,6 @@ def result():
     form_data3 = session.get('form_data_3', {})
     form_data4 = session.get('form_data_4', {})
     form_data5 = session.get('form_data_5', {})
-    print("================================")
-    print(form_data1)
-    print("================================")
-    print(form_data2)
-    print("================================")
-    print(form_data3)
-    print("================================")
-    print(form_data4)
-    print("================================")
-    print(form_data5)
-    print("================================")
-    print(list(trustees))
-    print(retrustees_dict)
 
     return render_template('result.html', form_data1=form_data1, form_data2=form_data2, form_data4=form_data4,
                            academic_df=academic_df, scholarship_df=scholarship_df, grade_df=grade_df,
