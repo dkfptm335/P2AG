@@ -367,8 +367,6 @@ tr:nth-child(odd) textarea{
     width: 50%;
 }
 
-
-
 .radio-container, .checkbox-container {
   grid-column: span 2; /* 또는 필요에 따라 span 값을 조정 */
   font-weight: normal;
@@ -392,5 +390,12 @@ tr:nth-child(odd) textarea{
     width: 100%;
     height: 100%;
     border: none;
+    background-color: transparent;
+}
+
+.safety_measure{
+    width: 100%;
+    height: 100%;
+    border: block;
     background-color: transparent;
 }

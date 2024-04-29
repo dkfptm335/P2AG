@@ -105,9 +105,12 @@
                         <label for="checkBox-sub7" class="checkbox-custom-label"><strong>정보주체의 영상정보 열람 등 요구에 대한
                             조치</strong></label>
                         <ul class="sub2-checklist" id="checkBox2-sub7">
-                            <li><input type="checkbox" value="sub7" id="sub7" name="checkListYes">해당 항목은 본 프로그램의 추천문구로
-                                작성됩니다. 이예 동의하십니까?
-                            </li>
+                            <p>※ 이 항목은 해당 시 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 필요 시 수정 가능합니다.</p>
+                            <div class="form-input">
+                                <textarea id="requestView" name="requestView">‣  귀하는 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 원하는 경우 언제든지 영상정보처리기기 운영자에게 요구하실 수 있습니다.
+‣  단, 귀하가 촬영된 개인영상정보 및 명백히 정보주체의 급박한 생명, 신체, 재산의 이익을 위하여 필요한 개인영상정보에 한정됩니다.
+‣  본 기관은 개인영상정보에 관하여 열람 또는 존재확인ㆍ삭제를 요구한 경우 지체없이 필요한 조치를 하겠습니다.</textarea>
+                                </div>
                         </ul>
                     </li>
                     <li>
@@ -115,9 +118,12 @@
                                class="checkbox-input">
                         <label for="checkBox-sub8" class="checkbox-custom-label"><strong>영상정보 보호를 위한 안정성 확보 조치</strong></label>
                         <ul class="sub2-checklist" id="checkBox2-sub8">
-                            <li><input type="checkbox" value="sub8" id="sub8" name="checkListYes">해당 항목은 본 프로그램의 추천문구로
-                                작성됩니다. 이예 동의하십니까?
-                            </li>
+                                <p>※ 이 항목은 해당 시 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 필요 시 수정 가능합니다.</p>
+                            <div class="form-input">
+                                <textarea id="stability" name="stability">‣  본 기관에서 처리하는 영상정보는 암호화 조치 등을 통하여 안전하게 관리되고 있습니다.
+‣  또한 본 기관은 개인영상정보보호를 위한 관리적 대책으로서 개인정보에 대한 접근 권한을 차등부여하고 있고, 개인영상정보의 위ㆍ변조 방지를 위하여 개인영상정보의 생성 일시, 열람시 열람 목적ㆍ열람자ㆍ열람 일시 등을 기록하여 관리하고 있습니다.
+‣  이 외에도 개인영상정보의 안전한 물리적 보관을 위하여 잠금장치를 설치하고 있습니다</textarea>
+                                </div>
                         </ul>
                     </li>
                     <li>
@@ -148,21 +154,21 @@
                     사항</strong></label>
 
                 <ul class="sub_checkbox" id="SubCheckList2">
-                    <li><strong>만 14세 미만 아동 가입</strong><input type="radio" name="radio14">예
-                        <input type="radio" name="radio14">아니오
-                    </li>
-                    <li>
+                    <div><strong>만 14세 미만 아동 가입</strong><input type="radio" name="radio14" value="yes">예
+                        <input type="radio" name="radio14" value="no">아니오
+                    </div>
+                    <div>
                         <p><strong><14세 미만 아동이 가입 불가능한 경우></strong></p>
                         <p><strong>개인정보처리자명</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <p><strong><14세 미만 아동 가입 가능한 경우></strong></p>
-                        <p> 1) <strong>개인정보처리자명</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
-                        <p> 2) 만 14세 미만 아동회원 및 법정 대리인의 정보는 관련 법령이 허용하는 용도 이외에는 어떠한 용도로도 사용하지 않습니다.</p>
-                        <p> 3) 부모님 등 법정대리인의 요청이 있을 경우 아동회원의 개인정보의 열람·변경·탈퇴가 가능합니다.</p>
-                        <p> 4) 만 14세 미만 아동회원에게는 광고메일을 보내지 않으며, 게임 및 이벤트를 이용하여 더 많은 정보를 공개하도록 유도하지 않습니다.</p>
+                        <p> - <strong>개인정보처리자명</strong>는 만14세 미만 아동의 회원가입을 받지 않으며, 개인정보 수집을 하지 않습니다.</p>
+                        <p> - 만 14세 미만 아동회원 및 법정 대리인의 정보는 관련 법령이 허용하는 용도 이외에는 어떠한 용도로도 사용하지 않습니다.</p>
+                        <p> - 부모님 등 법정대리인의 요청이 있을 경우 아동회원의 개인정보의 열람·변경·탈퇴가 가능합니다.</p>
+                        <p> - 만 14세 미만 아동회원에게는 광고메일을 보내지 않으며, 게임 및 이벤트를 이용하여 더 많은 정보를 공개하도록 유도하지 않습니다.</p>
 
-                    </li>
+                    </div>
                 </ul>
             </div>
         </div>

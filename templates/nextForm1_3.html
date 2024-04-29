@@ -4,7 +4,6 @@
     <title>개인정보처리방침 생성 폼 입력</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='nextForm.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 <body>
 <div class="header">
@@ -27,7 +26,7 @@
                                                placeholder="ex) OO통계작성, OO연구, OO 기록보존, OO 분석 등"></td>
                                 </tr>
                                 <tr>
-                                    <th>항목</th>
+                                    <th>처리항목</th>
                                     <td><input type="text" name="table1_2" class="table_input"
                                                placeholder="ex) 성명, 휴대전화번호, 학번 등"></td>
                                 </tr>
@@ -81,13 +80,20 @@
                                     <td><input type="text" class="table_input" name="table3_1" placeholder="사용자 입력"></td>
                                 </tr>
                                 <tr>
-                                    <th>업무 내용</th>
+                                    <th>업무내용</th>
                                     <td><input type="text" class="table_input" name="table3_2" placeholder="사용자 입력"></td>
                                 </tr>
                             </table>
                         </div>
                         <button type="button" id="addRow3">추가하기</button>
                     </div>
+                    <div>
+                        <p> ◉ 법 제28조의 4(가명정보에 대한 안전조치 의무 등)에 따른 가명정보의 안전성 확보조치에 관한 사항</p>
+                        <p>※ 이 항목은 해당 시 의무적으로 작성해야 할 필수 항목으로 본 프로그램의 추천문구로 작성됩니다. 필요 시 수정 가능합니다.</p>
+                        <div class="form-input">
+                        <textarea class="safety_measure" name="safety_measure">본 대학교는 가명정보를 처리하는 경우에는 원래의 상태로 복원하기 위한 추가 정보를 별도로 분리하여 보관ㆍ관리하는 등 해당 정보가 분실ㆍ도난ㆍ유출ㆍ위조ㆍ변조 또는 훼손되지 않도록 개인정보보호법 제29조에 따라 확보에 필요한 기술적ㆍ관리적 및 물리적 조치를 취하고 있습니다.</textarea>
+                    </div>
+                        </div>
                     <br>
                 </div>
             </div>

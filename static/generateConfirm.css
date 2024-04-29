@@ -106,3 +106,10 @@ div > pre {
     overflow: auto; /* 내용이 div를 넘어갈 경우 스크롤바가 생김 */
     max-width: 100%; /* div의 최대 너비를 부모 요소에 맞춤 */
 }
+
+pre {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    white-space: pre-wrap; /* 자동 줄바꿈을 활성화 */
+}
+
