@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 from flask import Flask, request, session
 from flask import render_template, redirect, url_for
+
 from flask_session import Session
 
 app = Flask(__name__)
@@ -495,12 +496,12 @@ def nextForm1_3Confirm():
     name = form_data_1['name']
     # 제3자 제공 및 처리위탁 체크박스 확인
     checkBoxList = request.form.getlist('checkBoxList')
-    checkbox1 = ''
-    checkbox2 = ''
+    checkbox11 = ''
+    checkbox12 = ''
     if 'checkBox1' in checkBoxList:
-        checkbox1 = 1
+        checkbox11 = 1
     if 'checkBox2' in checkBoxList:
-        checkbox2 = 1
+        checkbox12 = 1
 
     table1_1 = request.form.getlist('table1_1')
     table1_2 = request.form.getlist('table1_2')
@@ -532,8 +533,9 @@ def nextForm1_3Confirm():
     auto_collect = request.form['auto_collect']
 
     if request.form['action'] == 'confirm':
-        return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox2, checkbox1=checkbox1,
-                               auto_collect=auto_collect, safety_measure=safety_measure, table1=table1, table2=table2, table3=table3, sub_check1=sub_check1, sub_check2=sub_check2)
+        return render_template('nextForm1_3Confirm.html', name=name, checkbox2=checkbox12, checkbox1=checkbox11,
+                               auto_collect=auto_collect, safety_measure=safety_measure, table1=table1, table2=table2,
+                               table3=table3, sub_check1=sub_check1, sub_check2=sub_check2)
     else:
         return redirect(url_for('nextForm2'))
 
@@ -613,8 +615,7 @@ def process_form_data3(request):
     # 6. 정보주체의 영상정보 열람 등 요구에 대한 조치
     requestView = request.form['requestView']
 
-
-    #7. 영상정보 보호를 위한 안정성 확보 조치
+    # 7. 영상정보 보호를 위한 안정성 확보 조치
     stability = request.form['stability']
 
     # 8. 영상정보처리기기 운영·관리 방침의 변경에 관한 사항
@@ -737,7 +738,7 @@ def result():
                            access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
                            checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
                            trustee_options=trustee_options, retrustees_dict=retrustees_dict, form_data3=form_data3,
-                           selected_rows2=selected_rows2)
+                           selected_rows2=selected_rows2, form_data5=form_data5)
 
 
 @app.route('/inspectionMain')
