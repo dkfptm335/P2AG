@@ -1,5 +1,4 @@
 import re
-from typing import List
 
 import pandas as pd
 import requests
@@ -496,6 +495,11 @@ def nextForm1_3():
     return render_template('nextForm1_3.html')
 
 
+table1 = []
+table2 = []
+table3 = []
+
+
 @app.route('/nextForm1_3Confirm', methods=['GET', 'POST'])
 def nextForm1_3Confirm():
     form_data_1 = session.get('form_data_1', {})
@@ -514,6 +518,10 @@ def nextForm1_3Confirm():
             checkbox2 = 1
     except:
         checkbox2 = 0
+
+    global table1
+    global table2
+    global table3
 
     table1_1 = request.form.getlist('table1_1')
     table1_2 = request.form.getlist('table1_2')
@@ -726,6 +734,9 @@ def result():
     global trustees
     global trustee_options
     global retrustees_dict
+    global table1
+    global table2
+    global table3
 
     form_data1 = session.get('form_data_1', {})
     form_data2 = session.get('form_data_2', {})
@@ -754,7 +765,7 @@ def result():
                            access_phone=access_phone, checkBox4=checkBox4, checkList7=checkList7, checkList8=checkList8,
                            checkbox2=checkbox2, checkbox3=checkbox3, trustees=trustees,
                            trustee_options=trustee_options, retrustees_dict=retrustees_dict, form_data3=form_data3,
-                           selected_rows2=selected_rows2, form_data5=form_data5)
+                           selected_rows2=selected_rows2, form_data5=form_data5, table1=table1, table2=table2, table3=table3)
 
 
 @app.route('/inspectionMain')
