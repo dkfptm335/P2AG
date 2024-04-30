@@ -44,8 +44,9 @@
             <hr>
             <br><br>
 
-            {% for result in results %} 
-                {{ result }}
+            {% for result in results %}
+                <h2> {{result[0]}} </h2>
+                <p>{{ result[1] }}</p>
                 <br><br>
             {% endfor %}
             <br>

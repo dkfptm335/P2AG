@@ -279,109 +279,56 @@ def classify_category(string_example):
         string_example = match.group(2)
     
     
-    number_of_columns = 20
-    classify_list = [ 0 for _ in range(number_of_columns) ]
-
-            
-    def  add_point(string_example, keyword, plus, minus):
-        if (keyword in string_example):
-            for num in plus:
-                classify_list[num] += 1
-        else:
-            for num in minus:
-                classify_list[num] -= 1
-        return string_example.replace(keyword, "")
-                
-        
-    # 빡빡한 규칙으로 색인 -> 애매한 것들은 유사도 측정 (안 넣음)
-    string_example = string_example.replace(' ', '')
+    if ('목적' in string_example) & ('항목' in string_example) & ('기간' in string_example):
+        return 16, 100
+    elif ('항목' not in string_example) & ('목적' in string_example) & ('기간' in string_example):
+        return 17, 100
+    elif ('항목' in string_example) & ('목적' in string_example) & ('기간' not in string_example):
+        return 18, 100
+    elif ('항목' in string_example) & ('목적' not in string_example) & ('기간' in string_example):
+        return 19, 100
+    elif ('목적' in string_example):
+        return 2, 100
+    elif ('기간' in string_example):
+        return 3, 100
+    elif ('항목' in string_example):
+        return 4, 100
     
-    string_example = add_point(string_example, '개인', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], [1,2,3,4,5,7,8,9,11,12,13,14,16,17,18,19])
-    string_example = add_point(string_example, '정보', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19], [1,2,3,4,5,7,8,9,11,12,13,14,16,17,18,19])
-    string_example = add_point(string_example, '처리', [1,2,3,4,11,13,16,17,18,19], [])
-    string_example = add_point(string_example, '방침', [1, 11], [1,11])
+    if ('파기' in string_example):
+        return 5, 100
     
-    # 2, 3, 4는 묶어서 표현할 수 있음
-    # 2, 3, 4 모두 합쳐진 경우                  -- 16
-    # (2,3) (2,4) (3,4) 두 개씩 합쳐진 경우     -- 17, 18, 19
-    string_example = add_point(string_example, '목적', [2,16,17,18], [2,16,17,18])
+    if ('정보주체' in string_example) & ('권리' in string_example) & ('의무' in string_example):
+        return 6, 100
     
-    string_example = add_point(string_example, '보유', [3,16,17,19], [])
-    string_example = add_point(string_example, '이용', [3,16,17,19], [])
-    string_example = add_point(string_example, '기간', [3,16,17,19], [3,16,17,19])
+    if (('안전성' in string_example) | ('안정성' in string_example)) & ('확보' in string_example):
+        return 7, 100
     
-    string_example = add_point(string_example, '수집', [2,3,4,14,16,17,18,19], [14])    # '처리'와 동일 except '처리방침'
-    string_example = add_point(string_example, '항목', [4,16,18,19], [4,16,18,19])
+    if ('책임자' in string_example):
+        return 8, 100
     
-    string_example = add_point(string_example, '파기', [5], [5])
-    string_example = add_point(string_example, '절차', [5], [])
-    string_example = add_point(string_example, '방법', [5,10], [])
+    if ('열람' in string_example) | ('창구' in string_example) | ('부서' in string_example):
+        return 9, 100
     
-    string_example = add_point(string_example, '주체', [6,10], [])
-    string_example = add_point(string_example, '법정', [6], [])
-    string_example = add_point(string_example, '대리인', [6], [])
-    string_example = add_point(string_example, '권리', [6], [6])
-    string_example = add_point(string_example, '의무', [6], [])
-    string_example = add_point(string_example, '행사', [6], [])
+    if ('권익' in string_example) | ('침해' in string_example) | ('구제' in string_example):
+        return 10, 100
     
-    string_example = add_point(string_example, '안전성', [7], [7])
-    string_example = add_point(string_example, '확보', [7], [7])
-    string_example = add_point(string_example, '조치', [7], [])
+    if ('변경' in string_example):
+        return 11, 100
     
-    string_example = add_point(string_example, '보호', [8], [])
-    string_example = add_point(string_example, '책임자', [8], [8])
+    if ('3자' in string_example):
+        return 12, 100
     
-    string_example = add_point(string_example, '열람', [9], [9])
-    string_example = add_point(string_example, '청구', [9], [])
-    string_example = add_point(string_example, '접수', [9], [])
-    string_example = add_point(string_example, '부서', [9], [])
+    if ('위탁' in string_example):
+        return 13, 100
     
-    string_example = add_point(string_example, '권익', [10], [])
-    string_example = add_point(string_example, '침해', [10], [10])
-    string_example = add_point(string_example, '구제', [10], [10])
+    if ('자동' in string_example) | ('수집' in string_example) | ('장치' in string_example):
+        return 14, 100
     
-    string_example = add_point(string_example, '이전', [11], [])
-    string_example = add_point(string_example, '변경', [11], [11])
+    if ('영상' in string_example) | ('운영' in string_example):
+        return 20, 100
     
-    string_example = add_point(string_example, '제3자', [12], [12])
-    string_example = add_point(string_example, '제공', [12], [])
-    
-    string_example = add_point(string_example, '위탁', [13], [13])
-    string_example = add_point(string_example, '위탁', [13], [13])
-    
-    string_example = add_point(string_example, '자동', [14], [14])
-    string_example = add_point(string_example, '저장', [14], [])
-    string_example = add_point(string_example, '장치', [14], [])
-    string_example = add_point(string_example, '설치', [14], [])
-    string_example = add_point(string_example, '거부', [14], [14])
-    
-    string_example = add_point(string_example, '운영', [14, 15], [])
-    string_example = add_point(string_example, '영상', [15], [15])
-    string_example = add_point(string_example, '정보처리기기', [15], [])
-    string_example = add_point(string_example, '관리', [15], [])
-    
-    # 구별 가능 항목이지만 따로 분류하지 않음
-    string_example = add_point(string_example, '파일', [0], [])
-    string_example = add_point(string_example, '등록', [0], [])
-    string_example = add_point(string_example, '현황', [0], [])
-    
-    # 평범한 단어 제거
-    string_example = string_example.replace('관한', '')
-    string_example = string_example.replace('사항', '')
-    string_example = string_example.replace('및', '')
-    string_example = string_example.replace('·', '')
-    string_example = string_example.replace('/', '')
-    string_example = string_example.replace(',', '')
-    string_example = string_example.replace('‧', '')
-    
-    
-    inferred_category = classify_list.index(max(classify_list))
-    accuracy_of_infer = 100 - len(string_example)
-    
-    if accuracy_of_infer + max(classify_list)*2 < 100:
-        inferred_category = 0
-        accuracy_of_infer = 0
-    
+    inferred_category = 0
+    accuracy_of_infer = 100
     
     return inferred_category, accuracy_of_infer
 
@@ -999,7 +946,7 @@ def check1check(bodies):
                 
     # 32 ~ 36
     if (13 in cat_num_table):
-        checklist[27] = True
+        checklist[32] = True
         
         for table in bodies[cat_num_table.index(13)][4]:
             header = table[0]

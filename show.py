@@ -16,6 +16,7 @@ def to_html_table(bodies, check_list):
     else:
         tmp = "-"
         
+    title = "-"
     for body in bodies:
         if body[0] == 2 or body[0] == 16 or body[0] == 17 or body[0] == 18:
             title = body[2]
@@ -38,6 +39,7 @@ def to_html_table(bodies, check_list):
     else:
         tmp = "-"
         
+    title = "-"
     for body in bodies:
         if body[0] == 3 or body[0] == 16 or body[0] == 17 or body[0] == 19:
             title = body[2]
@@ -58,7 +60,8 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
-        
+    
+    title = "-"
     for body in bodies:
         if body[0] == 4 or body[0] == 16 or body[0] == 18 or body[0] == 19:
             title = body[2]
@@ -69,6 +72,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 5:
             title = body[2]
@@ -79,6 +83,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 6:
             title = body[2]
@@ -89,6 +94,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 7:
             title = body[2]
@@ -106,6 +112,7 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
+    title = "-"
     for body in bodies:
         if body[0] == 8:
             title = body[2]
@@ -126,6 +133,7 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
+    title = "-"
     for body in bodies:
         if body[0] == 9:
             title = body[2]
@@ -144,6 +152,7 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
+    title = "-"
     for body in bodies:
         if body[0] == 10:
             title = body[2]
@@ -154,6 +163,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 11:
             title = body[2]
@@ -174,6 +184,7 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
+    title = "-"
     for body in bodies:
         if body[0] == 12:
             title = body[2]
@@ -194,6 +205,7 @@ def to_html_table(bodies, check_list):
         tmp = tmp[0]
     else:
         tmp = "-"
+    title = "-"
     for body in bodies:
         if body[0] == 13:
             title = body[2]
@@ -204,6 +216,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 14:
             title = body[2]
@@ -214,6 +227,7 @@ def to_html_table(bodies, check_list):
         tmp = "[항목존재]"
     else:
         tmp = ''
+    title = "-"
     for body in bodies:
         if body[0] == 15:
             title = body[2]
@@ -226,7 +240,7 @@ def to_html_table(bodies, check_list):
 
 def to_html_results(bodies, check_list):
     
-    result = []
+    result = []     # [title, content] 구성으로 전달
     tmp = []
     
     if not check_list[2]:
@@ -260,8 +274,9 @@ def to_html_results(bodies, check_list):
     
     message = ''
     if tmp:
+        title = '항목존재'
         message += f"항목 유무 검사 결과, { ', '.join(tmp) }가 확인되지 않습니다. 해당 항목은 개인정보처리방침에 필수 항목이니 반드시 작성해주십시오."
-        result.append(message)
+        result.append([title, message])
     
     
     tmp = []
@@ -287,18 +302,19 @@ def to_html_results(bodies, check_list):
         message += "'상시', '목적달성시' 등의 표현방식은 정확하지 않습니다. 기간을 정확히 기입하십시오. "
         
     if message != '[3] 개인정보의 처리 및 보유기간, [4] 처리하는 개인정보의 항목 검사 결과, ':
-        result.append(message)
+        title = '개인정보의 처리 및 보유기간, 항목'
+        result.append([title, message])
         
     
     
     if not check_list[18]:
-        result.append(f"[8] 개인정보 보호책임자에 관한 사항 검사 결과, 전화번호/이메일 양식이 알맞지 않습니다.")
+        result.append(["개인정보 보호책임자에 관한 사항", f"[8] 개인정보 보호책임자에 관한 사항 검사 결과, 전화번호/이메일 양식이 알맞지 않습니다."])
     
     if not check_list[20]:
-        result.append(f"[9] 개인정보 보호책임자에 관한 사항 검사 결과, 전화번호/이메일 양식이 알맞지 않습니다.")
+        result.append(["개인정보의 열람청구를 접수/처리하는 부서", f"[9] 개인정보의 열람청구를 접수/처리하는 부서 검사 결과, 전화번호/이메일 양식이 알맞지 않습니다."])
         
     if not check_list[22]:
-        result.append(f"[10] 정보주체의 권익침해에 대한 구제방법 검사 결과, 현재 접속 가능한 사이트 주소 및 연락처가 일치하지 않습니다. 권익침해 구제 방법 정보를 최신으로 업데이트 하십시오.")
+        result.append(["정보주체의 권익침해에 대한 구제방법", f"[10] 정보주체의 권익침해에 대한 구제방법 검사 결과, 현재 접속 가능한 사이트 주소 및 연락처가 일치하지 않습니다. 권익침해 구제 방법 정보를 최신으로 업데이트 하십시오."])
         
     
     tmp = []
@@ -316,16 +332,17 @@ def to_html_results(bodies, check_list):
         message += f"{ ','.join(tmp) } 가 확인되지 않습니다. 해당 항목은 개인정보처리방침에 필수 항목이니 반드시 작성해주십시오. "
     
     if not check_list[29]:
-        message += "개인정보 처리 항목 또는 처리 목적에 대해 생략 없이 최대한 상세히 작성하십시오. "
+        message += "'기타', '등'이 확인됩니다. 개인정보 처리 항목 또는 처리 목적에 대해 생략 없이 최대한 상세히 작성하십시오. "
     
     if not check_list[30]:
-        message += "제공받는 자에 정확한 이름을 적으십시오. "
+        message += "대상을 '공공기관', '정부기관', '관련기관', '협회', '보험회사' 등 포괄적으로 지정하고 있습니다. 제공받는 자에 정확한 이름을 적으십시오. "
         
     if not check_list[31]:
-        message += "'상시', '목적달성시' 등의 표현방식은 정확하지 않습니다. 기간을 정확히 기입하시오. "
+        message += "기간 항목에 '수시', '상시', '목적달성시', '사유발생시' 등의 표현방식은 정확하지 않습니다. 기간을 정확히 기입하시오. "
         
     if message != '[12] 개인정보의 제3자 제공에 관한 사항 검사 결과, ':
-        result.append(message)
+        title = '개인정보의 제3자 제공에 관한 사항'
+        result.append([title, message])
         
     
     tmp = []
@@ -339,13 +356,14 @@ def to_html_results(bodies, check_list):
         message += f"{ ','.join(tmp) } 가 확인되지 않습니다. 해당 항목은 개인정보처리방침에 필수 항목이니 반드시 작성해주십시오. "
     
     if not check_list[35]:
-        message += "개인정보 처리 항목 또는 처리 목적에 대해 생략 없이 최대한 상세히 작성하십시오. "
+        message += "'기타', '등'이 확인됩니다. 개인정보 처리 항목 또는 처리 목적에 대해 생략 없이 최대한 상세히 작성하십시오. "
         
     if not check_list[36]:
-        message += "'상시', '목적달성시' 등의 표현방식은 정확하지 않습니다. 기간을 정확히 기입하시오. "
+        message += "기간 항목에 '수시', '상시', '목적달성시', '사유발생시' 등의 표현방식은 정확하지 않습니다. 기간을 정확히 기입하시오. "
         
     if message != '[13] 개인정보 처리업무의 위탁에 관한 사항 검사 결과, ':
-        result.append(message)
+        title = '개인정보 처리업무의 위탁에 관한 사항'
+        result.append([title, message])
     
     
     
