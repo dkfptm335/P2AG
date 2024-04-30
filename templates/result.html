@@ -64,12 +64,16 @@
             <li>
                 <a href="#list1">‣ 개인정보의 처리 목적 및 항목, 보유기간</a>
             </li>
+            {% if form_data2['checkBox1'] %}
             <li>
                 <a href="#list2">‣ 개인정보의 제3자 제공에 관한 사항</a>
             </li>
+            {% endif %}
+            {% if checkbox2 or checkbox3 %}
             <li>
                 <a href="#list3">‣ 개인정보 처리업무의 위탁에 관한 사항</a>
             </li>
+            {% endif %}
             <li>
                 <a href="#list4">‣ 정보주체와 법정대리인의 권리/의무 및 행사방법에 관한 사항</a>
             </li>
@@ -85,18 +89,26 @@
             <li>
                 <a href="#list8">‣ 개인정보의 열람청구를 접수/처리하는 부서</a>
             </li>
+            {% if form_data5['checkBox2'] %}
             <li>
                 <a href="#list9">‣ 개인정보를 자동으로 수집하는 장치의 설치/운영 및 그 거부에 관한 사항</a>
             </li>
+            {% endif %}
+            {% if form_data5['checkBox1'] %}
             <li>
                 <a href="#list10">‣ 가명정보 처리에 관한 사항</a>
             </li>
+            {% endif %}
+            {% if form_data4['checkBox1'] %}
             <li>
                 <a href="#list11">‣ 영상정보처리기기 운영 관리에 관한 사항</a>
             </li>
+            {% endif %}
+            {% if form_data4['checkBox2'] %}
             <li>
                 <a href="#list12">‣ 만 14세 미만 아동의 개인정보 처리</a>
             </li>
+            {% endif %}
             <li>
                 <a href="#list13">‣ 정보주체의 권익침해에 대한 구제방법</a>
             </li>
