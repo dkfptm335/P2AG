@@ -15,14 +15,41 @@
             <p>검사가 완료된 URL: {{ url }}</p>
         </header>
         <section class="results-section">
-            {% for category, results in categories.items() %}
-                <h2>{{ category }}</h2>
-                <ul>
-                    {% for result in results.split("\n") %}
-                        <li>{{ result }}</li>
-                    {% endfor %}
-                </ul>
+
+            <table>
+                <tr>
+                    <th>검증항목</th>
+                    <th>검증결과</th>
+                    <th>실제항목명</th>
+                </tr>
+                
+                <tr>
+                    <td>제목 및 서문</td>
+                    <td>-</td>
+                    <td>개인정보처리항목</td>
+                </tr>
+
+
+                {% for table in tables %}
+                    <tr>
+                        <td>{{table[0]}}</td>
+                        <td>{{table[1]}}</td>
+                        <td>{{table[2]}}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+            <br><br>
+            <hr>
+            <br><br>
+
+            {% for result in results %}
+                <h2> {{result[0]}} </h2>
+                <p>{{ result[1] }}</p>
+                <br><br>
             {% endfor %}
+            <br>
         </section>
         <a href="{{ url_for('inspectionMain') }}" style="text-decoration: none;">
             <button type="button">돌아가기</button>
