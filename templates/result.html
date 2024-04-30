@@ -51,10 +51,12 @@
                 <div class="info">처리위탁</div>
             </div>
         {% endif %}
-        <div class="image-box">
-            <img src="../static/images/가명정보 처리.png" alt="가명정보 처리">
-            <div class="info">가명정보 처리</div>
-        </div>
+        {% if form_data5['checkBox1'] %}
+            <div class="image-box">
+                <img src="../static/images/가명정보 처리.png" alt="가명정보 처리">
+                <div class="info">가명정보 처리</div>
+            </div>
+        {% endif %}
     </div>
     <br><br>
     <div class="panel_box">
