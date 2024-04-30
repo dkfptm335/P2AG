@@ -103,6 +103,8 @@ def check_compliance(text):
 
     return "\n".join(results) if results else "모든 표현이 적절합니다."
 
+companyName = ''
+
 
 @app.route('/')
 def index():
@@ -132,6 +134,7 @@ def index():
     global trustees
     global trustee_options
     global retrustees_dict
+    global companyName
 
     academic_df = pd.DataFrame()
     scholarship_df = pd.DataFrame()
@@ -158,6 +161,7 @@ def index():
     trustees = []
     trustee_options = []
     retrustees_dict = {}
+    companyName = ''
 
     # 모든 세션 데이터 초기화
     session.pop('form_data_1', None)
@@ -205,8 +209,10 @@ def process_form_data1(request):
     global homepage_df
     global etc_df
     global combined_data_result
+    global companyName
 
     name = request.form['name']
+    companyName = name
     file = request.files['file']
 
     # 개인정보의 파기 절차 및 방법
@@ -561,7 +567,8 @@ def nextForm1_3Confirm():
 
 @app.route('/nextForm2', methods=['GET', 'POST'])
 def nextForm2():
-    return render_template('nextForm2.html')
+    global companyName
+    return render_template('nextForm2.html', companyName=companyName)
 
 
 manager_position = ''
